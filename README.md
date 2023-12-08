@@ -1,3 +1,22 @@
+### Setup
+
+Download the traces from [RICO data sets](http://interactionmining.org/rico#quick-downloads) and copy it to `sources/datasets/RICO/`:
+```
+.
+├── rnn
+└── sources
+    └── datasets
+        └── RICO
+          ├── traces
+          │   └── filtered_traces
+          │       └── [some.app.com]
+          │           └── trace_1
+          │            ├── screenshots
+          │            └── view_hierarchies
+          └── unique_uis
+              └── combined
+```
+
 ### Python Virtual environment
 
 To checkout the virtual environment of python, call:
