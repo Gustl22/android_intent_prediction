@@ -599,7 +599,12 @@ def create_simple_features(file_prefix):
   json_path = file_prefix + '.json'
   with tf.io.gfile.GFile(json_path) as f:
     view_hierarchy = json.load(f)
-  root = view_hierarchy['activity']['root']
+  if view_hierarchy is None:
+    return None
+  activity = view_hierarchy['activity']
+  if activity is None:
+    return None
+  root = activity['root']
   all_nodes = _load_all_node(root)
 
   features = _get_features_from_all_nodes(all_nodes)
@@ -608,7 +613,7 @@ def create_simple_features(file_prefix):
   # attention_boxes = _truncate_and_pad_attention_box(labels, 5)
   # features['attention_boxes'] = attention_boxes
   # features['attended_objects'] = _get_attended_obj(features)
-  
+
   # August: Avoid conversion to numpy
   # for key in features:
   #   features[key] = np.array(features[key])
