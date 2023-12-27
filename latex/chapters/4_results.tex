@@ -1,0 +1,36 @@
+\chapter{Results}
+
+\section{Datasets}
+
+- Problem with sequential data sets
+
+\subsection{Rico}
+
+\begin{itemize}
+  \item Too less frames.
+  \item No transition between apps.
+\end{itemize}
+
+\section{Preprocessing Android UI tree data}
+\subsection{Filtering privacy invasive details}
+\subsection{Normalization, Feature selection}
+
+Dealing with variable length data tf.io.VarLenFeature()
+
+\section{Evaluation}
+
+%- Screen2Words
+
+Multiple approaches
+
+AutoEncoder:
+
+- Encoder -> Decoder -> LSTM -> Decoder
+- Encoder -> LSTM -> Decoder
+- LSTM -> Encoder -> Decoder (AutoEncoder)
+
+Decoder can either only decode to x and y or to whole UI tree.
+
+
+\subsection{Mean Squared Error}
+\subsection{F1 Score}
