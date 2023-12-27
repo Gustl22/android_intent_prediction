@@ -1082,7 +1082,7 @@
 
 \let\xtodo\todo
 \renewcommand{\todo}[1]{\xtodo[inline,color=orange]{[TODO]: #1}}
-\renewcommand{\info}[1]{\xtodo[inline,color=cyan]{[INFO]: #1}}
+\newcommand{\info}[1]{\xtodo[inline,color=cyan]{[INFO]: #1}}
 %\renewcommand{\todo}[1]{\colorbox{orange}{\color{white}{[TODO]: #1}}}
 %\renewcommand{\info}[1]{\colorbox{cyan}{\color{white}{[INFO]: #1}}}
 \newcommand{\utodo}[1]{\xtodo[inline,color=green!5]{#1}}
@@ -1187,3 +1187,14 @@
 \ifdeutsch
   \setlength{\emergencystretch}{3em} % Silbentrennung reduzieren durch mehr frei Raum zwischen den Worten
 \fi
+
+
+% New commands
+\newcommand{\tb}{\textbf}
+\newcommand{\ti}{\textit}
+\newcommand{\quotes}[1]{“#1”}
+\newcommand{\mVec}[1]{\left(
+\begin{array}{c}
+#1
+\end{array}
+\right)}
