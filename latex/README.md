@@ -20,3 +20,12 @@ The images in `logos` are subject to other copyright from other parties:
   They can be used in a scientific context only.
   For commercial use, please change them.
 - `UBP-background-picture.pdf` is generated out of `UBP-background-picture.pptx` and is free for personal use only.
+
+
+## Setup
+
+```shell
+sudo apt install texlive texlive-full inkscape
+```
+
+Run `pdflatex` command with the `--shell-escape` option to allow external programs like Inkscape to convert the svg files.

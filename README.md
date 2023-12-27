@@ -32,10 +32,3 @@ To include system packages check out [this stackoverflow post](https://stackover
 
 Install Tensorflow with Nvidia GPU support
 https://stackoverflow.com/a/76836703/5164462
-
-
-## Latex
-
-```shell
-sudo apt install texlive texlive-full
-```
