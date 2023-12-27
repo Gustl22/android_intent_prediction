@@ -1081,7 +1081,10 @@
 \setlength{\marginparwidth}{2,5cm}
 
 \let\xtodo\todo
-\renewcommand{\todo}[1]{\xtodo[inline,color=black!5]{#1}}
+\renewcommand{\todo}[1]{\xtodo[inline,color=orange]{[TODO]: #1}}
+\renewcommand{\info}[1]{\xtodo[inline,color=cyan]{[INFO]: #1}}
+%\renewcommand{\todo}[1]{\colorbox{orange}{\color{white}{[TODO]: #1}}}
+%\renewcommand{\info}[1]{\colorbox{cyan}{\color{white}{[INFO]: #1}}}
 \newcommand{\utodo}[1]{\xtodo[inline,color=green!5]{#1}}
 \newcommand{\itodo}[1]{\xtodo[inline]{#1}}
 
