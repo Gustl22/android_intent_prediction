@@ -90,14 +90,10 @@ def _extract_features_from_node(node):
     features['ui_obj_visibility_to_user'] = 0
   features['ui_obj_clickable'] = 1 if node['clickable'] else 0
   # Scope into [0, 1].
-  features['ui_obj_cord_x'] = [
-      max(min(float(node['bounds'][0]) / 1440, 1), 0),
-      max(min(float(node['bounds'][2]) / 1440, 1), 0),
-  ]
-  features['ui_obj_cord_y'] = [
-      max(min(float(node['bounds'][1]) / 2560, 1), 0),
-      max(min(float(node['bounds'][3]) / 2560, 1), 0),
-  ]
+  features['ui_obj_cord_x_start'] = max(min(float(node['bounds'][0]) / 1440, 1), 0)
+  features['ui_obj_cord_x_end'] = max(min(float(node['bounds'][2]) / 1440, 1), 0),
+  features['ui_obj_cord_y_start'] = max(min(float(node['bounds'][1]) / 2560, 1), 0)
+  features['ui_obj_cord_y_end'] = max(min(float(node['bounds'][3]) / 2560, 1), 0)
   return features
 
 
@@ -255,8 +251,8 @@ def _truncate_and_pad_attention_box(labels, max_boxes):
 def _get_attended_obj(features):
   """Calculate which objects are in the SFA annoated by human worker."""
   obj_visible = features['visibility_to_user_seq']
-  cord_x_seq = features['cord_x_seq']
-  cord_y_seq = features['cord_y_seq']
+  cord_x_seq = [features['cord_x_seq_start'], features['cord_x_seq_end']]
+  cord_y_seq = [features['cord_y_seq_start'], features['cord_y_seq_end']]
   attention_boxes = features['attention_boxes']
   attended_obj_maskes = []
 
@@ -383,8 +379,10 @@ def _get_features_from_all_nodes(all_nodes):
     all_features['visibility_to_user_seq'].append(
         features['ui_obj_visibility_to_user'])
     all_features['clickable_seq'].append(features['ui_obj_clickable'])
-    all_features['cord_x_seq'].append(features['ui_obj_cord_x'])
-    all_features['cord_y_seq'].append(features['ui_obj_cord_y'])
+    all_features['cord_x_seq_start'].append(features['ui_obj_cord_x_start'])
+    all_features['cord_x_seq_end'].append(features['ui_obj_cord_x_end'])
+    all_features['cord_y_seq_start'].append(features['ui_obj_cord_y_start'])
+    all_features['cord_y_seq_end'].append(features['ui_obj_cord_y_end'])
     # Text features.
     #all_features['developer_token_id'].append(node['developer_token_id'])
     #all_features['resource_token_id'].append(node['resource_token_id'])
