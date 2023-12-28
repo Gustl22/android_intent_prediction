@@ -17,7 +17,7 @@
 
 Dealing with variable length data tf.io.VarLenFeature()
 
-\section{Evaluation}
+\section{Model}
 
 %- Screen2Words
 
@@ -25,16 +25,21 @@ Multiple approaches
 
 AutoEncoder:
 
-- Encoder -> Decoder -> LSTM -> Decoder
-- Encoder -> LSTM -> Decoder
-- LSTM -> Encoder -> Decoder (AutoEncoder)
+\begin{itemize}
+  \item Encoder -> Decoder -> LSTM -> Decoder
+  \item Encoder -> LSTM -> Decoder
+  \item LSTM -> Encoder -> Decoder (AutoEncoder)
+\end{itemize}
 
 Decoder can either only decode to x and y or to whole UI tree.
+
+\section{Evaluation}
+
 
 
 \subsection{Mean Squared Error}
 \subsection{F1 Score}
-\subsection{Limitations}
+\section{Limitations}
 
 Dataset
 Dataset is not through different apps, only in one app.

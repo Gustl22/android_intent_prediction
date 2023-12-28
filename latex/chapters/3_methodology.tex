@@ -1,12 +1,8 @@
 \chapter{Methodology}
 
-% \section{Apparatus}
+How this thesis is working?
+Apparatus, Procedure, Utilities
 
-% \section{Procedure}
-
-% \section{Measurements}
-
-% \section{Participants}
 
 \section{Android UI Data}
 \subsection{Data tree structure}
@@ -23,7 +19,7 @@
 Semantics tree:
 https://developer.android.com/jetpack/compose/semantics
 https://android.googlesource.com/platform/frameworks/testing/+/jb-dev/uiautomator/library/src/com/android/uiautomator/core/AccessibilityNodeInfoDumper.java
-
+https://github.com/Gustl22/android-accessibility/blob/c158808533d6fc017455184a7317555d3e6946f6/GlobalActionBarService/app/src/main/java/com/example/android/globalactionbarservice/uiautomator/AccessibilityNodeInfoDumper.java
 
 \lstinputlisting[language=XML,label=android_accessibility_node,caption={Android Accessibility Node in XML.},float]{code/android_accessibility_node.xml}
 
@@ -54,10 +50,14 @@ Category Embedding before LSTM
 % https://stackoverflow.com/questions/52627739/how-to-merge-numerical-and-embedding-sequential-models-to-treat-categories-in-rn/52629902#comment136040845_52629902
 
 
+- Embedding layer
+Dimension near the actual average length of features (?)
+
 \subsection{Supervised vs Unsupervised vs Semisupervised}
+Reinforcement learning
 \subsection{Under and Overfitting}
 \subsection{Evaluation Metrics}
-\section{Neuronal Nets}
+\section{Artificial Neural Nets}
 Activation Functions
 Cost function
 Gradient
@@ -65,26 +65,13 @@ Gradient
 - Classification: Multiple class
 - One Class
 
-\subsubsection{Deep Neuronal Nets}
+\subsection{Classes of Neural Nets}
 
-\subsubsection{Convolutional Neuronal Nets}
-\subsubsection{Recurrent Neuronal Networks and LSTMs / GRU}
-
-\subsection{Layers}
-
-- Embedding layer
-    Dimension near the actual average length of features
+\subsubsection{Deep Neural Nets}
 - Dense Layer
 
-Positive Integer to Dense Vectors of fixed size
-
-FlattenLayer
-
-\subsubsection{Autoencoders}
-
-Encoder, Decoder
-
-\subsubsection{RNN and LSTM}
+\subsubsection{Convolutional Neural Nets}
+\subsubsection{Recurrent Neural Networks and LSTMs / GRU}
 LSTM 4 dimensional
 % https://stackoverflow.com/questions/54743549/is-it-possible-to-making-lstm-model-with-4-dimension-shape-of-data
 
@@ -99,3 +86,16 @@ TimeDistributedLayer
 % https://stackoverflow.com/a/61588937/5164462
 % https://stackoverflow.com/questions/53107126/what-are-the-uses-of-timedistributed-wrapper-for-lstm-or-any-other-layers
 
+\subsubsection{Autoencoders}
+
+Encoder, Decoder
+
+\subsection{Tensorflow and Keras}
+Layers
+FlattenLayer
+
+Positive Integer to Dense Vectors of fixed size
+
+\section{Evaluation and Metrics}
+\subsection{Mean Squared Error}
+\subsection{F1 Score}
