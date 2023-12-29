@@ -18,7 +18,65 @@ ing annotators to visually verify whether the bound-
 ing boxes of view hierarchy leaves match each UI
 object on the corresponding screenshot image.This filtering results in 25K unique screens."
 
+
+
 Use web interface to gain tree and interaction traces
+
+\begin{table}
+  \centering
+  \begin{tabular}{|l|c|c|>{\RaggedRight}p{0.4\linewidth}|}
+    \hline
+    \tb{Key} & \textbf{Type} & \textbf{Shape} & \textbf{Description} \\
+    \hline
+    \multicolumn{4}{c}{Per Trace} \\
+    \hline
+% Annotated by word2vec
+%    \_is\_leaf\_node & bool & (1) & \\
+%    \_caption\_preorder\_id & bool & (1) & \\
+%    \_caption\_depth & bool & (1) & \\
+%    \_caption\_node\_id & bool & (1) & \\
+%    \_caption\_postorder\_id & bool & (1) & \\
+    activity\_name & string & (1, None) & Name of the activity: \quotes{com.my\_app.AppName.MainActivity} \\
+%    added\_fragments & [] & (None) & \\
+%    active\_fragments & [] & (None) & \\
+    is\_keyboard\_deployed & bool & (1) & Indicates if the keyboard is shown \\
+    request\_id & int & (1) & \todo{TODO} \\
+    \hline
+    \multicolumn{4}{c}{Per Node} \\
+    \hline
+    abs-pos & bool & (1) & Indicates if position in bounds is relative to the parent or absolute to the screen boundaries \\
+    adapter-view & bool & (1) & Indicates that children are loaded via an adapter, see https://developer.android.com/reference/android/widget/AdapterView \\
+    ancestors & bool & (1) & \todo{TODO} \\
+    bounds & bool & (1) & \todo{TODO} \\
+    children & [node] & (1) & \todo{TODO} \\
+    class & bool & (1) & \todo{TODO} \\
+    clickable & bool & (1) & User can interact by press / click \\
+    content-desc & bool & (1) & \todo{TODO} \\
+    draw & bool & (1) & \todo{TODO} \\
+    enabled & bool & (1) & \todo{TODO} \\
+    focusable & bool & (1) & \todo{TODO} \\
+    focused & bool & (1) & \todo{TODO} \\
+    font-family & bool & (1) & \todo{TODO} \\
+    long-clickable & bool & (1) & \todo{TODO} \\
+    package & bool & (1) & \todo{TODO} \\
+    pointer & bool & (1) & \todo{TODO} \\
+    pressed & bool & (1) & \todo{TODO} \\
+    rel-bounds & bool & (1) & \todo{TODO} \\
+    resource-id & bool & (1) & \todo{TODO} \\
+    scrollable-horizontal & bool & (1) & \todo{TODO} \\
+    scrollable-vertical & bool & (1) & Vertically scrollable \\
+    selected & bool & (1) & \todo{TODO} \\
+    text & bool & (1) & \todo{TODO} \\
+    text-hint & bool & (1) & \todo{TODO} \\
+    visibility & bool & (1) & \todo{TODO} \\
+    visible-to-user & bool & (1) & \todo{TODO} \\
+    \hline
+  \end{tabular}
+  \caption[Values of Rico Node]{Values of Rico Trace and Node -- see \cite{deka2017rico}}
+  \label{tab:Ergebnisse}
+\end{table}
+
+See \cite{deka2017rico}
 
 \subsection{Mobile UI CLAY Dataset}
 

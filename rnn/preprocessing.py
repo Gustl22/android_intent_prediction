@@ -360,6 +360,12 @@ def _create_token_id(node, word_vocab, max_token_per_label):
   node['resource_token_id'] = resource_token_ids
 
 
+feature_keys = set()
+def _add_feature_keys_from_all_nodes(all_nodes):
+  for node in all_nodes:
+    for key in list(node.keys()):
+      feature_keys.add(key)
+
 def _get_features_from_all_nodes(all_nodes):
   """Gets all feature dictionary from xml/json file_path and the image."""
   #image_width, image_height = image.size
@@ -605,6 +611,7 @@ def create_simple_features(file_prefix):
   root = activity['root']
   all_nodes = _load_all_node(root)
 
+  # _add_feature_keys_from_all_nodes(all_nodes)
   features = _get_features_from_all_nodes(all_nodes)
   #features['file_prefix'] = [file_prefix.encode()]
 
