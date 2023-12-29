@@ -91,7 +91,7 @@ def _extract_features_from_node(node):
   features['ui_obj_clickable'] = 1 if node['clickable'] else 0
   # Scope into [0, 1].
   features['ui_obj_cord_x_start'] = max(min(float(node['bounds'][0]) / 1440, 1), 0)
-  features['ui_obj_cord_x_end'] = max(min(float(node['bounds'][2]) / 1440, 1), 0),
+  features['ui_obj_cord_x_end'] = max(min(float(node['bounds'][2]) / 1440, 1), 0)
   features['ui_obj_cord_y_start'] = max(min(float(node['bounds'][1]) / 2560, 1), 0)
   features['ui_obj_cord_y_end'] = max(min(float(node['bounds'][3]) / 2560, 1), 0)
   return features
