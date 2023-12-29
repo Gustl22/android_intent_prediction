@@ -29,6 +29,28 @@ https://github.com/Gustl22/android-accessibility/blob/c158808533d6fc017455184a73
 \lstinputlisting[language=XML,label=android_accessibility_node,caption={Android Accessibility Node in XML.},float]{code/android_accessibility_node.xml}
 
 \section{Machine Learning}
+
+- Method of data analysis
+- Automation of model building, in contrast to statistical inference / models
+- Uses algorithms to iteratively learn
+- Find hidden relations / context / connections / patterns, without explicitly programming it
+- Generalization
+
+Field of application:
+- Fraud detection
+    - Network intrusion detection
+- Web search
+- Recommender Systems (Netflix, Amazon)
+- Advertising
+- Prediction (pricing, )
+- Text Analysis, LLMs
+- Pattern and image recognition
+- Email / Spam filtering
+
+Drawbacks:
+- Biases, Discrimination
+
+
 \subsection{Preprocessing}
 
 Tensors, Datasets
@@ -59,10 +81,31 @@ Category Embedding before LSTM
 Dimension near the actual average length of features (?)
 
 \subsection{Supervised vs Unsupervised vs Semisupervised}
+
+\subsubsection{Supervised Learning}
+Supervised: Classification and regression
+Uses \tb{labeled} examples: Input and output is known
+
+Learns by comparison of the output it is provided with the output the model \ti{predicts}.
+
+Steps:
+- Data acquisition
+- Data cleaning / Preprocessing (Panadas)
+- Split into Training Data, Validation data, and Test data (cannot adapt the model after using the test data)
+- Train the model with the train data
+- Evaluate the model with the test data, then can adapt the model by the developer
+- Last deploy the model to production
+
+\subsubsection{Unsupervised Learning}
 Reinforcement learning
 \subsection{Under and Overfitting}
 \subsection{Evaluation Metrics}
 \section{Artificial Neural Nets}
+
+- Uses biological neuron systems as paradigm to generate mathematical models
+- can solve tasks by abstraction or generalization of data relations
+
+
 Activation Functions
 Cost function
 Gradient
@@ -73,6 +116,8 @@ Gradient
 \subsection{Classes of Neural Nets}
 
 \subsubsection{Deep Neural Nets}
+
+Neural Net with more than one layer
 - Dense Layer
 
 \subsubsection{Convolutional Neural Nets}
