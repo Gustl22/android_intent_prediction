@@ -419,7 +419,7 @@ On MiKTeX, one can solve it as follows:
   - Add text here
   - Adjust title etc. here
 - [bibliography.bib](bibliography.bib) - Bibliography. [biblatex] format. Manage it with [JabRef].
-- [acronyms.tex](acronyms.tex) - Abbreviations.
+- [glossary.tex](glossary.tex) - Abbreviations.
 - [commands.tex](commands.tex) - Example macros
 - [config.tex](config.tex) - The place to add packages etc.
 

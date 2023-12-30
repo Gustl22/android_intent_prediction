@@ -52,7 +52,7 @@
   language=english
 ]{lmu-thesis-cover}
 
-\input{acronyms}
+\input{glossary}
 
 \makeindex
 
@@ -165,9 +165,15 @@
 \fi
 
 % Control Glossary
-\let\ifglossary\iffalse
+\let\ifglossary\iftrue
 \ifglossary
   \printnoidxglossaries
+%  \printnoidxglossary[type=\acronymtype,title=Acronyms]
+%  \printnoidxglossary[title=Glossary]
+%  \printnoidxglossaries
+%  \printglossary[type=\acronymtype,nonumberlist]
+%  \printglossary
+
 \fi
 
 \iftex4ht
@@ -202,15 +208,15 @@
 
 \include{chapters/1_introduction}
 
-\include{chapters/2_related_work.tex}
+\include{chapters/2_related_work}
 
-\include{chapters/3_methodology.tex}
+\include{chapters/3_methodology}
 
-\include{chapters/4_results.tex}
+\include{chapters/4_results}
 
-\include{chapters/5_discussion.tex}
+\include{chapters/5_discussion}
 
-\include{chapters/6_conclusion.tex}
+\include{chapters/6_conclusion}
 
 \printbibliography[heading=subbibliography]
 
