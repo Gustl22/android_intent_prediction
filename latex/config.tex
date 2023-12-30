@@ -768,16 +768,16 @@
 %
 % DE: siehe http://www.dickimaw-books.com/cgi-bin/faq.cgi?action=view&categorylabel=glossaries#glsnewwriteexceeded
 %\usepackage[automake, indexonlyfirst, acronym, toc, nomain]{glossaries}
-\usepackage[acronym,indexonlyfirst,nomain]{glossaries}
-\ifdeutsch
-  \addto\captionsngerman % DE: siehe https://tex.stackexchange.com/a/154566
-  {%
-    \renewcommand*{\acronymname}{Abkürzungsverzeichnis}
-  }
-\else
-  \renewcommand*{\acronymname}{List of Abbreviations}
-\fi
-\renewcommand*{\glsgroupskip}{}
+\usepackage[acronym]{glossaries}
+%\ifdeutsch
+%  \addto\captionsngerman % DE: siehe https://tex.stackexchange.com/a/154566
+%  {%
+%    \renewcommand*{\acronymname}{Abkürzungsverzeichnis}
+%  }
+%\else
+%  \renewcommand*{\acronymname}{List of Abbreviations}
+%\fi
+%\renewcommand*{\glsgroupskip}{}
 %
 % EN: Removed Glossarie as a table as a quick fix to get the template working again
 %     See http://tex.stackexchange.com/questions/145579/how-to-print-acronyms-of-glossaries-into-a-table

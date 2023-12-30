@@ -167,13 +167,10 @@
 % Control Glossary
 \let\ifglossary\iftrue
 \ifglossary
+%  \setglossarysection{section} remove empty sites
+%  \clearpage
   \printnoidxglossaries
-%  \printnoidxglossary[type=\acronymtype,title=Acronyms]
-%  \printnoidxglossary[title=Glossary]
-%  \printnoidxglossaries
-%  \printglossary[type=\acronymtype,nonumberlist]
-%  \printglossary
-
+%  \clearpage
 \fi
 
 \iftex4ht
