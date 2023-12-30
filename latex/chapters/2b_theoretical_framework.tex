@@ -35,10 +35,22 @@ It can include biases and therefore may acquire forms of discrimination or unfai
 
 Preprocessing describes the step after one acquired their data, but before training the \gls{ml} model.
 This step is not to be underestimated.
--
+A \gls{ml} model can perform significantly better when certain preprocessing steps are applied \cite{alam2019impact}.
 
+To be able to preprocess the data, we have to know with what kind of data we handle with.
+Data can occur in different forms, but we can break them down in three main types:
+\begin{itemize}
+    \item \tb{Categorical values}: a value is always assigned to a class with fixed pool of predetermined classes.
+          E.g.\ letters, words, brands, animals, chemical elements
+    \item \tb{Continuous values}: the value can be fractional and may lies in between a lower and an upper bound.
+          E.g.\ temperature, velocity, geographic position
+    \item \tb{Integer values}: the value is a whole number and may also lie in between a lower and an upper bound.
+          E.g.\ revolutions per minute, product number, annual sales
+\end{itemize}
 
-Tensors, Datasets
+For discrete and continuous values, we have a wide variety of options to prepare them to be able to be processed by a \gls{ml} model \cite{duong2021}.
+
+\todo{Tensors, Datasets}
 %https://stackoverflow.com/a/48599383/5164462
 
 \subsubsection{Feature selection}
@@ -49,13 +61,34 @@ a) Vector length
 b) Weighting of features
 c) Manipulating individual parameters of model
 
-\subsubsection{Normalization}
+\subsubsection{Missing data}
+Some data points may are missing.
+Therefore, you have two approaches to get around these missing values.
+One can drop these values by removing the column or row.
+This is only recommended if you are not relying on this data entry, or this the whole feature is not expected to be important enough to bring any value to the models' performance.
+Further you can fill the data with a default value like zero or calculate a reasonable value from the surrounding data entries by taking their \quotes{mean, median, or interpolation} \cite{duong2021}.
+The second approach can only be applied to numerical data.
 
+\subsubsection{Normalization and Standardization}
 
+This is only applicable for numerical data.
+Many \gls{ml} models work better or exclusively with normalized data.
+This means that the values have to be in a certain range, most commonly are from \tb{0} to \tb{1} or from \tb{-1} to \tb{1}.
+This can be achieved by dividing all values with the difference of the minimum and maximum value and shift the output accordingly \cite{duong2021}.
 
+% X new = (X — X min)/ (X max — X min)
+
+Sometimes this is not enough, e.g.\ if having a few extreme values, and an approach is desired which better reflects the average data.
+Here the standardization, also called z-score normalization, comes into play.
+This method scales the values so that the mean value is placed at \tb{0} and the standard deviation is placed at \tb{1}.
+%https://medium.com/analytics-vidhya/what-are-data-standardization-and-data-normalization-f880dd9e79b6
 \subsubsection{Padding}
 
-\subsubsection{Embedding}
+
+\subsubsection{Categorical Variables}
+
+\todo{categorical}
+According to \cite{alam2019impact} these steps can be removal of emoticons, elimination of stopwords and stemming for text based models.
 
 Category Embedding before LSTM
 % https://stackoverflow.com/questions/47217151/keras-lstm-with-embedding-layer-before-lstm-layer
