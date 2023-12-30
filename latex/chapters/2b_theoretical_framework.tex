@@ -1,0 +1,131 @@
+\chapter{Theoretical Framework}
+
+\section{Android UI Data}
+\subsection{Data tree structure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{graphics/android_layout_inspector}
+    \caption{https://developer.android.com/studio/debug/layout-inspector, https://github.com/mimuc/app-ins-gruene}
+    \label{fig:android_layout_inspector}
+\end{figure}
+
+\subsection{Retrieval of UI data via Android Accessibility Service}
+
+Semantics tree:
+https://developer.android.com/jetpack/compose/semantics
+https://android.googlesource.com/platform/frameworks/testing/+/jb-dev/uiautomator/library/src/com/android/uiautomator/core/AccessibilityNodeInfoDumper.java
+https://github.com/Gustl22/android-accessibility/blob/c158808533d6fc017455184a7317555d3e6946f6/GlobalActionBarService/app/src/main/java/com/example/android/globalactionbarservice/uiautomator/AccessibilityNodeInfoDumper.java
+
+\lstinputlisting[language=XML,label=android_accessibility_node,caption={Android Accessibility Node in XML.},float]{code/android_accessibility_node.xml}
+
+\section{Machine Learning}
+\label{sec:machine-learning}
+
+\acrfull{ml}, a term spread by Arthur Lee Samuel, is a method of data analysis, more precisely a scientific approach to form statistical models without the need to explicitly program it.
+It uses algorithms to iteratively learn how data is structured.
+In contrast to statistical inference or manually crafted statistical models respectively, \acrshort{ml} can solve tasks by automation of model building.
+Its advantages lie in finding hidden relations and patterns from the context, without having any or only a small pre knowledge of the data, thus it is a strong tool for generalization or abstraction of large datasets, also known as \gls{gl-bigdata}.
+\acrshort{ml} can be applied to the following fields among others: email and spam filtering, fraud detection, cybersecurity, web search engines, recommender systems (like known from Netflix or Amazon), advertising, translators and text generation, pattern and image recognition~\cite{mahesh2020machine}.
+The data driven approach also comes with some drawbacks: the outcome heavily depends on the provided data.
+It can include biases and therefore may acquire forms of discrimination or unfair treatment.
+
+
+\subsection{Preprocessing}
+
+Tensors, Datasets
+%https://stackoverflow.com/a/48599383/5164462
+
+\subsubsection{Feature selection}
+Such as Filtering privacy invasive details
+
+Parameterizing the vectorization process
+a) Vector length
+b) Weighting of features
+c) Manipulating individual parameters of model
+
+\subsubsection{Normalization}
+
+
+
+\subsubsection{Padding}
+
+\subsubsection{Embedding}
+
+Category Embedding before LSTM
+% https://stackoverflow.com/questions/47217151/keras-lstm-with-embedding-layer-before-lstm-layer
+% https://stackoverflow.com/questions/52627739/how-to-merge-numerical-and-embedding-sequential-models-to-treat-categories-in-rn/52629902#comment136040845_52629902
+
+
+- Embedding layer
+Dimension near the actual average length of features (?)
+
+\subsection{Supervised vs Unsupervised vs Semisupervised}
+
+\subsubsection{Supervised Learning}
+Supervised: Classification and regression
+Uses \tb{labeled} examples: Input and output is known
+
+Learns by comparison of the output it is provided with the output the model \ti{predicts}.
+
+Steps:
+- Data acquisition
+- Data cleaning / Preprocessing (Panadas)
+- Split into Training Data, Validation data, and Test data (cannot adapt the model after using the test data)
+- Train the model with the train data
+- Evaluate the model with the test data, then can adapt the model by the developer
+- Last deploy the model to production
+
+\subsubsection{Unsupervised Learning}
+Reinforcement learning
+\subsection{Under and Overfitting}
+\subsection{Evaluation Metrics}
+\section{Artificial Neural Nets}
+
+- Uses biological neuron systems as paradigm to generate mathematical models
+- can solve tasks by abstraction or generalization of data relations
+
+
+Activation Functions
+Cost function
+Gradient
+- Regression: Continous Values
+- Classification: Multiple class
+- One Class
+
+\subsection{Classes of Neural Nets}
+
+\subsubsection{Deep Neural Nets}
+
+Neural Net with more than one layer
+- Dense Layer
+
+\subsubsection{Convolutional Neural Nets}
+\subsubsection{Recurrent Neural Networks and LSTMs / GRU}
+LSTM 4 dimensional
+% https://stackoverflow.com/questions/54743549/is-it-possible-to-making-lstm-model-with-4-dimension-shape-of-data
+
+Limitations to only 3 dimensions, needs flattening
+
+Sample dimension (X -> y)
+Time (Step) Dimension
+Feature Dimension
+Data, Quantity dimension, such as Image dimensions, or multiple nodes
+
+TimeDistributedLayer
+% https://stackoverflow.com/a/61588937/5164462
+% https://stackoverflow.com/questions/53107126/what-are-the-uses-of-timedistributed-wrapper-for-lstm-or-any-other-layers
+
+\subsubsection{Autoencoders}
+
+Encoder, Decoder
+
+\subsection{Tensorflow and Keras}
+Layers
+FlattenLayer
+
+Positive Integer to Dense Vectors of fixed size
+
+\section{Evaluation and Metrics}
+\subsection{Mean Squared Error}
+\subsection{F1 Score}
