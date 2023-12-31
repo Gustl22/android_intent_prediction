@@ -24,23 +24,19 @@ The authors worked out 23 common user flows (from over a thousand popular Androi
 
 %\todo{descibe how they worked out the 23 user flows, which Autoencoder they used etc.}
 
-\subsection{RICO / RicoSCA}
+\subsection{Rico / RicoSCA}
 
-- make predictions about design performance and support the creation of adaptive UIs
-- largest repository of mobile app designs to date
-- classes of apps: design search, UI layout generation, UI code generation, user interaction modeling, and user perception prediction
-- 9.7k Android apps spanning 27 categories. It exposes visual, textual, structural, and interactive design properties of more than 72k unique UI screens.
+Rico (spanish for \quotes{rich}) is the successor of ERICA~\cite{deka2017rico}.
+It aims to help perform better at designing and support the creation of adaptive UIs
+As far as known to date this is the largest collection of mobile app designs and traces with covering 72k UI screens in 9.7k Android apps.
+Like its predecessor Rico uses a web-based approach to collect user traces.
+It enables the applications like searching for designs, generation of UI layouts and code, modeling of user interactions, and prediction of user perception.
+It exposes visual, textual, structural, and interactive design properties of more than 72k unique UI screens.
+\todo{Explain AutoEncoder of RICO and difference to current approach}
 
-
-"Rico is a public UI corpus with 72K Android UI
-screens mined from 9.7K Android apps. [...]
-We manually removed screens whose view
-hierarchies do not match their screenshots by ask-
-ing annotators to visually verify whether the bound-
-ing boxes of view hierarchy leaves match each UI
-object on the corresponding screenshot image.This filtering results in 25K unique screens."
-
-
+The RicoSCA dataset has been formed out of the research topic of mapping language instructions to mobile UI action sequences~\cite{li2020mapping}.
+They removed screens whose bounding boxes in the view hierarchies are inconsistent with the screenshots with the help of annotators.
+The process of filtering resulted reduced the Rico dataset to 25k screens.
 
 Use web interface to gain tree and interaction traces
 
