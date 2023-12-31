@@ -6,19 +6,23 @@ Describe relevant scientific literature related to your work.
 
 \subsection{ERICA}
 
-ERICA is a design and interaction mining application, which enables collecting \ti{interaction traces} by capture users interacting with Android apps~\cite{deka2016erica}.
+ERICA is a design and interaction mining application, which allows gathering \ti{interaction traces} by capturing the users activity on Android apps~\cite{deka2016erica}.
 This is accomplished through a web-based interaction layer in contrast to the other common approach of using \ti{accessibility services} directly.
-They justify that approach by the lack of need to install additional applications, as only a browser is needed.
+They justify that approach by the lack of need to install additional applications, as only a browser is required.
+A further reason is the response latency of the commonly used \ti{UiAutomator}, which cannot collect the data in time.
 Also they argue that capturing and simultaneously interacting with the apps may overload the user device and challenges the user experience.
 Therefore the much more powerful servers take the task of capturing the UI trees.
 The apps are hosted on multiple physical devices with a modified Android OS directly connected with the server.
 ERICA captures UI screens and user flows by tracking UI changes.
-The authors worked out 23 common user flows which aiming to provide complementary, promising or new design patterns and trends.
+They then used this data to form k-mean clusters from the UI elements (visual and textual features) and the interactive elements (icons and buttons).
+Based on the clusters they then build classifiers and trained an~\ref{autoencoder} to determine the flows from the test dataset.
+The authors worked out 23 common user flows (from over a thousand popular Android apps) which aim to provide complementary, promising or new design patterns and trends.
+
 %- data-driven app design application
 %- gathers user interaction trace > 1000 popular apps
 %- 3000 flow examples
 
-\todo{descibe how they worked out the 23 user flows, which Autoencoder they used etc.}
+%\todo{descibe how they worked out the 23 user flows, which Autoencoder they used etc.}
 
 \subsection{RICO / RicoSCA}
 
