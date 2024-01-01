@@ -1,8 +1,9 @@
 \chapter{Related Work}
 
+\todo{introduce in related work, differentiate the importance of datasets}
 Describe relevant scientific literature related to your work.
 
-\section{UI Tree and Datasets}
+\section{Datasets of UI Trees}
 
 \subsection{ERICA}
 
@@ -36,12 +37,10 @@ Unfortunately the dataset doesn't include interaction traces for app to app tran
 In table~\ref{tab:rico_view_hierarchy_attributes} a collection of all view hierarchy attributes is shown with their meaning.
 These were extracted by iterating over all view hierarchy files contained in the traces of the dataset.
 This gives insights in what attributes were recorded in the Rico dataset and what relevance they may have during training the model.
-\todo{Explain AutoEncoder of Rico and difference to current approach}
-
-The RicoSCA dataset has been formed out of the research topic of mapping language instructions to mobile UI action sequences~\cite{li2020mapping}.
-They removed screens whose bounding boxes in the view hierarchies are inconsistent with the screenshots with the help of annotators.
-The process of filtering resulted reduced the Rico dataset to 25k screens.
-
+The authors of Rico used their dataset to train a 64-dimensional UI layout vector~\ref{subsubsec:embedding} with an AutoEncoder \ref{subsubsec:autoencoder}.
+For their input they converted the UI layout hierarchy to an image with colored bounding boxes differentiating images and text.
+This has the advantage to be able to deal with the high dimensions inside the UI tree.
+But the conversion also most likely discards lots of meaningful information hidden in the UI tree semantics.
 
 \begin{table}
   \small
@@ -98,7 +97,9 @@ The process of filtering resulted reduced the Rico dataset to 25k screens.
   \label{tab:rico_view_hierarchy_attributes}
 \end{table}
 
-See \cite{deka2017rico}
+The RicoSCA dataset has been formed out of the research topic of mapping language instructions to mobile UI action sequences~\cite{li2020mapping}.
+They removed screens whose bounding boxes in the view hierarchies are inconsistent with the screenshots with the help of annotators.
+The process of filtering reduced the Rico dataset to 25k more concise and meaningful screens.
 
 \subsection{Mobile UI CLAY Dataset}
 
