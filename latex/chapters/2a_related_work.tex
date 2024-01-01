@@ -6,8 +6,23 @@ Describe relevant scientific literature related to your work.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Datasets of UI Trees}
+\label{sec:datasets-of-ui-trees}
+
+Requirements on a good data set
+- Google and Samsung
+- need to have correct data
+- needs enough data to train a NN
+- need enough features to be able to recognize patterns
+- up to date
+- Publicly available
+
+Missing
+- System to feed in in real time
+- Dataset which is across multiple apps, also tracks the system
+-
 
 \subsection{ERICA}
+\label{subsec:erica}
 
 ERICA is a design and interaction mining application, which allows gathering \ti{interaction traces} by capturing the users activity on Android apps~\cite{deka2016erica}.
 This is accomplished through a web-based interaction layer in contrast to the other common approach of using \ti{accessibility services} directly.
@@ -120,6 +135,14 @@ This pipeline could help to improve intent prediction algorithms as less inconsi
 
 \section{Vector models}
 
+- Compress a huge data set to a concise model
+- Vector Representation enables
+
+Advantages:
+- \quotes{small} or smaller than the data set itself
+- No need to have pre knowledge about the topic, just need input an output (labels) for unsupervised NN
+-
+
 \subsection{Doc2Vec and Word2Vec}
 %http://proceedings.mlr.press/v32/le14.pdf
 %6_Quoc-Le_Doc2Vec
@@ -144,8 +167,8 @@ This pipeline could help to improve intent prediction algorithms as less inconsi
 
 \section{Time Series / Sequence models}
 
-RNNs: 9_Personalizing session based recommendations with RNNs \cite{quadrana2017personalizing}
-10_Bansal_Hybrid RNN Recommender system \cite{bansal2022remembering}
+RNNs: 9\_Personalizing session based recommendations with RNNs \cite{quadrana2017personalizing}
+10\_Bansal\_Hybrid RNN Recommender system \cite{bansal2022remembering}
 \cite{pietro2022recommendationSystems}
 
 \subsection{Seq2Seq Model}
