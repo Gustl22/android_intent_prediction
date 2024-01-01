@@ -167,6 +167,11 @@ Advantages:
 
 \section{Time Series / Sequence models}
 
+- one more dimension
+- allows predicting unseen states
+- back propagation -> see technical part
+-
+
 RNNs: 9\_Personalizing session based recommendations with RNNs \cite{quadrana2017personalizing}
 10\_Bansal\_Hybrid RNN Recommender system \cite{bansal2022remembering}
 \cite{pietro2022recommendationSystems}
@@ -174,9 +179,24 @@ RNNs: 9\_Personalizing session based recommendations with RNNs \cite{quadrana201
 \subsection{Seq2Seq Model}
 \cite{chollet2017seq2seq}
 
-\subsection{Click Sequence Prediction in Android Mobile Applications}
-\cite{lee2018click}
--> No code or dataset
+\subsection{Click Sequence Prediction / PathFinder}
+
+Seokjun Lee et al. \cite{lee2018click} propose a technique called \ti{PathFinder} which aims to predict the sequence of user clicks in Android mobile apps.
+The user input and the contextual data is collected via the Android Accessibility Services \ref{accessibility_services}, so the users \gls{os} does not need to be modified or \glslink{gl-rooting}{rooted}.
+They collected the data from 55 students of their university with a sequence tracing tool and collected near 2 million button clicks from over a thousand apps.
+They follow a collaborative and content-based approach which takes both all the users data as well as the individual preferences into account.
+The \ti{button depth} describes the number of clicks or taps until the user gets to their target screen.
+In average nearly the user has 16 buttons as candidates to press as the next action.
+With a personalized UI a the \ti{button depth} should decrease significantly.
+The next user click is dependent on very recent but also on previous clicks happened a longer time ago, e.g.~taking a picture relates to uploading it later to their \gls{sns}.
+The authors train a \gls{lstm} model to predict the next button, which will be clicked on.
+PathFinder predicts the most probable three buttons with a 0.76 F-measure.
+
+In contrast to this work, \ti{PathFinder} does not take into account the complete view hierarchy or other spatiotemporal information.
+Just the previous and the current app and the click history with their button properties are considered.
+Also as far as known the dataset and code is not publicly accessible.
+
+% "Very challenging to make accurate predictions of the click sequence."
 
 \subsection{Large-Scale Modeling of Mobile User Click Behaviors Using Deep Learning}
 \cite{zhou2021large}
