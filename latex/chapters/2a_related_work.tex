@@ -15,7 +15,7 @@ Therefore the much more powerful servers take the task of capturing the UI trees
 The apps are hosted on multiple physical devices with a modified Android OS directly connected with the server.
 ERICA captures UI screens and user flows by tracking UI changes.
 They then used this data to form k-mean clusters from the UI elements (visual and textual features) and the interactive elements (icons and buttons).
-Based on the clusters they then build classifiers and trained an~\ref{autoencoder} to determine the flows from the test dataset.
+Based on the clusters they then build classifiers and trained an AutoEncoder (\ref{subsubsec:autoencoder}) to determine the flows from the test dataset.
 The authors worked out 23 common user flows (from over a thousand popular Android apps) which aim to provide complementary, promising or new design patterns and trends.
 
 %- data-driven app design application
@@ -26,27 +26,31 @@ The authors worked out 23 common user flows (from over a thousand popular Androi
 
 \subsection{Rico / RicoSCA}
 
-Rico (spanish for \quotes{rich}) is the successor of ERICA~\cite{deka2017rico}.
-It aims to help perform better at designing and support the creation of adaptive UIs
+Rico \cite{deka2017rico} (spanish for \quotes{rich}) is the successor of ERICA.
+It aims to help perform better at designing and support the creation of adaptive UIs.
 As far as known to date this is the largest collection of mobile app designs and traces with covering 72k UI screens in 9.7k Android apps.
 Like its predecessor Rico uses a web-based approach to collect user traces.
 It enables the applications like searching for designs, generation of UI layouts and code, modeling of user interactions, and prediction of user perception.
 It exposes visual, textual, structural, and interactive design properties of more than 72k unique UI screens.
-\todo{Explain AutoEncoder of RICO and difference to current approach}
+Unfortunately the dataset doesn't include interaction traces for app to app transitions or interactions with the Android OS itself.
+In table~\ref{rico_view_hierarchy_attributes} a collection of all view hierarchy attributes is shown with their meaning.
+These were extracted by iterating over all view hierarchy files contained in the traces of the dataset.
+This gives insights in what attributes were recorded in the Rico dataset and what impact they may have during training the model.
+\todo{Explain AutoEncoder of Rico and difference to current approach}
 
 The RicoSCA dataset has been formed out of the research topic of mapping language instructions to mobile UI action sequences~\cite{li2020mapping}.
 They removed screens whose bounding boxes in the view hierarchies are inconsistent with the screenshots with the help of annotators.
 The process of filtering resulted reduced the Rico dataset to 25k screens.
 
-Use web interface to gain tree and interaction traces
 
 \begin{table}
+  \small
   \centering
-  \begin{tabular}{|l|c|c|>{\RaggedRight}p{0.4\linewidth}|}
+  \begin{tabular}{|l|c|c|>{\RaggedRight}p{0.5\linewidth}|}
     \hline
     \tb{Key} & \textbf{Type} & \textbf{Shape} & \textbf{Description} \\
     \hline
-    \multicolumn{4}{c}{Per Trace} \\
+    \multicolumn{4}{c}{Per View} \\
     \hline
 % Annotated by word2vec
 %    \_is\_leaf\_node & bool & (1) & \\
@@ -54,44 +58,44 @@ Use web interface to gain tree and interaction traces
 %    \_caption\_depth & bool & (1) & \\
 %    \_caption\_node\_id & bool & (1) & \\
 %    \_caption\_postorder\_id & bool & (1) & \\
-    activity\_name & string & (1, None) & Name of the activity: \quotes{com.my\_app.AppName.MainActivity} \\
+    activity\_name & string & (1) & Name of the activity: e.g. \quotes{com.my\_app.AppName.MainActivity} \\
 %    added\_fragments & [] & (None) & \\
 %    active\_fragments & [] & (None) & \\
     is\_keyboard\_deployed & bool & (1) & Indicates if the keyboard is shown \\
-    request\_id & int & (1) & \todo{TODO} \\
+    request\_id & int & (1) & Id used by the crawler to request the view \\
     \hline
     \multicolumn{4}{c}{Per Node} \\
     \hline
-    abs-pos & bool & (1) & Indicates if position in bounds is relative to the parent or absolute to the screen boundaries \\
-    adapter-view & bool & (1) & Indicates that children are loaded via an adapter, see https://developer.android.com/reference/android/widget/AdapterView \\
-    ancestors & bool & (1) & \todo{TODO} \\
-    bounds & bool & (1) & \todo{TODO} \\
-    children & [node] & (1) & \todo{TODO} \\
-    class & bool & (1) & \todo{TODO} \\
+    abs-pos & bool & (1) & Indicates if position in \ti{bounds} is relative or absolute; if \ti{true}, \ti{rel-bounds} is set \\
+    adapter-view & bool & (1) & Indicates that children are loaded via an adapter, see~\cite{android_adapterview} \\
+    ancestors & [string] & (None) & Ancestors of current node, e.g. \quotes{android.view.View} \\
+    bounds & [integer] & (4) & Absolute or relative boundaries, dependent on \ti{abs-pos} \\
+    children & [node] & (None) & Child nodes \\
+    class & string & (1) & \quotes{com.my\_app.lib.ui.views.DropDownSpinner} \\
     clickable & bool & (1) & User can interact by press / click \\
-    content-desc & bool & (1) & \todo{TODO} \\
-    draw & bool & (1) & \todo{TODO} \\
-    enabled & bool & (1) & \todo{TODO} \\
-    focusable & bool & (1) & \todo{TODO} \\
-    focused & bool & (1) & \todo{TODO} \\
-    font-family & bool & (1) & \todo{TODO} \\
-    long-clickable & bool & (1) & \todo{TODO} \\
-    package & bool & (1) & \todo{TODO} \\
-    pointer & bool & (1) & \todo{TODO} \\
-    pressed & bool & (1) & \todo{TODO} \\
-    rel-bounds & bool & (1) & \todo{TODO} \\
-    resource-id & bool & (1) & \todo{TODO} \\
-    scrollable-horizontal & bool & (1) & \todo{TODO} \\
-    scrollable-vertical & bool & (1) & Vertically scrollable \\
-    selected & bool & (1) & \todo{TODO} \\
-    text & bool & (1) & \todo{TODO} \\
-    text-hint & bool & (1) & \todo{TODO} \\
-    visibility & bool & (1) & \todo{TODO} \\
-    visible-to-user & bool & (1) & \todo{TODO} \\
+    content-desc & string & (1) & (Accessibility) description of the node \quotes{Interstitial close button} \\
+    draw & bool & (1) & Indicates if this node is drawn on the canvas \\
+    enabled & bool & (1) & Indicates if this node is in the enabled state \\
+    focusable & bool & (1) & Indicates if this node can be focused \\
+    focused & bool & (1) & Indicates if this node can is currently in focus \\
+    font-family & string & (1) & States the font family, e.g. \quotes{sans-serif} \\
+    long-clickable & bool & (1) & Indicates if this node has a long press action \\
+    package & string & (1) & States which packages the node belongs to \quotes{com.my\_app.mypackage} \\
+%    pointer & string & (1) & \todo{Presumably the saving address in the memory, e.g. \quotes{92690f4}} \\
+    pressed & bool & (1) & Indicates if this node can is currently pressed \\
+    rel-bounds & [integer] & (4) & Relative boundaries, if \ti{abs-pos} is set to \ti{true} \\
+    resource-id & string & (1) & The unique resource identifier for this view \quotes{android:id/navigationBarBackground} \\
+    scrollable-horizontal & bool & (1) & Indicates if this node can be scrolled horizontally \\
+    scrollable-vertical & bool & (1) & Indicates if this node can be scrolled vertically \\
+    selected & bool & (1) & Indicates if this node can is currently selected \\
+    text & string & (1) & Text value if this node is a textual element \\
+    text-hint & bool & (1) & Explanation text for text boxes or icons \\
+    visibility & string & (1) & Indicates if this node is hidden, e.g. \quotes{visible}, \quotes{gone}\\
+    visible-to-user & bool & (1) & Indicates if this node can be seen in the viewport by the user \\
     \hline
   \end{tabular}
-  \caption[Values of Rico Node]{Values of Rico Trace and Node -- see \cite{deka2017rico}}
-  \label{tab:Ergebnisse}
+  \caption[Attributes of a view hierarchy record]{Collection of attributes of a \ti{view hierarchy} record, extracted from all interaction traces of the Rico \cite{deka2017rico} dataset.}
+  \label{tab:rico_view_hierarchy_attributes}
 \end{table}
 
 See \cite{deka2017rico}
