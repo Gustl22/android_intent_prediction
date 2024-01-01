@@ -3,6 +3,8 @@
 \todo{introduce in related work, differentiate the importance of datasets}
 Describe relevant scientific literature related to your work.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Datasets of UI Trees}
 
 \subsection{ERICA}
@@ -112,27 +114,42 @@ The researchers filtered invalid objects by training a \gls{resnet} model with t
 Also they introduced two models: a \gls{gnn} and a Transformer model to each determine the view type (also related to the view class).
 For that they considered the view hierarchy attributes as well as the screenshots via a \gls{cnn}.
 They claim they outperform heuristic approaches for detecting layout objects without a visual valid counterpart and also can recognize their types in more than 85\%.
-This pipeline could help to improve intent prediction algorithms as less false data is applied to the model.
+This pipeline could help to improve intent prediction algorithms as less inconsistent data is applied to the model.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Vector models}
 
 \subsection{Doc2Vec and Word2Vec}
 %http://proceedings.mlr.press/v32/le14.pdf
+%6_Quoc-Le_Doc2Vec
+\cite{le2014distributed}
 
 \subsection{Screen2Vec}
+\cite{li2021screen2vec}
 
 \subsection{Screen2Words}
 
 \subsection{Intention2Text}
+\cite{yu2020understanding}
 
 \subsection{Html2Vec}
+\cite{wu2022distributed}
 
 \subsection{Tree2Vec}
 
 \subsection{Activity2Vec}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Time Series / Sequence models}
+
+RNNs: 9_Personalizing session based recommendations with RNNs \cite{quadrana2017personalizing}
+10_Bansal_Hybrid RNN Recommender system \cite{bansal2022remembering}
+\cite{pietro2022recommendationSystems}
+
 \subsection{Seq2Seq Model}
+\cite{chollet2017seq2seq}
 
 \subsection{Click Sequence Prediction in Android Mobile Applications}
 \cite{lee2018click}
