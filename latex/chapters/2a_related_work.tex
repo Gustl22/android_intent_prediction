@@ -44,6 +44,7 @@ The authors worked out 23 common user flows (from over a thousand popular Androi
 %\todo{descibe how they worked out the 23 user flows, which Autoencoder they used etc.}
 
 \subsection{Rico / RicoSCA}
+\label{subsec:rico}
 
 Rico \cite{deka2017rico} (spanish for \quotes{rich}) is the successor of ERICA.
 It aims to help perform better at designing and support the creation of adaptive UIs.
@@ -150,7 +151,22 @@ Advantages:
 \cite{le2014distributed}
 
 \subsection{Screen2Vec}
-\cite{li2021screen2vec}
+\label{subsec:screen2vec}
+
+Toby Jia-Jun Li, Lindsay Popowski et al. \cite{li2021screen2vec} wrote a \gls{nn} called Screen2Vec which embeds the UI components while preserving the semantics.
+%i.e., the type of machine learning approach that trains a model without human-labeled data by withholding some part of the data, and tasking the network with predicting it
+It is claimed that they are among the first to develop a \gls{nn} for mobile screens which takes textual, visual design, and layout patterns and app context meta-data into account.
+As inspiration they used the Word2Vec~\ref{word2vec} to predict result by considering the context and map them to a \gls{cbow}.
+The self-supervised~\ref{self-supervised} model consists of two pipeline levels.
+The outer level (\gls{gui} screen level) combines embeddings of \gls{gui} components, layout hierarchy and app descriptions.
+The inner level is only present for the \gls{gui} components as they contain nested embeddings for the screen text and the class type.
+The screen text (in the inner level) as well as the app description (in the outer level) is processed using a pretrained Sentence-BERT model.
+The layout hierarchy is converted to a colored image encoding the text and image boundaries with colors (like in \ref{subsec:rico}).
+With such model, a vector can be calculated for each screen which then can be compared to each other, e.g. by the euclidean distance between the pixel representations, or comparing the distance in the view hierarchy representation.
+When taking all features into account, both, the euclidean and the hierarchical approach, get an \gls{gl-accuracy} of around 0.85 that the correct screen is among the first 1\% of the models predictions.
+In around half of the cases the predicted screen (\quotes{Top-1 Accuracy}) is the correct one.
+
+Such an approach of representing an Android layout and context in a vector can be used as pretrained embedding for feeding a \gls{rnn} predicting upcoming screens.
 
 \subsection{Screen2Words}
 
@@ -216,7 +232,7 @@ Together with the click event as well as the time encoding the screen embedding 
 The encoded time can be very different as it doesn't follow a regular sample interval, but is recorded as soon as the screen is changing \ref{fig:zhou_graphs} (b).
 Multiple input steps then form a sequence fed in a second Transformer Encoder which contains all past screens and clicks.
 The current screen embedding and time are then passed to a pointer (M-layer perceptron) which calculates the most probable \ti{actionable} elements to be clicked on.
-They consider a UI element as \ti{actionable}, if it is currently \code{clickable}, \code{visible} and \code{enable} (cf. \ref{tab:rico_view_hierarchy_attributes}).
+They consider a UI element as \ti{actionable}, if it is currently \code{clickable}, \code{visible} and \code{enable}d (cf. \ref{tab:rico_view_hierarchy_attributes}).
 More complex screens can have much more actionable elements, which makes the prediction much more difficult~\ref{fig:zhou_graphs} (a).
 % They introduced another metric to measure such predictions, which are relative to the number of objects.
 
