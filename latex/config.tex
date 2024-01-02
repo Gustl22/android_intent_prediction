@@ -1201,5 +1201,12 @@
 \end{array}
 \right)}
 
+\newfloat{lstfloat}{htbp}{lop}
+\floatname{lstfloat}{Listing}
+\newcommand{\code}{\lstinline}
+\lstnewenvironment{codeblock}
+{\lstset{language=C,numbers=left,numberstyle=\tiny,xleftmargin=.1\textwidth}}
+{}
+
 % Custom packages
 \usepackage{array}

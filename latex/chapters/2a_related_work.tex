@@ -15,6 +15,7 @@ Requirements on a good data set
 - need enough features to be able to recognize patterns
 - up to date
 - Publicly available
+- Variable length of app sessions, define one session of activating the screen until it is turned off.
 
 Missing
 - System to feed in in real time
@@ -202,3 +203,45 @@ Also as far as known the dataset and code is not publicly accessible.
 \cite{zhou2021large}
 -> No code or dataset
 
+- understand interaction behavior
+- ui optimization
+- recommending next element to click on
+- dataset of 20m clicks from 4k mobile users
+- Based on \ref{tranformer} model
+- deep leraning model
+- 48\% \ref{accuracy} and 71\% accuracy for top-3
+- challenges: accurate and scalabele click sequence modeling:
+  - exceeding number of unique UI screens in different apps -> no predefined set of UI elements
+  - users click behavior is very individual and heavily dependent on situational factors
+- tackles cross-app transitions (26\% of all clicks)
+- differentiate \ti{actionable} UI elements, if they are \code{clickable}, \code{visible} and \code{enable} (cf. \ref{tab:rico_view_hierarchy_attributes})
+- takes current context into account, time of the day, day in the week
+- uses context of the screen (bounding boxes, text content, type) and also click-sequence
+
+\todo{describe and link figure}
+
+\begin{figure}[htbp!]
+  \centering
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{graphics/zhou_actionable_elements}
+    \caption{Number of actionable elements per screen}
+    \label{fig:zhou_actionable_elements}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{graphics/zhou_event_time_intervals}
+    \caption{The distribution of time intervals between click events}
+    \label{fig:zhou_event_time_intervals}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{graphics/zhou_event_time_distribution}
+    \caption{The distribution of time intervals between click events}
+    \label{fig:zhou_event_time_distribution}
+  \end{subfigure}
+  \caption{View element insights \cite{zhou2021large}}
+  \label{fig:zhou_graphs}
+\end{figure}
