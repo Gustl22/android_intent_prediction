@@ -257,16 +257,16 @@ Based on the Transformer architecture in \ref{subsubsec:transformer} they create
 The researchers differentiated three main inputs for embedding their elements visible on the screen: the text content, the type of view and the bounding box.
 All the elements are then passed to a Transformer Encoder representing a single screen.
 Together with the click event as well as the time encoding the screen embedding serves as one concatenated input step.
-The encoded time can be very different as it doesn't follow a regular sample interval, but is recorded as soon as the screen is changing \ref{fig:zhou_graphs} (b).
+The encoded time can be very different as it doesn't follow a regular sample interval, but is recorded as soon as the screen is changing \ref{fig:zhou_event_time_intervals}.
 Multiple input steps then form a sequence fed in a second Transformer Encoder which contains all past screens and clicks.
 The current screen embedding and time are then passed to a pointer (M-layer perceptron) which calculates the most probable \ti{actionable} elements to be clicked on.
-They consider a UI element as \ti{actionable}, if it is currently \code{clickable}, \code{visible} and \code{enable}d (cf. \ref{tab:rico_view_hierarchy_attributes}).
-More complex screens can have much more actionable elements, which makes the prediction much more difficult~\ref{fig:zhou_graphs} (a).
+They consider a UI element as \ti{actionable}, if it is currently \code{clickable}, \code{visible} and \code{enable}d (cf.\ table~\ref{tab:rico_view_hierarchy_attributes}).
+More complex screens can have much more actionable elements, which makes the prediction much more difficult~\ref{fig:zhou_actionable_elements}.
 % They introduced another metric to measure such predictions, which are relative to the number of objects.
 
 This paper solves a lot of problems previous attempts had.
 The dataset includes cross-app transitions which make 26\% of all clicks, which are also considered in their model.
-The current context was taken into account such as the time of the day and day in the week~\ref{fig:zhou_graphs} (c) which adds a lot of semantics.
+The current context was taken into account such as the time of the day and day in the week~\ref{fig:zhou_event_time_distribution} which adds a lot of semantics.
 Further they used a transformer model with self-attention, which reduces the training times significantly compared to \gls{lstm}.
 Compared to the approach tested in this paper, they also predict the concrete element that will be clicked on instead of the absolute screen coordinates.
 
