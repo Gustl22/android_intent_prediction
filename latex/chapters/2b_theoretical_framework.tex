@@ -1,23 +1,56 @@
 \chapter{Theoretical Framework}
+\label{ch:theoretical-framework}
 
-\section{Android UI Data}
+Before starting with rehabilitate the main topic, some basic concepts, technical terms and underlying theory has to be explained.
+This is important to faster read through the thesis without the need to interrupt the flow of thought.
+In the following, a set of established theories and terms is explained which are not directly related to the thesis formulation, but essential to comprehend numerous contexts.
+
+\section{Android UI}
+\label{sec:android-ui}
+
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{graphics/android_udf}
+        \caption{Diagram of \gls{udf} in app architecture \cite{android_ui_layer}}
+        \label{fig:android_udf}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{graphics/android_semantics-ui-tree}
+        \caption{Structure of the semantics tree in the UI hierarchy \cite{android_semantics_compose}}
+        \label{fig:android_semantics_ui_tree}
+    \end{subfigure}
+    \caption{Structure of the Android \gls{ui}}
+    \label{fig:android_tree}
+\end{figure}
+https://developer.android.com/topic/architecture/ui-layer \cite{android_ui_layer}
+https://developer.android.com/guide/topics/ui/how-android-draws \cite{android_draw_views}
+https://developer.android.com/jetpack/compose/mental-model \cite{android_jetpack_compose}
+
 \subsection{Data tree structure}
+\label{subsec:data-tree-structure}
+
 
 Mean 18 actionable elements, with Std=12. \cite{zhou2021large}
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{graphics/android_layout_inspector}
-    \caption{https://developer.android.com/studio/debug/layout-inspector, https://github.com/mimuc/app-ins-gruene}
+    \caption{\cite{android_layout_inspector}, \cite{mimuc_app_ins_gruene}}
     \label{fig:android_layout_inspector}
 \end{figure}
 
 \subsection{Retrieval of UI data via Android Accessibility Service}
 
 Semantics tree:
-https://developer.android.com/jetpack/compose/semantics
-https://android.googlesource.com/platform/frameworks/testing/+/jb-dev/uiautomator/library/src/com/android/uiautomator/core/AccessibilityNodeInfoDumper.java
-https://github.com/Gustl22/android-accessibility/blob/c158808533d6fc017455184a7317555d3e6946f6/GlobalActionBarService/app/src/main/java/com/example/android/globalactionbarservice/uiautomator/AccessibilityNodeInfoDumper.java
+https://api.flutter.dev/flutter/widgets/Semantics-class.html
+https://developer.android.com/jetpack/compose/semantics \cite{android_semantics_compose}
+https://android.googlesource.com/platform/frameworks/testing/+/jb-dev/uiautomator/library/src/com/android/uiautomator/core/AccessibilityNodeInfoDumper.java \cite{android_accessibility_node_info_dumper}
+%https://github.com/Gustl22/android-accessibility/blob/c158808533d6fc017455184a7317555d3e6946f6/GlobalActionBarService/app/src/main/java/com/example/android/globalactionbarservice/uiautomator/AccessibilityNodeInfoDumper.java
 
 \lstinputlisting[language=XML,label=android_accessibility_node,caption={Android Accessibility Node in XML.},float]{code/android_accessibility_node.xml}
 
