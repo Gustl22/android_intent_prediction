@@ -10,13 +10,14 @@ In the following, a set of established theories and terms is explained which are
 
 To be able to use any of the things displayed on the mobile device, some concepts of \gls{ui} programming must be shown.
 A \gls{ui} enables the user to view the applications data on the screen but also to interact with the device especially on mobile devices \cite{android_ui_layer}.
+
 The main challenge is to bring the application data in the right format, so that the display can interpret the instructions to draw the elements.
 Each mobile phone with the Android \gls{os} has a basic set of native functions through which the \gls{ui} can be drawn and updated, a so-called \gls{api}.
 These functions can be very general to instruct drawing a whole component such as an alert box, or they can be very specific as drawing single rectangles in a canvas.
 
 The rough transition from the application data (data layer) to the display data (ui layer) is depicted in figure \ref{fig:android_udf}.
 The application data is transformed, concatenated or filtered to be saved in a view model, which represents the state for each view.
-The view model is then layed out to multiple UI elements.
+The view model is then layed out to multiple \gls{ui} elements.
 E.g.\ they are loaded in the Android activity via view layouts~\cite{android_draw_views} or composed in a declarative approach~\cite{android_jetpack_compose}.
 It is generally advised to use a \gls{udf}.
 This ensures that the data is only changed in one place and doesn't get out of sync between \gls{ui} elements, the view model and the data layer.
@@ -35,7 +36,7 @@ The view model then updates the application data, if needed, and then also repor
     \begin{subfigure}[b]{0.4\textwidth}
         \centering
         \includegraphics[width=\textwidth]{graphics/android_semantics-ui-tree}
-        \caption{Structure of the semantics tree in the UI hierarchy \cite{android_semantics_compose}}
+        \caption{Schema of how the semantics tree is related to the \gls{ui} hierarchy \cite{android_semantics_compose}}
         \label{fig:android_semantics_ui_tree}
     \end{subfigure}
     \caption{Structure of the Android \gls{ui}}
@@ -47,23 +48,49 @@ The view model then updates the application data, if needed, and then also repor
 \subsection{Data tree structure}
 \label{subsec:data-tree-structure}
 
+The \gls{ui} elements (i.e.\ the composition) themselves are hierarchically structured in a tree.
+This allows the renderer to calculate relative distances, floatings and skip processing hidden or overlapped elements.
 
-Mean 18 actionable elements, with Std=12. \cite{zhou2021large}
+With the Android Layout Inspector (figure~\ref{fig:android_layout_inspector}) a view hierarchy tree can be visually inspected while displaying its position and layout on the Android screen.
+Also, the layout attributes can be validated.
+This tool allows to debug complex \gls{ui}s especially when using nested components and display them in a simplistic way.
+Note that this tool is only available if one has access to the app's source code.
 
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=\textwidth]{graphics/android_layout_inspector}
-    \caption{\cite{android_layout_inspector}, \cite{mimuc_app_ins_gruene}}
+    \caption{The Android Layout Inspector tool using the example of \quotes{App ins Grüne}~\cite{mimuc_app_ins_gruene} by the Media Informatics Group of the LMU in Munich.}
     \label{fig:android_layout_inspector}
 \end{figure}
 
-\subsection{Retrieval of UI data via Android Accessibility Service}
+\subsection{Android Accessibility Service}
+\label{subsec:android-accessibility-service}
 
-Semantics tree:
-https://api.flutter.dev/flutter/widgets/Semantics-class.html
-https://developer.android.com/jetpack/compose/semantics \cite{android_semantics_compose}
-https://android.googlesource.com/platform/frameworks/testing/+/jb-dev/uiautomator/library/src/com/android/uiautomator/core/AccessibilityNodeInfoDumper.java \cite{android_accessibility_node_info_dumper}
+If an app is running in production on a users device, meaning that the app is compiled and publicly available, the ways of accessing the Android \gls{ui} tree are limited.
+This behavior is of course wanted for safety and privacy reasons.
+Nonetheless, if desired, a user can explicitly allow certain apps to gain access to the semantics tree of your Android \gls{os}.
+This is especially useful for providing accessibility services for impaired users (like done with the TalkBack app).
+Or -- as in our case -- the setting can be used to enable services which collect data for user studies or scientific experiments.
+
+This semantics tree is deviated from the existing \gls{ui} tree.
+It can be fed via special semantic properties while composing the \gls{ui}, e.g.\ by specifying the \code{contentDescription} property of an icon \cite{android_semantics_compose}.
+Providing semantics is not limited to native platforms as shown by Flutter~\cite{flutter_semantics} and React Native~\cite{react_native_accessibility}.
+In figure~\ref{fig:android_semantics_ui_tree} a schema is presented, which shows how the elements of the semantics tree are spanned compared to the components on the \gls{ui} layer.
+
+%https://github.com/android/codelab-android-accessibility
+To take advantage of the semantics tree, a custom accessibility service can be built, which can run in the background.
+This service tracks all UI changes and has access to the current view hierarchy of the screen, which also inherits the semantic tree.
+By altering the code of the \ti{AccessibilityNodeInfoDumper} one can extract the view hierarchy to a locale or remote database~\cite{android_accessibility_node_info_dumper}.
+In the code section \ref{android_accessibility_node} a small fraction of a view hierarchy is shown.
+It contains nested nodes with various attributes which represent the components of the combined \gls{ui} and semantics hierarchy.
+
+%Semantics tree:
+%https://api.flutter.dev/flutter/widgets/Semantics-class.html
+%https://developer.android.com/jetpack/compose/semantics
+%https://android.googlesource.com/platform/frameworks/testing/+/jb-dev/uiautomator/library/src/com/android/uiautomator/core/AccessibilityNodeInfoDumper.java \cite{android_accessibility_node_info_dumper}
 %https://github.com/Gustl22/android-accessibility/blob/c158808533d6fc017455184a7317555d3e6946f6/GlobalActionBarService/app/src/main/java/com/example/android/globalactionbarservice/uiautomator/AccessibilityNodeInfoDumper.java
+
+%Mean 18 actionable elements, with Std=12. \cite{zhou2021large}
 
 \lstinputlisting[language=XML,label=android_accessibility_node,caption={Android Accessibility Node in XML.},float]{code/android_accessibility_node.xml}
 
