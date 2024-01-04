@@ -145,7 +145,7 @@ Multiple features can be compared by calculating their correlation.
 If one feature is uncorrelated to all other features, this may be an indicator that this feature can be dropped, as it may doesn't contribute to the resulting model (\ti{filter method}).
 However, this can only be stated for linear correlations, thus it may contribute to the result in an unpredicted way.
 Also, if two features correlate too much to each other, one feature may is redundant and can be dropped.
-A good approach is also to reduce the dimensionality of the input data, e.g.\ by replacing \ref{one-hot} encoded features of the same domain with embeddings (\ti{embedded method}).
+A good approach is also to reduce the dimensionality of the input data, e.g.\ by replacing~\gls{gl-one-hot} encoded features of the same domain with embeddings (\ti{embedded method}).
 This is also called \ti{feature extraction}.
 Feature extraction can also be used in unsupervised feature selection.
 Clustering is a common approach to reduce the number of input dimensions by gaining insights of which classes can be merged and which need to stay.
@@ -197,22 +197,57 @@ One can also use a combination to e.g.\ pad all inputs with zero to the mean dim
 \ti{Causal padding} is a form of \ti{same padding}, but it prepends the fill values in front of the sequence.
 This is helpful if having \gls{rnn}s, which rely on a lengthier inputs in order to predict their next value, without need of filtering out short sequences.
 
-\subsubsection{Categorical Variables}
+\subsubsection{Categorical Values and One-Hot-Encoding}
 \label{subsubsec:categorical_variables}
 
-\todo{categorical}
-According to \cite{alam2019impact} these steps can be removal of emoticons, elimination of stopwords and stemming for text based models.
+A categorical value must be treated differently than numerical ordinal values.
+This is demonstrated best on a concrete example.
+Imagine a dataset with pictures of animals, and we want to categorize their species.
+Then the values of all possible species like \code{dog} and \code{cat} is called \ti{vocabulary}.
+To write it in a table, one could add a column called \code{species} and write their species as a \ti{string} (cf.\ table~\ref{tab:raw_data_table}).
+Unfortunately a \gls{ann} cannot work with \ti{strings}, but only with numerical values.
+So one could think that mapping each species to a number can solve this issue.
+Indeed, this is possible for ordinal categories, which have a strict linear order, such as ratings or gradings.
+They are then treated the same as \tb{integer values}.
+But animals aren't structured ordinal, thus each species must be treated equally.
+To reflect that we split the species column in multiple sub-columns, so that each new one represents one species, see table~\ref{tab:one-hot}.
+If the animal belongs to that species, one inserts a \tb{1} or \tb{True} and if not, a \tb{0} or \tb{False} is filled.
+This is also called \gls{gl-one-hot}-encoding.
 
-ordinal categories belong to the \tb{Integer values} as they
-
-Category Embedding before LSTM
-% https://stackoverflow.com/questions/47217151/keras-lstm-with-embedding-layer-before-lstm-layer
-% https://stackoverflow.com/questions/52627739/how-to-merge-numerical-and-embedding-sequential-models-to-treat-categories-in-rn/52629902#comment136040845_52629902
-
-
-- Embedding layer
-Embedding dimension is about the actual voc\_size, but not too large.
-Dimension near the actual average length of features (?)
+\begin{table}[htbp!]
+    \begin{subtable}[c]{0.5\textwidth}
+        \centering
+        \begin{tabular}{|l|l|l|}
+            \hline
+            \tb{$I_{d}$} & \textbf{Img} & \textbf{Species} \\
+            \hline
+            0 & \ti{blob} & cat \\
+            1 & \ti{blob} & dog \\
+            2 & \ti{blob} & cat \\
+            3 & \ti{blob} & horse \\
+            \hline
+        \end{tabular}
+        \subcaption{Raw data table}
+        \label{tab:raw_data_table}
+    \end{subtable}
+    \begin{subtable}[c]{0.5\textwidth}
+        \centering
+        \begin{tabular}{|l|l|l|l|l|}
+            \hline
+            \tb{$I_{d}$} & \tb{Img} & \tb{Cat} & \tb{Dog} & \tb{Horse}\\
+            \hline
+            0 & \ti{blob} & 1 & 0 & 0 \\
+            1 & \ti{blob} & 0 & 1 & 0 \\
+            2 & \ti{blob} & 1 & 0 & 0 \\
+            3 & \ti{blob} & 0 & 0 & 1 \\
+            \hline
+        \end{tabular}
+        \subcaption{One-hot encoded species}
+        \label{tab:one-hot}
+    \end{subtable}
+    \caption{\Gls{gl-one-hot}-encoding of categories, $I_{d}$ is the index of the data entry}
+    \label{tab:cat_one_hot}
+\end{table}
 
 \subsection{Supervised vs Unsupervised vs Semisupervised}
 
@@ -250,7 +285,7 @@ self-supervised
 Activation Functions
 Cost function
 Gradient
-- Regression: Continous Values
+- Regression: Continuous Values
 - Classification: Multiple class
 - One Class
 
@@ -277,6 +312,71 @@ Data, Quantity dimension, such as Image dimensions, or multiple nodes
 TimeDistributedLayer
 % https://stackoverflow.com/a/61588937/5164462
 % https://stackoverflow.com/questions/53107126/what-are-the-uses-of-timedistributed-wrapper-for-lstm-or-any-other-layers
+
+\subsubsection{Dense Layer}
+\label{subsubsec:dense-layer}
+
+\subsubsection{Embedding Layer}
+\label{subsubsec:embedding-layer}
+
+% https://machinelearningmastery.com/use-word-embedding-layers-deep-learning-keras/
+As mentioned in section~\ref{subsubsec:categorical_variables} categories can be represented using \gls{gl-one-hot} encoding.
+The conversion can result in innumerable amount of columns, which is equivalent each having its own feature dimension.
+To reduce the dimensionality of such encoding, so-called categorical \ti{embeddings} can be introduced.
+This means that each single species is represented by a vector.
+The length of the vector can be selected freely, it is called the \ti{embedding dimension}.
+A lookup-table is created which encodes each category with randomly initialized weights of size of the embedding dimension (cf.\ table~\ref{tab:species-embedding}).
+Now the embedding vector for each species is looked up and replaced in the data table resulting in an embedded representation (cf.\ table~\ref{tab:embedding_data_table}).
+During training of the model the weights of the look-up table are successively updated (like for the dense layer ~\ref{subsubsec:dense-layer}) to reduce the loss of the overall model.
+An embedding would result in an \gls{gl-one-hot}-encoding, if the embedding dimension and the vocabulary size are equal and the conversion matrix (lookup-table) is the identity matrix.
+
+\begin{table}[htbp!]
+    \begin{subtable}[c]{0.5\textwidth}
+        \centering
+        \begin{tabular}{|l|l|l|l|}
+            \hline
+            \tb{$I_{d}$} & \tb{Img} & \tb{SP\_1} & \tb{SP\_2}\\
+            \hline
+            0 & \ti{blob} & 0.1 & 0.6 \\
+            1 & \ti{blob} & 0.4 & 0.8 \\
+            2 & \ti{blob} & 0.1 & 0.6 \\
+            3 & \ti{blob} & 0.5 & 0.5 \\
+            \hline
+        \end{tabular}
+        \subcaption{Species encoded with embedding}
+        \label{tab:embedding_data_table}
+    \end{subtable}
+    \begin{subtable}[c]{0.5\textwidth}
+        \centering
+        \begin{tabular}{|l|l|l|l|}
+            \hline
+            \tb{Species} & \tb{$I_{s}$} & \tb{SP\_1} & \tb{SP\_2}\\
+            \hline
+            0 & cat & 0.1 & 0.6 \\
+            1 & dog & 0.4 & 0.8 \\
+            2 & horse & 0.5 & 0.5 \\
+            \hline
+        \end{tabular}
+        \subcaption{Lookup table for the 2-dimensional embedding of species}
+        \label{tab:species-embedding}
+    \end{subtable}
+    \caption{Embedding of categories, $I_{d}$ is the index of the data entry, $I_{s}$ is the index of the species}
+    \label{tab:cat_embeddings}
+\end{table}
+
+
+
+According to \cite{alam2019impact} these steps can be removal of emoticons, elimination of stopwords and stemming for text based models.
+
+Category Embedding before LSTM
+% https://stackoverflow.com/questions/47217151/keras-lstm-with-embedding-layer-before-lstm-layer
+% https://stackoverflow.com/questions/52627739/how-to-merge-numerical-and-embedding-sequential-models-to-treat-categories-in-rn/52629902#comment136040845_52629902
+% https://stats.stackexchange.com/questions/270546/how-does-keras-embedding-layer-work
+% https://stackoverflow.com/questions/47868265/what-is-the-difference-between-an-embedding-layer-and-a-dense-layer
+
+
+Embedding dimension is about the actual voc\_size, but not too large.
+Dimension near the actual average length of features (?)
 
 \subsubsection{Autoencoders}
 \label{subsubsec:autoencoder}
