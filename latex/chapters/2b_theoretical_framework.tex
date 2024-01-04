@@ -139,7 +139,7 @@ Also, it may be a valid approach to get around missing data and can help structu
 
 %https://dl-acm-org.emedien.ub.uni-muenchen.de/doi/pdf/10.1145/3136625
 On the technical sight, feature selection can be differentiated for two goals: supervised and unsupervised learning~\cite{li2017feature}.
-However, principles from the supervised feature selection can be applied in the unsupervised domain, resulting in a semi-supervised filter selection.
+However, principles from the supervised feature selection can be applied in the unsupervised domain, resulting in a semi-supervised \ref{semi-supervised} filter selection.
 For classifiers and regression problems (unsupervised) following methods can be applied.
 Multiple features can be compared by calculating their correlation.
 If one feature is uncorrelated to all other features, this may be an indicator that this feature can be dropped, as it doesn't contribute to the resulting model (\ti{filter method}).
@@ -251,7 +251,9 @@ This is also called \gls{gl-one-hot}-encoding.
     \label{tab:cat_one_hot}
 \end{table}
 
-\subsection{Supervised vs Unsupervised vs Semisupervised}
+\subsection{Types of Machine Learning}
+
+\cite{ghahramani2003unsupervised}
 
 \subsubsection{Supervised Learning}
 Supervised: Classification and regression
@@ -267,11 +269,26 @@ Steps:
 - Evaluate the model with the test data, then can adapt the model by the developer
 - Last deploy the model to production
 
+
+\tb{Semi-supervised Learning}
+
+The algorithms using semi-supervised learning seek to adopt from unlabeled and labeled data~\cite{van2020survey}.
+It can be assumed that the model is trained first with labeled data, e.g.\ to be able to differentiate certain clusters.
+Then the model predicts the labels of the unlabeled data which is then serving as new data point to train the model.
+This helps to enlarge the cluster or move its boundaries.
+%Test points to be classified by the model into the clusters then have a smaller distance to the previous predicted point,
+%and therefore adapting the label of it's cluster, instead of being assigned to a different cluster.
+It can be seen as a model trained with classification through labeled data and then extended with clustering through unlabeled data.
+Also, if having only few labeled points, one can start with training a cluster through unlabeled data and then determine the class label of the clusters with the labeled data points.
+
+\tb{Self-supervised Learning}
+
+\tb{Reinforcement Learning}
+Can also be applied to LSTM
+
 \subsubsection{Unsupervised Learning}
 Clustering
-Reinforcement learning
-
-self-supervised
+Dimensionality reduction
 
 \subsection{Under and Overfitting}
 \label{subsec:under-and-overfitting}
@@ -301,6 +318,8 @@ Neural Net with more than one layer
 
 \subsubsection{Convolutional Neural Nets}
 \subsubsection{Recurrent Neural Networks and LSTMs / GRU}
+supervised
+
 LSTM 4 dimensional
 % https://stackoverflow.com/questions/54743549/is-it-possible-to-making-lstm-model-with-4-dimension-shape-of-data
 
@@ -393,4 +412,30 @@ Positive Integer to Dense Vectors of fixed size
 
 \section{Evaluation and Metrics}
 \subsection{Mean Squared Error}
-\subsection{F1 Score}
+
+\subsection{\texorpdfstring{F\textsubscript{1}-Score}{F1-Score}}
+\label{subsec:f1-score}
+
+\begin{comment}
+Die F\textsubscript{1}-Wertung ist eine der am häufigst verwendeten Metriken zur Evaluation von \acrshort{ml}-Modellen. Um den F\textsubscript{1}-Wert berechnen zu können, werden die Werte der im vorherigen Kapitel beschriebenen Confusion Matrix benötigt. Die Formel zur Berechnung des F\textsubscript{1}-Wertes lautet:
+
+\begin{equation}
+    F\textsubscript{1} = (\frac{\text{1/Precision + 1/Recall}}{2})\textsuperscript{-1}
+\end{equation}
+
+Dazu werden die Formeln für den Wert von \textit{Precision} und \textit{Recall} benötigt.
+
+\begin{equation}
+    Precision = \frac{\text{\acrshort{tp}}}{\text{\acrshort{tp} + \acrshort{fp}}}
+\end{equation}
+\begin{equation}
+    Recall = \frac{\text{\acrshort{tp}}}{\text{\acrshort{tp} + \acrshort{fn}}}
+\end{equation}
+
+Der Wert der Precision-Gleichung wird durch den Anteil an richtig vorhergesagten positiven
+Ergebnissen (\acrshort{tp}) auf die Gesamtheit aller als positiv vorhergesagten Ergebnissen berechnet. Mit der Recall-Gleichung, welche auch Hit-Rate genannt wird, wird mit der Anzahl
+\acrshort{tp}-Ergebnisse geteilt durch die Gesamtheit der tatsächlich positiven Ergebnisse,
+der Wert der Gleichung berechnet. Dieser Wert gibt den Anteil der Objekte der positiven Klasse an, der durch ein \acrshort{ml}-Modell errechnet wurde. Der F\textsubscript{1}-Wert hat einen Wert zwischen [0, 1]. Je höher dieser Wert ist, desto
+besser ist die Leistung des \acrshort{ml}-Modells~\cite{evaluationsMethoden}.
+
+\end{comment}
