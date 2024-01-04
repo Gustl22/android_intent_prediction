@@ -111,6 +111,7 @@ Nonetheless \gls{ml} has a lot of potential to uncover hidden connections in lar
 %https://stackoverflow.com/a/48599383/5164462
 
 \subsection{Preprocessing}
+\label{subsec:preprocessing}
 
 Preprocessing describes the step after one acquired their data, but before training the \gls{ml} model.
 This step is not to be underestimated.
@@ -127,7 +128,7 @@ Data entries can occur in different forms, but we can break them down in three m
           E.g.\ revolutions per minute, product number, annual sales
 \end{itemize}
 
-For discrete and continuous values, we have a wide variety of options for preparing them in order to be subsequently processed by a \gls{ml} model \cite{duong2021}.
+For all types -- discrete, continuous, and categorical values -- we have a wide variety of options for preparing them in order to be subsequently processed by a \gls{ml} model \cite{duong2021}.
 
 
 \subsubsection{Feature selection}
@@ -184,9 +185,20 @@ Here the standardization, also called z-score normalization, comes into play.
 This method scales the values so that the mean value is placed at \tb{0} and the standard deviation is placed at \tb{1}.
 %https://medium.com/analytics-vidhya/what-are-data-standardization-and-data-normalization-f880dd9e79b6
 \subsubsection{Padding}
+\label{subsubsec:padding}
 
+Padding is a technique to adapt input sequences or matrices of different dimensions to the same size.
+For example if one screen only has five \gls{ui} elements, and the next one has twenty, the input size varies significantly.
+Therefore, there exists three approaches to overcome this problem~\cite{baeldung_padding}.
+The first one is to extend all inputs of a specific feature to the longest available input dimension of this feature.
+Then every sequence has to be filled with additional values, almost always \tb{0} is used for that, until it matches the longest dimension (\ti{same padding}).
+Another technique called \ti{valid padding} cuts all data values after reaching the smallest dimension of all inputs of the feature.
+One can also use a combination to e.g.\ pad all inputs with zero to the mean dimension, but throw away all exceeding values as they aren't expected to contribute to a better result.
+\ti{Causal padding} is a form of \ti{same padding}, but it prepends the fill values in front of the sequence.
+This is helpful if having \gls{rnn}s, which rely on a lengthier inputs in order to predict their next value, without need of filtering out short sequences.
 
 \subsubsection{Categorical Variables}
+\label{subsubsec:categorical_variables}
 
 \todo{categorical}
 According to \cite{alam2019impact} these steps can be removal of emoticons, elimination of stopwords and stemming for text based models.
