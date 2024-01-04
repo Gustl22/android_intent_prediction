@@ -142,15 +142,15 @@ On the technical sight, feature selection can be differentiated for two goals: s
 However, principles from the supervised feature selection can be applied in the unsupervised domain, resulting in a semi-supervised filter selection.
 For classifiers and regression problems (unsupervised) following methods can be applied.
 Multiple features can be compared by calculating their correlation.
-If one feature is uncorrelated to all other features, this may be an indicator that this feature can be dropped, as it may doesn't contribute to the resulting model (\ti{filter method}).
-However, this can only be stated for linear correlations, thus it may contribute to the result in an unpredicted way.
-Also, if two features correlate too much to each other, one feature may is redundant and can be dropped.
+If one feature is uncorrelated to all other features, this may be an indicator that this feature can be dropped, as it doesn't contribute to the resulting model (\ti{filter method}).
+However, this can only be stated for linear correlations, thus it can contribute to the result in an unpredicted way.
+Also, if two features correlate too much to each other, one feature probably is redundant and can be dropped.
 A good approach is also to reduce the dimensionality of the input data, e.g.\ by replacing~\gls{gl-one-hot} encoded features of the same domain with embeddings (\ti{embedded method}).
 This is also called \ti{feature extraction}.
 Feature extraction can also be used in unsupervised feature selection.
 Clustering is a common approach to reduce the number of input dimensions by gaining insights of which classes can be merged and which need to stay.
 A more computational but promising solution is to filter the features by optimizing the model result, also called a \ti{wrapper method}.
-By gradually removing and adding features and calculating the models performance, one can determine which inputs are important and which may only steal computing time.
+By gradually removing and adding features and calculating the models performance, one can determine which inputs are important and which are at risk to increase computing time without noticeable effect.
 
 \todo{formulate or remove}
 semantic or legal feature selection
@@ -199,6 +199,8 @@ This is helpful if having \gls{rnn}s, which rely on a lengthier inputs in order 
 
 \subsubsection{Categorical Values and One-Hot-Encoding}
 \label{subsubsec:categorical_variables}
+
+\todo{cite}
 
 A categorical value must be treated differently than numerical ordinal values.
 This is demonstrated best on a concrete example.
@@ -322,7 +324,7 @@ TimeDistributedLayer
 % https://machinelearningmastery.com/use-word-embedding-layers-deep-learning-keras/
 As mentioned in section~\ref{subsubsec:categorical_variables} categories can be represented using \gls{gl-one-hot} encoding.
 The conversion can result in innumerable amount of columns, which is equivalent each having its own feature dimension.
-To reduce the dimensionality of such encoding, so-called categorical \ti{embeddings} can be introduced.
+To reduce the dimensionality of such encoding, so-called categorical \ti{embeddings} can be introduced~\cite{brownlee2021}.
 This means that each single species is represented by a vector.
 The length of the vector can be selected freely, it is called the \ti{embedding dimension}.
 A lookup-table is created which encodes each category with randomly initialized weights of size of the embedding dimension (cf.\ table~\ref{tab:species-embedding}).
