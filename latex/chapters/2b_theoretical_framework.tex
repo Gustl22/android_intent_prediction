@@ -106,16 +106,20 @@ The data driven approach also comes with some drawbacks: the outcome heavily dep
 It can include biases and therefore may acquire forms of discrimination or unfair treatment.
 Nonetheless \gls{ml} has a lot of potential to uncover hidden connections in large datasets.
 
+
+\todo{explain Tensors, Datasets}
+%https://stackoverflow.com/a/48599383/5164462
+
 \subsection{Preprocessing}
 
 Preprocessing describes the step after one acquired their data, but before training the \gls{ml} model.
 This step is not to be underestimated.
 A \gls{ml} model can perform significantly better when certain preprocessing steps are applied \cite{alam2019impact}.
 
-To be able to preprocess the data, we have to know with what kind of data we handle with.
-Data can occur in different forms, but we can break them down in three main types:
+To be able to preprocess, we have to know with what kind of data we handle with.
+Data entries can occur in different forms, but we can break them down in three main types:
 \begin{itemize}
-    \item \tb{Categorical values}: a value is always assigned to a class with fixed pool of predetermined classes.
+    \item \tb{Categorical values}: a value is always assigned to a class with a fixed pool of predetermined classes.
           E.g.\ letters, words, brands, animals, chemical elements
     \item \tb{Continuous values}: the value can be fractional and may lies in between a lower and an upper bound.
           E.g.\ temperature, velocity, geographic position
@@ -123,13 +127,34 @@ Data can occur in different forms, but we can break them down in three main type
           E.g.\ revolutions per minute, product number, annual sales
 \end{itemize}
 
-For discrete and continuous values, we have a wide variety of options to prepare them to be able to be processed by a \gls{ml} model \cite{duong2021}.
+For discrete and continuous values, we have a wide variety of options for preparing them in order to be subsequently processed by a \gls{ml} model \cite{duong2021}.
 
-\todo{Tensors, Datasets}
-%https://stackoverflow.com/a/48599383/5164462
 
 \subsubsection{Feature selection}
+
+Feature selection is a crucial step to successfully develop a model with the desired results.
+It can improve learning performance, thus reduces time, increases computational efficiency, decreases memory storage, and helps build better generalization models \cite{li2017feature}.
+Also, it may be a valid approach to get around missing data and can help structure the data by removing unnecessary clutter.
+
+%https://dl-acm-org.emedien.ub.uni-muenchen.de/doi/pdf/10.1145/3136625
+On the technical sight, feature selection can be differentiated for two goals: supervised and unsupervised learning~\cite{li2017feature}.
+However, principles from the supervised feature selection can be applied in the unsupervised domain, resulting in a semi-supervised filter selection.
+For classifiers and regression problems (unsupervised) following methods can be applied.
+Multiple features can be compared by calculating their correlation.
+If one feature is uncorrelated to all other features, this may be an indicator that this feature can be dropped, as it may doesn't contribute to the resulting model (\ti{filter method}).
+However, this can only be stated for linear correlations, thus it may contribute to the result in an unpredicted way.
+Also, if two features correlate too much to each other, one feature may is redundant and can be dropped.
+A good approach is also to reduce the dimensionality of the input data, e.g.\ by replacing \ref{one-hot} encoded features of the same domain with embeddings (\ti{embedded method}).
+This is also called \ti{feature extraction}.
+Feature extraction can also be used in unsupervised feature selection.
+Clustering is a common approach to reduce the number of input dimensions by gaining insights of which classes can be merged and which need to stay.
+A more computational but promising solution is to filter the features by optimizing the model result, also called a \ti{wrapper method}.
+By gradually removing and adding features and calculating the models performance, one can determine which inputs are important and which may only steal computing time.
+
+semantic or legal feature selection
 Such as Filtering privacy invasive details
+Remove sensitive data
+%https://news.mit.edu/2023/new-way-look-data-privacy-0714
 
 Parameterizing the vectorization process
 a) Vector length
@@ -165,12 +190,15 @@ This method scales the values so that the mean value is placed at \tb{0} and the
 \todo{categorical}
 According to \cite{alam2019impact} these steps can be removal of emoticons, elimination of stopwords and stemming for text based models.
 
+ordinal categories belong to the \tb{Integer values} as they
+
 Category Embedding before LSTM
 % https://stackoverflow.com/questions/47217151/keras-lstm-with-embedding-layer-before-lstm-layer
 % https://stackoverflow.com/questions/52627739/how-to-merge-numerical-and-embedding-sequential-models-to-treat-categories-in-rn/52629902#comment136040845_52629902
 
 
 - Embedding layer
+Embedding dimension is about the actual voc\_size, but not too large.
 Dimension near the actual average length of features (?)
 
 \subsection{Supervised vs Unsupervised vs Semisupervised}
