@@ -1,10 +1,57 @@
 \chapter{Methodology}
 
-\todo{Describe methodology}
-Start with your overall approach to the research.
-What research problem or question did you investigate?
-What type of data did you need to answer it?
-Quantitative, qualitative, or mixed? Primary or secondary? Experimental or descriptive?
+In the upcoming sections the methodology for this thesis is presented.
+This includes the research questions, the type of work, the analysis process of related work, how the data was selected, and what decisions were made to accomplish the research goals.
+
+Working with mobile \gls{os} and how the user can be supported by solving their tasks is the main booster to embrace to this topic.
+To this date and as far as known no open accessible prediction model was published to predict the user intent to the detail of their gesture inputs.
+In order to converge to this goal, the research questions were developed and the methodology for those is explained.
+%Start with your overall approach to the research.
+% What research problem or question did you investigate?
+\todo{may add a third research question}
+How the user can be supported with their tasks on digital end devices?
+No user study, overall goal -> Future work
+
+Initially the question was asked: \quotes{Is the LSTM a suitable choice for the prediction of user intent?}
+To answer this question, LSTM has to be compared against other methods of predicting user intents.
+As shown in \todo{add ref} classic stochastic approaches may can predict larger scope of the user such as the next app or a general user workflow.
+But they are not sufficient for predicting views, screens, or even precise gesture inputs.
+To overcome this limitation the \gls{ml}-models have established in large datasets.
+As the described problem is to be contextualized in the prediction of time series, the following options are offered:
+\begin{itemize}
+    \item \gls{rnn}
+    \item \gls{gru}
+    \item \gls{lstm}
+    \item \gls{gl-transformer}
+\end{itemize}
+
+\gls{rnn} is limited in the capacity of establishing long-term semantics.
+\gls{gru} is missing the forget gate compared to the \gls{lstm} making it simpler and faster, but may perform weaker on complex datasets.
+The \gls{gl-transformer} model has many advantages, such as fast and efficient training, parallelism of input sequences and recognizing long-term patterns through multi-head attention.
+On the other hand few prior work was done in the mobile sector which covers prediction of \gls{ui} trees.
+Therefore, no publicly available coding approach was found which could be extended.
+Also, as described in~\cite{zhou2021large} the structure of the model is quite complex -- with two transformers -- and needs more processing steps in general.
+\gls{lstm} is well documented and the common choice to predict time dependent series.
+It is well-supported by Keras \ref{keras} and easy to use.
+Also, similar approaches have been made in the area of app prediction or app summarization~\ref{cite me}, which can be used as basis for this work, such as Screen2Words \ref{subsec:screen2words}.
+
+The next research question is: \quotes{At what level of detail the predictions can be made?}
+User flows can be predicted: \ref{subsec:erica}
+\todo{first read through "Intent"}
+category → app → screen → view → action
+1. Predict Gestures, predict of current screen, not next screen, is possible and can easily calculate distances between this and the next point
+2. Predict Screen or parts of screens, labels not gestures, box positions, text prediction, decoded and compared to current output, more a qualitative evalutation,
+3. Predict App -> Not possible with RICO, no cross app traces
+
+%What type of data did you need to answer it?
+
+%Quantitative, qualitative, or mixed? Primary or secondary? Experimental or descriptive?
+Mixed strategy, qualitative to explain existing approaches
+But also Quantitative as a new method is developed.
+
+Descriptive and experimental...
+% type of research
+
 
 \section{Data Aquisition}
 How you collected and analyzed your data
@@ -32,6 +79,7 @@ How do they relate to your research question and literature review?
 How do they address the limitations or gaps in existing research?
 How do they suit your research design and objectives?
 
+- Keras vs PyTorch, Python vs other languages
 - No similar approach
 - No dataset present with consecutive sequential app usages
 - Many different approaches to solve this problem:
