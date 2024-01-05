@@ -12,7 +12,7 @@ Working with mobile \gls{os} and how the user can be supported by solving their 
 This also raises the question, how much aid a user can be given, to what detail it is capable of and where are its limitations.
 To this date and as far as known no open accessible prediction model was published to predict the user intent to the detail of their gesture inputs.
 Also, it is not apparent which technologies and methods are suitable to develop such an intent prediction system.
-In order to converge to these goals, the research questions were developed and the methodology for those is explained.
+In order to converge solving these problems, the research questions were developed.
 
 %Quantitative, qualitative, or mixed? Primary or secondary? Experimental or descriptive?
 The thesis follows a mixed strategy to develop the research topic.
@@ -27,67 +27,76 @@ Some of these papers included sample code and datasets, which were evaluated in 
 Also, tools were looked for, which can help accomplish the research.
 To acquire the basics of \gls{ml}, a workshop has been passed, which teaches the handling with Tensorflow and Keras using the programming language Python.
 The structure of the thesis was chosen by knowledge of working on previous thesis, the given template, and proposals from other scientists.
+A proof of concept has been developed in order to provide a working example for intent prediction.
+This was evaluated with well-established metrics, such as the \gls{gl-accuracy} or the F\textsubscript{1}-Score.
+The importance of the result was discussed and the research questions were answered.
 
-The goal is to develop an approach that can be followed by the reader, but also is detailed enough to understand the underlying technology.
+
+%The goal is to develop an approach that can be followed by the reader, but also is detailed enough to understand the underlying technology.
 
 %What type of data did you need to answer it?
 
 %\section{Data Aquisition}
-How you collected and analyzed your data
-Describe the specific methods you used for data collection and analysis.
-How did you collect and analyze your data?
-What tools or materials did you use?
-How did you ensure the quality and accuracy of your data?
+%How you collected and analyzed your data
+%Describe the specific methods you used for data collection and analysis.
+%How did you collect and analyze your data?
+%What tools or materials did you use?
+%How did you ensure the quality and accuracy of your data?
 
-- Why RICO, rather use a dataset with accessibility service.
-- ERICA employs a human-powered approach over an automated one:
-    - More realistic results
-    - required user input, which cannot emulated, Google Captcha, real data
-    - humans detect the completion of UI updates \cite{deka2016erica}
-    - erica is quite outdated
+Several factors affected the decision for the dataset, that is used to train the \gls{ml} model.
+Gathering an own dataset could not be realized, as of the following reasons:
+\begin{itemize}
+    \item too small group of expected participants to fulfill the requirements for the model
+    \item infrastructure and app service have to be built
+    \item legal and technological barriers
+\end{itemize}
+Nonetheless, a prototype app has been developed which could inspect the accessibility tree.
+The dataset of ERICA (\ref{subsec:erica}) is more suited, as it gives has a large dataset and human interaction traces.
+The successor dataset, Rico (\ref{subsec:rico}), is even bigger, which matches the requirements for \gls{ml}.
+Unfortunately both, ERICA and Rico, don't provide cross-app interaction traces, restricting it to possible intent predictions only during using an app.
+They also weren't reflecting a real world application, as they used a web-service approach, rather than the android accessibility services to gather their data.
+Because of the lack of large appropriate datasets the Rico dataset was chosen for training the model.
 
-
-Any tools or materials you used in the research.
-The type of research you conducted
-
-E.g. Google Scholar, Google Research, Tensorflow, Keras, Udemy, Open Source, Reproducible
-
-\section{Methodological variety}
-Explain why you chose these methods over others.
-How do they relate to your research question and literature review?
-How do they address the limitations or gaps in existing research?
-How do they suit your research design and objectives?
-
-- Keras vs PyTorch, Python vs other languages
-- No similar approach
-- No dataset present with consecutive sequential app usages
-- Many different approaches to solve this problem:
-    - Encoder, Decoder, etc...
-- A Study can follow
-
-\section{Methodological choices}
-Evaluate and justify your methodological choices.
-Why you chose these methods
-How did they affect the outcome of your research?
-What challenges or difficulties did you encounter and how did you overcome them?
-How can you ensure the credibility and generalizability of your findings?
-
-IntelliJ and Overleaf
-\todo{overall goal is more than just interaction traces}
-Goal: Make the algorithm as independent of the data as possible.
-Find general rules to feed the data.
-Applicable to other research fields, not just UI traces.
-Use LSTM, so predict something unseen, in contrast to RICO or ERICA, which only categorize the current context
+%Any tools or materials you used in the research.
+%E.g. Google Scholar, Google Research, Tensorflow, Keras, Udemy, Open Source, Reproducible, IntelliJ and Overleaf
+As of technologies, Keras -- an abstraction interface of Tensorflow -- was chosen to implement the proof of concept.
+The popularity and public knowledge, but also the usage in other related projects, convinced to use Keras, which is built up on Python.
+Regrettably Python is not \ti{type safe}, which made debugging unnecessarily hard and raised major problems during development of the proof of concept.
+As \gls{ide} IntelliJ was used in combination with Jupyter Notebook platform.
+For calculations of \gls{nn} a Linux-machine with an Intel Core i5-6600 processor and a NVIDIA GeForce GTX 970 graphics card were used.
 
 
-\section{Research Biases}
-How you mitigated or avoided research biases
+%\section{Methodological variety}
+%Explain why you chose these methods over others.
+%How do they relate to your research question and literature review?
+%How do they address the limitations or gaps in existing research?
+%How do they suit your research design and objectives?
+%
+%- Keras vs PyTorch, Python vs other languages
+%- No similar approach
+%- No dataset present with consecutive sequential app usages
+%- Many different approaches to solve this problem:
+%    - Encoder, Decoder, etc...
+%- A Study can follow
 
-How this thesis is working?
-Apparatus, Procedure, Utilities
+\todo{Check Methodological choices}
+%\section{Methodological choices}
+%Evaluate and justify your methodological choices.
+%Why you chose these methods
+%How did they affect the outcome of your research?
+%What challenges or difficulties did you encounter and how did you overcome them?
+%How can you ensure the credibility and generalizability of your findings?
 
 
-\section{How research requestions are answered}
-\quotes{What is a suitable model for the prediction of user intent?}.
-\quotes{At what level of detail the predictions can be made?}
-\todo{may add a third research question}
+%\section{Research Biases}
+%How you mitigated or avoided research biases
+
+
+%How this thesis is working?
+%Apparatus, Procedure, Utilities
+
+
+%\section{How research requestions are answered}
+%\quotes{What is a suitable model for the prediction of user intent?}.
+%\quotes{At what level of detail the predictions can be made?}
+%\todo{may add a third research question}
