@@ -1,59 +1,38 @@
 \chapter{Methodology}
 
 In the upcoming sections the methodology for this thesis is presented.
-This includes the research questions, the type of work, the analysis process of related work, how the data was selected, and what decisions were made to accomplish the research goals.
+This includes the type of work,
+the analysis process of related work,
+how the data was selected,
+what decisions were made to accomplish the research goals,
+and how the research questions are answered.
 
-Working with mobile \gls{os} and how the user can be supported by solving their tasks is the main booster to embrace to this topic.
-To this date and as far as known no open accessible prediction model was published to predict the user intent to the detail of their gesture inputs.
-In order to converge to this goal, the research questions were developed and the methodology for those is explained.
-%Start with your overall approach to the research.
 % What research problem or question did you investigate?
-\todo{may add a third research question}
-How the user can be supported with their tasks on digital end devices?
-No user study, overall goal -> Future work
+Working with mobile \gls{os} and how the user can be supported by solving their tasks on digital end devices is the main booster to embrace to this topic.
+This also raises the question, how much aid a user can be given, to what detail it is capable of and where are its limitations.
+To this date and as far as known no open accessible prediction model was published to predict the user intent to the detail of their gesture inputs.
+Also, it is not apparent which technologies and methods are suitable to develop such an intent prediction system.
+In order to converge to these goals, the research questions were developed and the methodology for those is explained.
 
-Initially the question was asked: \quotes{Is the LSTM a suitable choice for the prediction of user intent?}
-To answer this question, LSTM has to be compared against other methods of predicting user intents.
-As shown in \todo{add ref} classic stochastic approaches may can predict larger scope of the user such as the next app or a general user workflow.
-But they are not sufficient for predicting views, screens, or even precise gesture inputs.
-To overcome this limitation the \gls{ml}-models have established in large datasets.
-As the described problem is to be contextualized in the prediction of time series, the following options are offered:
-\begin{itemize}
-    \item \gls{rnn}
-    \item \gls{gru}
-    \item \gls{lstm}
-    \item \gls{gl-transformer}
-\end{itemize}
+%Quantitative, qualitative, or mixed? Primary or secondary? Experimental or descriptive?
+The thesis follows a mixed strategy to develop the research topic.
+Qualitative statements were taken into account in order to explain existing approaches and describe theories.
+But the experimental proof of concept was evaluated using quantitative metrics.
+A study to evaluate the experimental findings was exceeding the scope of this master thesis, although it would be very interesting.
 
-\gls{rnn} is limited in the capacity of establishing long-term semantics.
-\gls{gru} is missing the forget gate compared to the \gls{lstm} making it simpler and faster, but may perform weaker on complex datasets.
-The \gls{gl-transformer} model has many advantages, such as fast and efficient training, parallelism of input sequences and recognizing long-term patterns through multi-head attention.
-On the other hand few prior work was done in the mobile sector which covers prediction of \gls{ui} trees.
-Therefore, no publicly available coding approach was found which could be extended.
-Also, as described in~\cite{zhou2021large} the structure of the model is quite complex -- with two transformers -- and needs more processing steps in general.
-\gls{lstm} is well documented and the common choice to predict time dependent series.
-It is well-supported by Keras \ref{keras} and easy to use.
-Also, similar approaches have been made in the area of app prediction or app summarization~\ref{cite me}, which can be used as basis for this work, such as Screen2Words \ref{subsec:screen2words}.
+%Start with your overall approach to the research.
+In order to have an overview of the subject, various research papers were worked through.
+These then were classified by its relevance to the topic and if suitable, presented in related work (chapter~\ref{ch:related-work}).
+Some of these papers included sample code and datasets, which were evaluated in parts, such as Rico (\ref{subsec:rico}), Screen2vec (\ref{subsec:screen2vec}) or Screen2words (\ref{subsec:screen2words}).
+Also, tools were looked for, which can help accomplish the research.
+To acquire the basics of \gls{ml}, a workshop has been passed, which teaches the handling with Tensorflow and Keras using the programming language Python.
+The structure of the thesis was chosen by knowledge of working on previous thesis, the given template, and proposals from other scientists.
 
-The next research question is: \quotes{At what level of detail the predictions can be made?}
-User flows can be predicted: \ref{subsec:erica}
-\todo{first read through "Intent"}
-category → app → screen → view → action
-1. Predict Gestures, predict of current screen, not next screen, is possible and can easily calculate distances between this and the next point
-2. Predict Screen or parts of screens, labels not gestures, box positions, text prediction, decoded and compared to current output, more a qualitative evalutation,
-3. Predict App -> Not possible with RICO, no cross app traces
+The goal is to develop an approach that can be followed by the reader, but also is detailed enough to understand the underlying technology.
 
 %What type of data did you need to answer it?
 
-%Quantitative, qualitative, or mixed? Primary or secondary? Experimental or descriptive?
-Mixed strategy, qualitative to explain existing approaches
-But also Quantitative as a new method is developed.
-
-Descriptive and experimental...
-% type of research
-
-
-\section{Data Aquisition}
+%\section{Data Aquisition}
 How you collected and analyzed your data
 Describe the specific methods you used for data collection and analysis.
 How did you collect and analyze your data?
@@ -93,7 +72,7 @@ How did they affect the outcome of your research?
 What challenges or difficulties did you encounter and how did you overcome them?
 How can you ensure the credibility and generalizability of your findings?
 
-
+IntelliJ and Overleaf
 \todo{overall goal is more than just interaction traces}
 Goal: Make the algorithm as independent of the data as possible.
 Find general rules to feed the data.
@@ -106,3 +85,9 @@ How you mitigated or avoided research biases
 
 How this thesis is working?
 Apparatus, Procedure, Utilities
+
+
+\section{How research requestions are answered}
+\quotes{What is a suitable model for the prediction of user intent?}.
+\quotes{At what level of detail the predictions can be made?}
+\todo{may add a third research question}

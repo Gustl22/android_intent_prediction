@@ -4,3 +4,52 @@
 \section{UI design similarities}
 \section{Action prediction models, User behavior modeling}
 \section{Behavioral analyses for smartphone usage patterns}
+
+
+\section{What is a suitable model for the prediction of user intent?}.
+
+To answer this question, LSTM has to be compared against other methods of predicting user intents.
+As shown in \todo{add ref} classic stochastic approaches may can predict larger scope of the user such as the next app or a general user workflow.
+But they are not sufficient for predicting views, screens, or even precise gesture inputs.
+To overcome this limitation the \gls{ml}-models have established in large datasets.
+As the described problem is to be contextualized in the prediction of time series, the following options are offered:
+\begin{itemize}
+    \item Simple \gls{rnn}
+    \item \gls{gru}
+    \item \gls{lstm}
+    \item \gls{gl-transformer}
+\end{itemize}
+
+Simple \gls{rnn} is limited in the capacity of establishing long-term semantics.
+\gls{gru} is missing the forget gate compared to the \gls{lstm} making it simpler and faster, but may perform weaker on complex datasets.
+The \gls{gl-transformer} model has many advantages, such as fast and efficient training, parallelism of input sequences and recognizing long-term patterns through multi-head attention.
+On the other hand few prior work was done in the mobile sector which covers prediction of \gls{ui} trees.
+Therefore, no publicly available coding approach was found which could be extended.
+Also, as described in~\cite{zhou2021large} the structure of the model is quite complex -- with two transformers -- and needs more processing steps in general.
+\gls{lstm} is well documented and the common choice to predict time dependent series.
+It is well-supported by Keras~(\ref{keras}) and easy to use.
+Also, similar approaches have been made in the area of app prediction or app summarization~\ref{cite me}, which can be used as basis for this work, such as Screen2Words~\ref{subsec:screen2words}.
+
+
+\section{At what level of detail the predictions can be made?}
+
+As noted in the introduction the term \ti{intent} has a very wide scope.
+It's prediction can only be made in fractions, or serve as indicator.
+The semantically closest way and also the most detailed would be to describe the users intent in words, thus a description of what the user wants to do next.
+Unfortunately, the users intent description cannot be determined yet, as no according dataset is provided.
+An important step, the screen summarization as shown in Screen2words~\ref{subsec:screen2words}, already was made, which could also be fed with the users intention descriptions.
+But this would then only reflect the already passed fulfilled intent and not the upcoming next purpose.
+Also, the users flows can be predicted as shown in the works of ERICA~\ref{subsec:erica}.
+Next app prediction already works quite well \ref{todo}, which also reflects the larger intent of the user, but is not very detailed.
+
+In order to approximate that goal the assumption was made that the next user interaction also give hints on what the user is intending to achieve.
+The interaction is resulting in another screen, which then the user (hopefully) intends to see.
+So not only the interaction, but also the next contents, such as screen or single views can give a hint to the intent.
+As it turns out, this is possible, if replacing the labels in the proposed model, but presumably it will not be very precise.
+
+%category → app → screen → view → action
+1. Predict Gestures, prediction of current screen, not next screen, is possible and can easily calculate distances between this and the next point
+2. Predict Screen or parts of screens, labels not gestures, box positions, text prediction, decoded and compared to current output, more a qualitative evalutation,
+3. Predict App -> Not possible with RICO, no cross app traces
+
+\section{How the user can be supported with their tasks on didigal end devices?}
