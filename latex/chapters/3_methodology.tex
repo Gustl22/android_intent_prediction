@@ -1,6 +1,6 @@
 \chapter{Methodology}
 
-In the upcoming sections the methodology for this thesis is presented.
+In the upcoming section the methodology for this thesis is presented.
 This includes the type of work,
 the analysis process of related work,
 how the data was selected,
@@ -8,6 +8,8 @@ what decisions were made to accomplish the research goals,
 and how the research questions are answered.
 
 % What research problem or question did you investigate?
+\tb{Research Problem}
+
 Working with mobile \gls{os} and how the user can be supported by solving their tasks on digital end devices is the main booster to embrace to this topic.
 This also raises the question, how much aid a user can be given, to what detail it is capable of and where are its limitations.
 To this date and as far as known no open accessible prediction model was published to predict the user intent to the detail of their gesture inputs.
@@ -15,14 +17,18 @@ Also, it is not apparent which technologies and methods are suitable to develop 
 In order to converge solving these problems, the research questions were developed.
 
 %Quantitative, qualitative, or mixed? Primary or secondary? Experimental or descriptive?
+\tb{Type of work}
+
 The thesis follows a mixed strategy to develop the research topic.
 Qualitative statements were taken into account in order to explain existing approaches and describe theories.
 But the experimental proof of concept was evaluated using quantitative metrics.
 A study to evaluate the experimental findings was exceeding the scope of this master thesis, although it would be very interesting.
 
 %Start with your overall approach to the research.
+\tb{Research approach}
+
 In order to have an overview of the subject, various research papers were worked through.
-These then were classified by its relevance to the topic and if suitable, presented in related work (chapter~\ref{ch:related-work}).
+These then were classified by its relevance to the topic and -- if suitable -- presented in the related work (chapter~\ref{ch:related-work}).
 Some of these papers included sample code and datasets, which were evaluated in parts, such as Rico (\ref{subsec:rico}), Screen2vec (\ref{subsec:screen2vec}) or Screen2words (\ref{subsec:screen2words}).
 Also, tools were looked for, which can help accomplish the research.
 To acquire the basics of \gls{ml}, a workshop has been passed, which teaches the handling with Tensorflow and Keras using the programming language Python.
@@ -36,6 +42,7 @@ The importance of the result was discussed and the research questions were answe
 
 %What type of data did you need to answer it?
 
+\tb{Data Aquisition}
 %\section{Data Aquisition}
 %How you collected and analyzed your data
 %Describe the specific methods you used for data collection and analysis.
@@ -43,25 +50,29 @@ The importance of the result was discussed and the research questions were answe
 %What tools or materials did you use?
 %How did you ensure the quality and accuracy of your data?
 
-Several factors affected the decision for the dataset, that is used to train the \gls{ml} model.
-Gathering an own dataset could not be realized, as of the following reasons:
-\begin{itemize}
-    \item too small group of expected participants to fulfill the requirements for the model
-    \item infrastructure and app service have to be built
-    \item legal and technological barriers
-\end{itemize}
-Nonetheless, a prototype app has been developed which could inspect the accessibility tree.
-The dataset of ERICA (\ref{subsec:erica}) is more suited, as it gives has a large dataset and human interaction traces.
+Several factors affected the decision for the dataset, that is used to train the \gls{ml} model, which are explained in the following.
+
+A prototype app has been developed which could inspect the accessibility tree, and therefore a potential candidate to create a self-made dataset.
+Unfortunately, gathering data on its own could not be realized, as of a few reasons.
+Firstly, the group of expected participants would be too small to fulfill the requirements for the model.
+Secondly, the infrastructure has to be built up and the app service has to be maintained, which is not manageable in the given time frame.
+Last, legal and technological barriers may raise during realization, like privacy regulations or overstressed servers.
+
+The dataset of ERICA (\ref{subsec:erica}) is more suited, as it is quite extensive and contains human interaction traces.
 The successor dataset, Rico (\ref{subsec:rico}), is even bigger, which matches the requirements for \gls{ml}.
 Unfortunately both, ERICA and Rico, don't provide cross-app interaction traces, restricting it to possible intent predictions only during using an app.
-They also weren't reflecting a real world application, as they used a web-service approach, rather than the android accessibility services to gather their data.
+They also weren't reflecting a real world application as they used a web-service approach, rather than the android accessibility services to gather their data.
 Because of the lack of large appropriate datasets the Rico dataset was chosen for training the model.
+
+\tb{Technologies}
 
 %Any tools or materials you used in the research.
 %E.g. Google Scholar, Google Research, Tensorflow, Keras, Udemy, Open Source, Reproducible, IntelliJ and Overleaf
 As of technologies, Keras -- an abstraction interface of Tensorflow -- was chosen to implement the proof of concept.
 The popularity and public knowledge, but also the usage in other related projects, convinced to use Keras, which is built up on Python.
 Regrettably Python is not \ti{type safe}, which made debugging unnecessarily hard and raised major problems during development of the proof of concept.
+For example, the input shape and the types of embedding layers is not inherent in the parameters.
+Therefore, the required structure of the input data for various layers cannot be determined beforehand, unless having major expertise, which results in unpredictable states or errors.
 As \gls{ide} IntelliJ was used in combination with Jupyter Notebook platform.
 For calculations of \gls{nn} a Linux-machine with an Intel Core i5-6600 processor and a NVIDIA GeForce GTX 970 graphics card were used.
 
