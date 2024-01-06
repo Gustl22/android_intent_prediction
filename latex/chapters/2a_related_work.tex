@@ -35,7 +35,7 @@ Therefore the much more powerful servers take the task of capturing the UI trees
 The apps are hosted on multiple physical devices with a modified Android OS directly connected with the server.
 ERICA captures UI screens and user flows by tracking UI changes.
 They then used this data to form k-mean clusters from the UI elements (visual and textual features) and the interactive elements (icons and buttons).
-Based on the clusters they then build classifiers and trained an AutoEncoder (\ref{subsubsec:autoencoder}) to determine the flows from the test dataset.
+Based on the clusters they then build classifiers and trained an AutoEncoder (\ref{subsec:autoencoder}) to determine the flows from the test dataset.
 The authors worked out 23 common user flows (from over a thousand popular Android apps) which aim to provide complementary, promising or new design patterns and trends.
 
 %- data-driven app design application
@@ -63,7 +63,7 @@ Unfortunately the dataset doesn't include interaction traces for app to app tran
 In table~\ref{tab:rico_view_hierarchy_attributes} a collection of all view hierarchy attributes is shown with their meaning.
 These were extracted by iterating over all view hierarchy files contained in the traces of the dataset.
 This gives insights in what attributes were recorded in the Rico dataset and what relevance they may have during training the model.
-The authors of Rico used their dataset to train a 64-dimensional UI layout vector~\ref{subsubsec:embedding} with an AutoEncoder \ref{subsubsec:autoencoder}.
+The authors of Rico used their dataset to train a 64-dimensional UI layout vector~\ref{subsec:embedding} with an AutoEncoder \ref{subsec:autoencoder}.
 For their input they converted the UI layout hierarchy to an image with colored bounding boxes differentiating images and text.
 This has the advantage to be able to deal with the high dimensions inside the UI tree.
 But the conversion also most likely discards lots of meaningful information hidden in the UI tree semantics.

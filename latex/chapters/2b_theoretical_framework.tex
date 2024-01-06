@@ -289,8 +289,8 @@ This learning type can also be helpful in fine-tuning \gls{rnn}s.
 Validation loss
 https://www.baeldung.com/cs/learning-curve-ml
 
-\section{Artificial Neural Nets}
-\label{sec:artificial-neural-nets}
+\section{Classes of Artificial Neural Nets}
+\label{subsec:classes-of-neural-nets}
 
 - Uses biological neuron systems as paradigm to generate mathematical models
 - can solve tasks by abstraction or generalization of data relations
@@ -303,16 +303,13 @@ Gradient
 - Classification: Multiple class
 - One Class
 
-\subsection{Classes of Neural Nets}
-\label{subsec:classes-of-neural-nets}
-
-\subsubsection{Deep Neural Nets}
+\subsection{Deep Neural Nets}
 
 Neural Net with more than one layer
 - Dense Layer
 
-\subsubsection{Convolutional Neural Nets}
-\subsubsection{Recurrent Neural Networks and LSTMs / GRU}
+\subsection{Convolutional Neural Nets}
+\subsection{Recurrent Neural Networks and LSTMs / GRU}
 supervised
 
 LSTM 4 dimensional
@@ -329,11 +326,11 @@ TimeDistributedLayer
 % https://stackoverflow.com/a/61588937/5164462
 % https://stackoverflow.com/questions/53107126/what-are-the-uses-of-timedistributed-wrapper-for-lstm-or-any-other-layers
 
-\subsubsection{Dense Layer}
-\label{subsubsec:dense-layer}
+\subsection{Dense Layer}
+\label{subsec:dense-layer}
 
-\subsubsection{Embedding Layer}
-\label{subsubsec:embedding-layer}
+\subsection{Embedding Layer}
+\label{subsec:embedding-layer}
 
 % https://machinelearningmastery.com/use-word-embedding-layers-deep-learning-keras/
 As mentioned in section~\ref{subsubsec:categorical_variables} categories can be represented using \gls{gl-one-hot} encoding.
@@ -343,7 +340,7 @@ This means that each single species is represented by a vector.
 The length of the vector can be selected freely, it is called the \ti{embedding dimension}.
 A lookup-table is created which encodes each category with randomly initialized weights of size of the embedding dimension (cf.\ table~\ref{tab:species-embedding}).
 Now the embedding vector for each species is looked up and replaced in the data table resulting in an embedded representation (cf.\ table~\ref{tab:embedding_data_table}).
-During training of the model the weights of the look-up table are successively updated (like for the dense layer ~\ref{subsubsec:dense-layer}) to reduce the loss of the overall model.
+During training of the model the weights of the look-up table are successively updated (like for the dense layer ~\ref{subsec:dense-layer}) to reduce the loss of the overall model.
 An embedding would result in an \gls{gl-one-hot}-encoding, if the embedding dimension and the vocabulary size are equal and the conversion matrix (lookup-table) is the identity matrix.
 
 \begin{table}[htbp!]
@@ -412,15 +409,19 @@ The feed-forward layer applies a non-linear transformation to the output of the 
 The decoder transformer takes the encoding from the encoder and generates an output sequence, such as a sentence in another language. The decoder transformer also consists of multiple identical layers, each with three sublayers: a masked multi-head self-attention layer, a cross-attention layer, and a feed-forward layer. The masked self-attention layer allows the decoder to learn the relationships and dependencies between the words in the output sequence, but prevents it from attending to the future words that have not been generated yet. The cross-attention layer allows the decoder to attend to the encoding from the encoder and learn the alignment between the input and output sequences. The feed-forward layer applies a non-linear transformation to the output of the cross-attention layer
 \end{comment}
 
+\subsection{Autoencoders}
+\label{subsec:autoencoder}
 Encoder, Decoder
 
-\subsection{Tensorflow and Keras}
+\section{Tensorflow and Keras}
+\label{sec:tensorflow-keras}
 Layers
 FlattenLayer
 
 Positive Integer to Dense Vectors of fixed size
 
 \section{Evaluation and Metrics}
+\label{sec:evaluation-metrics}
 
 %Mit einer Konfusionsmatrix (\textit{Confusion Matrix}) werden die Vorhersage\-ergebnisse zu einem Klassifizierungsproblem zusammengefasst.
 %
