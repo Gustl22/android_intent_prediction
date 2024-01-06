@@ -105,7 +105,7 @@ Its advantages lie in finding hidden relations and patterns from the context, wi
 The data driven approach also comes with some drawbacks: the outcome heavily depends on the provided data.
 It can include biases and therefore may acquire forms of discrimination or unfair treatment.
 Nonetheless \gls{ml} has a lot of potential to uncover hidden connections in large datasets.
-
+The most important concepts are explained to be able to follow certain decisions in this thesis.
 
 \todo{explain Tensors, Datasets}
 %https://stackoverflow.com/a/48599383/5164462
@@ -129,7 +129,7 @@ Data entries can occur in different forms, but we can break them down in three m
 \end{itemize}
 
 For all types -- discrete, continuous, and categorical values -- we have a wide variety of options for preparing them in order to be subsequently processed by a \gls{ml} model \cite{duong2021}.
-
+These are listed in the following, while not all can be applied to all types of values.
 
 \subsubsection{Feature selection}
 
@@ -169,11 +169,9 @@ Therefore, you have two approaches to get around these missing values.
 One can drop these values by removing the column or row.
 This is only recommended if you are not relying on this data entry, or this the whole feature is not expected to be important enough to bring any value to the model's performance.
 Further you can fill the data with a default value like zero or calculate a reasonable value from the surrounding data entries by taking their \quotes{mean, median, or interpolation}~\cite{duong2021}.
-The second approach can only be applied to numerical data.
 
 \subsubsection{Normalization and Standardization}
 
-This is only applicable for numerical data.
 Many \gls{ml} models work better or exclusively with normalized data.
 This means that the values have to be in a certain range, most commonly are from \tb{0} to \tb{1} or from \tb{-1} to \tb{1}.
 This can be achieved by dividing all values with the difference of the minimum and maximum value and shift the output accordingly \cite{duong2021}.
@@ -184,6 +182,7 @@ Sometimes this is not enough, e.g.\ if having a few extreme values, and an appro
 Here the standardization, also called z-score normalization, comes into play.
 This method scales the values so that the mean value is placed at \tb{0} and the standard deviation is placed at \tb{1}.
 %https://medium.com/analytics-vidhya/what-are-data-standardization-and-data-normalization-f880dd9e79b6
+
 \subsubsection{Padding}
 \label{subsubsec:padding}
 
@@ -197,10 +196,8 @@ One can also use a combination to e.g.\ pad all inputs with zero to the mean dim
 \ti{Causal padding} is a form of \ti{same padding}, but it prepends the fill values in front of the sequence.
 This is helpful if having \gls{rnn}s, which rely on a lengthier inputs in order to predict their next value, without need of filtering out short sequences.
 
-\subsubsection{Categorical Values and One-Hot-Encoding}
+\subsubsection{One-Hot-Encoding for Categorical Values}
 \label{subsubsec:categorical_variables}
-
-\todo{cite}
 
 A categorical value must be treated differently than numerical ordinal values.
 This is demonstrated best on a concrete example.
@@ -214,7 +211,7 @@ They are then treated the same as \tb{integer values}.
 But animals aren't structured ordinal, thus each species must be treated equally.
 To reflect that we split the species column in multiple sub-columns, so that each new one represents one species, see table~\ref{tab:one-hot}.
 If the animal belongs to that species, one inserts a \tb{1} or \tb{True} and if not, a \tb{0} or \tb{False} is filled.
-This is also called \gls{gl-one-hot}-encoding.
+This is also called \gls{gl-one-hot}-encoding ~\cite{brownlee2021}.
 
 \begin{table}[htbp!]
     \begin{subtable}[c]{0.5\textwidth}
@@ -252,43 +249,38 @@ This is also called \gls{gl-one-hot}-encoding.
 \end{table}
 
 \subsection{Types of Machine Learning}
+\label{subsec:machine-learning-types}
 
-\cite{ghahramani2003unsupervised}
+To get be able to evaluate which subfield of \gls{ml} is the best choice, we need an overview of the existing approaches listed in \cite{ghahramani2003unsupervised}.
 
-\subsubsection{Supervised Learning}
-Supervised: Classification and regression
-Uses \tb{labeled} examples: Input and output is known
+\tb{Supervised Learning} is used for \ti{Classification} and \ti{Regression} tasks.
+It uses \ti{labeled} samples, which means the input $x$ and output $y$ is known beforehand.
+Essentially it learns through comparing the actual output (labels), which is provided, with the output the model \ti{predicts}.
 
-Learns by comparison of the output it is provided with the output the model \ti{predicts}.
+Unlike in Supervised Learning, \tb{Unsupervised Learning} isn't provided any labels $y$.
+It is used for clustering, dimensionality reduction or anomaly detection. %may need to explain more
+E.g.\ in clustering the \gls{ml} model detects similar objects and groups them together.
+What is seen as similar is up to the model, so it is not known before, with what groups or clusters the model comes up with.
 
-Steps:
-- Data acquisition
-- Data cleaning / Preprocessing (Panadas)
-- Split into Training Data, Validation data, and Test data (cannot adapt the model after using the test data)
-- Train the model with the train data
-- Evaluate the model with the test data, then can adapt the model by the developer
-- Last deploy the model to production
-
-
-\tb{Semi-supervised Learning}
-
-The algorithms using semi-supervised learning seek to adopt from unlabeled and labeled data~\cite{van2020survey}.
-It can be assumed that the model is trained first with labeled data, e.g.\ to be able to differentiate certain clusters.
-Then the model predicts the labels of the unlabeled data which is then serving as new data point to train the model.
-This helps to enlarge the cluster or move its boundaries.
+The algorithms using \tb{Semi-supervised Learning} seek to adopt from unlabeled and labeled data~\cite{van2020survey}.
+E.g.\ for a classification problem, the model is either trained first with unlabeled data resulting in clusters, which are then provided a class with a few labeled samples.
+Or classes are trained based on labeled data, but their class boundaries are extended through unlabeled data, which follows the approach of clustering.
+%It can be assumed that the model is trained first with labeled data, e.g.\ to be able to differentiate certain clusters.
+%Then the model predicts the labels of the unlabeled data which is then serving as new data point to train the model.
+%This helps to enlarge the cluster or move its boundaries.
 %Test points to be classified by the model into the clusters then have a smaller distance to the previous predicted point,
 %and therefore adapting the label of it's cluster, instead of being assigned to a different cluster.
-It can be seen as a model trained with classification through labeled data and then extended with clustering through unlabeled data.
-Also, if having only few labeled points, one can start with training a cluster through unlabeled data and then determine the class label of the clusters with the labeled data points.
+%It can be seen as a model trained with classification through labeled data and then extended with clustering through unlabeled data.
+%Also, if having only few labeled points, one can start with training a cluster through unlabeled data and then determine the class label of the clusters with the labeled data points.
 
-\tb{Self-supervised Learning}
+%\tb{Self-supervised Learning}
+\todo{may explain Self-supervised learning}
 
-\tb{Reinforcement Learning}
-Can also be applied to LSTM
-
-\subsubsection{Unsupervised Learning}
-Clustering
-Dimensionality reduction
+\tb{Reinforcement Learning} is closely related to decision theory \cite{ghahramani2003unsupervised}.
+A model is given the input and produces an output, which is exposed to the environment.
+The environment then provides a reward or a punishment to the next learning iteration of the model.
+This then tries to maximise the rewards and minimize the punishments.
+This learning type can also be helpful in fine-tuning \gls{rnn}s.
 
 \subsection{Under and Overfitting}
 \label{subsec:under-and-overfitting}
