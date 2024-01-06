@@ -282,15 +282,8 @@ The environment then provides a reward or a punishment to the next learning iter
 This then tries to maximise the rewards and minimize the punishments.
 This learning type can also be helpful in fine-tuning \gls{rnn}s.
 
-\subsection{Under and Overfitting}
-\label{subsec:under-and-overfitting}
-
-
-Validation loss
-https://www.baeldung.com/cs/learning-curve-ml
-
 \section{Classes of Artificial Neural Nets}
-\label{subsec:classes-of-neural-nets}
+\label{subsec:neural-net-classes}
 
 - Uses biological neuron systems as paradigm to generate mathematical models
 - can solve tasks by abstraction or generalization of data relations
@@ -423,37 +416,59 @@ Positive Integer to Dense Vectors of fixed size
 \section{Evaluation and Metrics}
 \label{sec:evaluation-metrics}
 
-%Mit einer Konfusionsmatrix (\textit{Confusion Matrix}) werden die Vorhersage\-ergebnisse zu einem Klassifizierungsproblem zusammengefasst.
-%
-%\begin{table}[!htbp]
-%    \centering
-%    \begin{tabular}{ |c|c|c| }
-%        \hline
-%         & Prediction positive & Prediction negative \\
-%        \hline
-%        Actual positive  & \gls{tp} & \gls{fn} \\
-%        \hline
-%        Actual negative & \gls{fp} & \gls{tn}  \\
-%        \hline
-%    \end{tabular}
-%    \caption{Confusion Matrix.}
-%    \label{tab:confusion-matrix}
-%\end{table}
-%
-%Precision $P$: How many samples were correctly predicted positive, from all positively predicted samples.
-%Also, the probability of correctness of the classification, if the sample is predicted as positive.
-%\begin{equation}
-%    P = \frac{\text{\gls{tp}}}{\text{\gls{tp} + \gls{fp}}}
-%\end{equation}
-%
-%Recall or Hit Rate $R$: How many samples were correctly predicted positive, from all actually positive samples.
-%Also, the probability of correctly classified as positive, if the sample is actually positive.
-%\begin{equation}
-%    R = \frac{\text{\gls{tp}}}{\text{\gls{tp} + \gls{fn}}}
-%\end{equation}
-%
-%For email spam recognition, precision is important, as if an email is classified as spam, it should be correctly predicted.
-%For disease recognition, recall is much more important, as if a patient isn't recognized as positive, the outcome is much more drastically.
+\begin{comment}
+Mit einer Konfusionsmatrix (\textit{Confusion Matrix}) werden die Vorhersage\-ergebnisse zu einem Klassifizierungsproblem zusammengefasst.
+
+\begin{table}[!htbp]
+    \centering
+    \begin{tabular}{ |c|c|c| }
+        \hline
+         & Prediction positive & Prediction negative \\
+        \hline
+        Actual positive  & \gls{tp} & \gls{fn} \\
+        \hline
+        Actual negative & \gls{fp} & \gls{tn}  \\
+        \hline
+    \end{tabular}
+    \caption{Confusion Matrix.}
+    \label{tab:confusion-matrix}
+\end{table}
+
+Precision $P$: How many samples were correctly predicted positive, from all positively predicted samples.
+Also, the probability of correctness of the classification, if the sample is predicted as positive.
+\begin{equation}
+    P = \frac{\text{\gls{tp}}}{\text{\gls{tp} + \gls{fp}}}
+\end{equation}
+
+Recall or Hit Rate $R$: How many samples were correctly predicted positive, from all actually positive samples.
+Also, the probability of correctly classified as positive, if the sample is actually positive.
+\begin{equation}
+    R = \frac{\text{\gls{tp}}}{\text{\gls{tp} + \gls{fn}}}
+\end{equation}
+
+For email spam recognition, precision is important, as if an email is classified as spam, it should be correctly predicted.
+For disease recognition, recall is much more important, as if a patient isn't recognized as positive, the outcome is much more drastically.
+\end{comment}
+\begin{comment}
+    Accuracy, Precision, Recall
+    \subsection{\texorpdfstring{F\textsubscript{1}-Score}{F1-Score}}
+
+    \label{subsec:f1-score}
+
+    Die F\textsubscript{1}-Wertung ist eine der am häufigst verwendeten Metriken zur Evaluation von \acrshort{ml}-Modellen. Um den F\textsubscript{1}-Wert berechnen zu können, werden die Werte der im vorherigen Kapitel beschriebenen Confusion Matrix benötigt. Die Formel zur Berechnung des F\textsubscript{1}-Wertes lautet:
+
+    \begin{equation}
+        F\textsubscript{1} = 1 / \frac{\frac{1}{P} + \frac{1}{R}}{2}
+    \end{equation}
+
+    Dazu werden die Formeln für den Wert von \textit{Precision} und \textit{Recall} benötigt.
+
+    Der Wert der Precision-Gleichung wird durch den Anteil an richtig vorhergesagten positiven Ergebnissen (\acrshort{tp}) auf die Gesamtheit aller als positiv vorhergesagten Ergebnissen berechnet.
+    Mit der Recall-Gleichung, welche auch Hit-Rate genannt wird, wird mit der Anzahl
+    \acrshort{tp}-Ergebnisse geteilt durch die Gesamtheit der tatsächlich positiven Ergebnisse,
+    der Wert der Gleichung berechnet. Dieser Wert gibt den Anteil der Objekte der positiven Klasse an, der durch ein \acrshort{ml}-Modell errechnet wurde.
+    Der F\textsubscript{1}-Wert hat einen Wert zwischen [0, 1]. Je höher dieser Wert ist, desto besser ist die Leistung des \acrshort{ml}-Modells~\cite{evaluationsMethoden}.
+\end{comment}
 
 Accuracy, precision and recall, as well as the combined F\textsubscript{1}-Score is only applicable for categorical labels, thus classification.
 
@@ -470,28 +485,17 @@ The \gls{mae} is the mean value when summing all absolute errors $y_i - \hat{y}_
 The \gls{mse} squares the single absolute errors in the \gls{mae} to punish single outliers.
 The \gls{rmse} is the root of the \gls{mse} to avoid squaring units, but also provide a realistic error values over all samples.
 
-\todo{Validation loss}
+%\subsection{Under and Overfitting}
+%\label{subsec:under-and-overfitting}
 
-\begin{comment}
-Accuracy, Precision, Recall
-\subsection{\texorpdfstring{F\textsubscript{1}-Score}{F1-Score}}
+\todo{explain Validation loss} % https://www.baeldung.com/cs/learning-curve-ml
 
-\label{subsec:f1-score}
+As explained in \ref{subsec:neural-net-classes} \gls{ann}s can be trained in epochs.
 
-Die F\textsubscript{1}-Wertung ist eine der am häufigst verwendeten Metriken zur Evaluation von \acrshort{ml}-Modellen. Um den F\textsubscript{1}-Wert berechnen zu können, werden die Werte der im vorherigen Kapitel beschriebenen Confusion Matrix benötigt. Die Formel zur Berechnung des F\textsubscript{1}-Wertes lautet:
+If a model was trained too few epochs, it probably is not able to grab the general trend or learn enough about the data to built context.
+This is called \tb{Underfitting}.
+The opposite \tb{Overfitting} is the case, if model was trained too many epochs.
+This results in knowing the train dataset very well and being able to predict every sample in the training set.
+But as soon as it is confronted with new data samples, it results in a larger errors than in earlier epochs.
+This can be solved by adding an \ti{early stop} function, which automatically interrupts the training, when the validation loss \ref{todo} increases.
 
-\begin{equation}
-    F\textsubscript{1} = 1 / \frac{\frac{1}{P} + \frac{1}{R}}{2}
-\end{equation}
-
-Dazu werden die Formeln für den Wert von \textit{Precision} und \textit{Recall} benötigt.
-
-
-
-Der Wert der Precision-Gleichung wird durch den Anteil an richtig vorhergesagten positiven Ergebnissen (\acrshort{tp}) auf die Gesamtheit aller als positiv vorhergesagten Ergebnissen berechnet.
-Mit der Recall-Gleichung, welche auch Hit-Rate genannt wird, wird mit der Anzahl
-\acrshort{tp}-Ergebnisse geteilt durch die Gesamtheit der tatsächlich positiven Ergebnisse,
-der Wert der Gleichung berechnet. Dieser Wert gibt den Anteil der Objekte der positiven Klasse an, der durch ein \acrshort{ml}-Modell errechnet wurde.
-Der F\textsubscript{1}-Wert hat einen Wert zwischen [0, 1]. Je höher dieser Wert ist, desto besser ist die Leistung des \acrshort{ml}-Modells~\cite{evaluationsMethoden}.
-
-\end{comment}
