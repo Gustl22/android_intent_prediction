@@ -294,6 +294,9 @@ Dimensionality reduction
 \label{subsec:under-and-overfitting}
 
 
+Validation loss
+https://www.baeldung.com/cs/learning-curve-ml
+
 \section{Artificial Neural Nets}
 \label{sec:artificial-neural-nets}
 
@@ -411,31 +414,76 @@ FlattenLayer
 Positive Integer to Dense Vectors of fixed size
 
 \section{Evaluation and Metrics}
-\subsection{Mean Squared Error}
 
-\subsection{\texorpdfstring{F\textsubscript{1}-Score}{F1-Score}}
-\label{subsec:f1-score}
+%Mit einer Konfusionsmatrix (\textit{Confusion Matrix}) werden die Vorhersage\-ergebnisse zu einem Klassifizierungsproblem zusammengefasst.
+%
+%\begin{table}[!htbp]
+%    \centering
+%    \begin{tabular}{ |c|c|c| }
+%        \hline
+%         & Prediction positive & Prediction negative \\
+%        \hline
+%        Actual positive  & \gls{tp} & \gls{fn} \\
+%        \hline
+%        Actual negative & \gls{fp} & \gls{tn}  \\
+%        \hline
+%    \end{tabular}
+%    \caption{Confusion Matrix.}
+%    \label{tab:confusion-matrix}
+%\end{table}
+%
+%Precision $P$: How many samples were correctly predicted positive, from all positively predicted samples.
+%Also, the probability of correctness of the classification, if the sample is predicted as positive.
+%\begin{equation}
+%    P = \frac{\text{\gls{tp}}}{\text{\gls{tp} + \gls{fp}}}
+%\end{equation}
+%
+%Recall or Hit Rate $R$: How many samples were correctly predicted positive, from all actually positive samples.
+%Also, the probability of correctly classified as positive, if the sample is actually positive.
+%\begin{equation}
+%    R = \frac{\text{\gls{tp}}}{\text{\gls{tp} + \gls{fn}}}
+%\end{equation}
+%
+%For email spam recognition, precision is important, as if an email is classified as spam, it should be correctly predicted.
+%For disease recognition, recall is much more important, as if a patient isn't recognized as positive, the outcome is much more drastically.
+
+Accuracy, precision and recall, as well as the combined F\textsubscript{1}-Score is only applicable for categorical labels, thus classification.
+
+For regression tasks, what we are aiming for, the \gls{mae}, the \gls{mse} and the \gls{rmse} are suited much better.
+
+\begin{quote}
+\begin{math}
+\text{RMSE}(y, \hat{y}) = \sqrt{\sum_{i=0}^{N - 1} (y_i - \hat{y}_i)^2 / N }
+\end{math}\newline
+with the number of samples $n$, the actual value $y$, and the predicted value $\hat{y}$ \cite{MAE_RMSE}.
+\end{quote}
+
+The \gls{mae} is the mean value when summing all absolute errors $y_i - \hat{y}_i$ and divide them by $n$
+The \gls{mse} squares the single absolute errors in the \gls{mae} to punish single outliers.
+The \gls{rmse} is the root of the \gls{mse} to avoid squaring units, but also provide a realistic error values over all samples.
+
+\todo{Validation loss}
 
 \begin{comment}
+Accuracy, Precision, Recall
+\subsection{\texorpdfstring{F\textsubscript{1}-Score}{F1-Score}}
+
+\label{subsec:f1-score}
+
 Die F\textsubscript{1}-Wertung ist eine der am häufigst verwendeten Metriken zur Evaluation von \acrshort{ml}-Modellen. Um den F\textsubscript{1}-Wert berechnen zu können, werden die Werte der im vorherigen Kapitel beschriebenen Confusion Matrix benötigt. Die Formel zur Berechnung des F\textsubscript{1}-Wertes lautet:
 
 \begin{equation}
-    F\textsubscript{1} = (\frac{\text{1/Precision + 1/Recall}}{2})\textsuperscript{-1}
+    F\textsubscript{1} = 1 / \frac{\frac{1}{P} + \frac{1}{R}}{2}
 \end{equation}
 
 Dazu werden die Formeln für den Wert von \textit{Precision} und \textit{Recall} benötigt.
 
-\begin{equation}
-    Precision = \frac{\text{\acrshort{tp}}}{\text{\acrshort{tp} + \acrshort{fp}}}
-\end{equation}
-\begin{equation}
-    Recall = \frac{\text{\acrshort{tp}}}{\text{\acrshort{tp} + \acrshort{fn}}}
-\end{equation}
 
-Der Wert der Precision-Gleichung wird durch den Anteil an richtig vorhergesagten positiven
-Ergebnissen (\acrshort{tp}) auf die Gesamtheit aller als positiv vorhergesagten Ergebnissen berechnet. Mit der Recall-Gleichung, welche auch Hit-Rate genannt wird, wird mit der Anzahl
+
+Der Wert der Precision-Gleichung wird durch den Anteil an richtig vorhergesagten positiven Ergebnissen (\acrshort{tp}) auf die Gesamtheit aller als positiv vorhergesagten Ergebnissen berechnet.
+Mit der Recall-Gleichung, welche auch Hit-Rate genannt wird, wird mit der Anzahl
 \acrshort{tp}-Ergebnisse geteilt durch die Gesamtheit der tatsächlich positiven Ergebnisse,
-der Wert der Gleichung berechnet. Dieser Wert gibt den Anteil der Objekte der positiven Klasse an, der durch ein \acrshort{ml}-Modell errechnet wurde. Der F\textsubscript{1}-Wert hat einen Wert zwischen [0, 1]. Je höher dieser Wert ist, desto
-besser ist die Leistung des \acrshort{ml}-Modells~\cite{evaluationsMethoden}.
+der Wert der Gleichung berechnet. Dieser Wert gibt den Anteil der Objekte der positiven Klasse an, der durch ein \acrshort{ml}-Modell errechnet wurde.
+Der F\textsubscript{1}-Wert hat einen Wert zwischen [0, 1]. Je höher dieser Wert ist, desto besser ist die Leistung des \acrshort{ml}-Modells~\cite{evaluationsMethoden}.
 
 \end{comment}
