@@ -9,19 +9,9 @@ Describe relevant scientific literature related to your work.
 \section{Datasets of UI Trees}
 \label{sec:datasets-of-ui-trees}
 
-Requirements on a good data set
-- Google and Samsung
-- need to have correct data
-- needs enough data to train a NN
-- need enough features to be able to recognize patterns
-- up to date
-- Publicly available
-- Variable length of app sessions, define one session of activating the screen until it is turned off.
-
-Missing
-- System to feed in in real time
-- Dataset which is across multiple apps, also tracks the system
--
+A fundamental part of training \gls{ann}s are solid and large datasets, which provide enough information to gain the expected result.
+Therefore, these datasets have to fulfill some requirements, like completeness, quantity, feature richness, topicality and (public) accessibility.
+In the follows, papers of thematic relevance are verified on the basis of these criteria.
 
 \subsection{ERICA}
 \label{subsec:erica}
@@ -134,7 +124,7 @@ As basis they used the Rico \ref{rico} dataset for a subject of improvement.
 They state that recording results are dynamic and can get out of sync with the actual screen of the user.
 That leads to 37.4\% of screens which contain invalid objects.
 This induces invisible or misaligned objects, or objects which are not clickable (greyed out).
-The researchers filtered invalid objects by training a \gls{resnet} model with the screenshots to classify nodes as as invalid if their bounding boxes don't match.
+The researchers filtered invalid objects by training a \gls{resnet} model with the screenshots to classify nodes as invalid if their bounding boxes don't match.
 Also they introduced two models: a \gls{gnn} and a Transformer model to each determine the view type (also related to the view class).
 For that they considered the view hierarchy attributes as well as the screenshots via a \gls{cnn}.
 They claim they outperform heuristic approaches for detecting layout objects without a visual valid counterpart and also can recognize their types in more than 85\%.
@@ -268,7 +258,7 @@ The encoded time can be very different as it doesn't follow a regular sample int
 Multiple input steps then form a sequence fed in a second Transformer Encoder which contains all past screens and clicks.
 The current screen embedding and time are then passed to a pointer (M-layer perceptron) which calculates the most probable \ti{actionable} elements to be clicked on.
 They consider a UI element as \ti{actionable}, if it is currently \code{clickable}, \code{visible} and \code{enable}d (cf.\ table~\ref{tab:rico_view_hierarchy_attributes}).
-More complex screens can have much more actionable elements, which makes the prediction much more difficult~\ref{fig:zhou_actionable_elements}.
+More complex screens can have much more actionable elements, which makes the prediction much more difficult (figure \ref{fig:zhou_actionable_elements}).
 % They introduced another metric to measure such predictions, which are relative to the number of objects.
 
 This paper solves a lot of problems previous attempts had.
@@ -304,3 +294,5 @@ Unfortunately as far as the investigation permits, neither the dataset nor the c
   \caption{View element insights \cite{zhou2021large}}
   \label{fig:zhou_graphs}
 \end{figure}
+
+\todo{provide short summary}

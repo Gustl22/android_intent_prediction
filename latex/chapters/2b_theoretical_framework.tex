@@ -138,7 +138,7 @@ It can improve learning performance, thus reduces time, increases computational 
 Also, it may be a valid approach to get around missing data and can help structure the data by removing unnecessary clutter.
 
 %https://dl-acm-org.emedien.ub.uni-muenchen.de/doi/pdf/10.1145/3136625
-On the technical sight, feature selection can be differentiated for two goals: supervised and unsupervised learning~\cite{li2017feature}.
+On the technical sight, feature selection can be differentiated for two goals: supervised and unsupervised learning~\cite{li2017feature} (cf. section \ref{subsec:machine-learning-types}).
 However, principles from the supervised feature selection can be applied in the unsupervised domain, resulting in a semi-supervised \ref{semi-supervised} filter selection.
 For classifiers and regression problems (unsupervised) following methods can be applied.
 Multiple features can be compared by calculating their correlation.
@@ -165,10 +165,10 @@ c) Manipulating individual parameters of model
 
 \subsubsection{Missing data}
 Some data entries may are missing.
-Therefore, you have two approaches to get around these missing values.
-One can drop these values by removing the column or row.
+Therefore, two approaches can be employed to get around these missing values.
+First, one can drop these values by removing the column or row.
 This is only recommended if you are not relying on this data entry, or this the whole feature is not expected to be important enough to bring any value to the model's performance.
-Further you can fill the data with a default value like zero or calculate a reasonable value from the surrounding data entries by taking their \quotes{mean, median, or interpolation}~\cite{duong2021}.
+Second, the data can be filled with a default value like zero or calculate a reasonable value from the surrounding data entries by taking their \quotes{mean, median, or interpolation}~\cite{duong2021}.
 
 \subsubsection{Normalization and Standardization}
 
@@ -179,7 +179,7 @@ This can be achieved by dividing all values with the difference of the minimum a
 % X new = (X — X min)/ (X max — X min)
 
 Sometimes this is not enough, e.g.\ if having a few extreme values, and an approach is desired which better reflects the average data.
-Here the standardization, also called z-score normalization, comes into play.
+Here the standardization, also called z-score normalization, is applied.
 This method scales the values so that the mean value is placed at \tb{0} and the standard deviation is placed at \tb{1}.
 %https://medium.com/analytics-vidhya/what-are-data-standardization-and-data-normalization-f880dd9e79b6
 
@@ -504,7 +504,6 @@ In most cases the loss function is the \gls{mse} which must be optimized, e.g. w
 %---
 
 As explained in \ref{sec:neural-net-classes} \gls{ann}s can be trained in epochs.
-
 If a model was trained too few epochs, it probably is not able to grab the general trend or learn enough about the data to built context.
 This is called \tb{Underfitting}.
 The opposite \tb{Overfitting} is the case, if model was trained too many epochs.
