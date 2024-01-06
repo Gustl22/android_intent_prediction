@@ -394,8 +394,23 @@ Category Embedding before LSTM
 Embedding dimension is about the actual voc\_size, but not too large.
 Dimension near the actual average length of features (?)
 
-\subsubsection{Autoencoders}
-\label{subsubsec:autoencoder}
+\begin{comment}
+\subsubsection{Transformer}
+\label{subsubsec:transformer}
+%https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)
+\todo{Check}
+The neural net transformer model is a type of deep learning architecture that uses attention mechanisms to process sequential data, such as natural language or speech.
+It does not rely on recurrent or convolutional layers, which are commonly used in other neural network models.
+Instead, it uses a combination of self-attention, multi-head attention, and feed-forward layers to encode and decode the input and output sequences12
+
+The difference between encoder and decoder transformer is that they have different roles and sublayers in the model.
+The encoder transformer takes an input sequence, such as a sentence in one language, and converts it into a vector representation, called an encoding, that captures the meaning and context of the input.
+The encoder transformer consists of multiple identical layers, each with two sublayers: a multi-head self-attention layer and a feed-forward layer.
+The self-attention layer allows the encoder to learn the relationships and dependencies between the words in the input sequence.
+The feed-forward layer applies a non-linear transformation to the output of the self-attention layer
+
+The decoder transformer takes the encoding from the encoder and generates an output sequence, such as a sentence in another language. The decoder transformer also consists of multiple identical layers, each with three sublayers: a masked multi-head self-attention layer, a cross-attention layer, and a feed-forward layer. The masked self-attention layer allows the decoder to learn the relationships and dependencies between the words in the output sequence, but prevents it from attending to the future words that have not been generated yet. The cross-attention layer allows the decoder to attend to the encoding from the encoder and learn the alignment between the input and output sequences. The feed-forward layer applies a non-linear transformation to the output of the cross-attention layer
+\end{comment}
 
 Encoder, Decoder
 
