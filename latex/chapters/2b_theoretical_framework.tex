@@ -283,41 +283,49 @@ This then tries to maximise the rewards and minimize the punishments.
 This learning type can also be helpful in fine-tuning \gls{rnn}s.
 
 \section{Classes of Artificial Neural Nets}
-\label{subsec:neural-net-classes}
+\label{sec:neural-net-classes}
 
-- Uses biological neuron systems as paradigm to generate mathematical models
-- can solve tasks by abstraction or generalization of data relations
+\todo{activation functions,Gradient decent, backpropagation and may include graphic of perceptron}
+Unfortunately the concepts of neural networks, cannot be explained in detail, as it is beyond the scope of this thesis.
+A good choice to make familiar with Neural nets is the book \quotes{Neural Networks and Deep Learning} of Nielsen~\cite{nielsen2015neural}, which is consulted throughout this section.
 
+An \gls{ann} uses biological neuron systems as paradigm to generate mathematical models.
+The biological neuron model was transferred to computer science and is called \ti{perceptron model}.
 
-Activation Functions
-Cost function
-Gradient
-- Regression: Continuous Values
-- Classification: Multiple class
-- One Class
+A perceptron -- or also named neuron in our context -- is fed by one or multiple inputs $x_i$ and performs a function $f$ on them resulting in an output $\hat{y}$, where $i$ is an index of the $n$ input values.
+Also, a weight $w_i$ and a bias $b_i$ can be applied to each of these inputs.
 
-\subsection{Deep Neural Nets}
+\begin{quote}
+    \begin{math}
+        \hat{y} = \sum_{i=0}^{n} x_i w_i+b_i
+    \end{math}\newline
+\end{quote}
 
-Neural Net with more than one layer
-- Dense Layer
+Multiple of these neurons can be used together producing one or multiple outputs, thus forming a neural layer, which can act as \gls{nn} together with the input and the output layer.
+If multiple neural layers (also called \ti{hidden layers}) are connected to each other, it is called a \ti{deep neural net}.
+The output(s) $\hat{y}$ of one or multiple neurons then serve as the input(s) $x$ of one or multiple neurons in the next layer.
+The last layer -- the output layer -- then serves the values, which have to be predicted.
+These values can be compared to the real data (labels) using an error function like \gls{rmse}.
+The whole model can be seen as a cost function, which has to be minimized during training.
+In the training process weights $w$ and biases $b$ for each neuron are adapted, in order to produce outputs, which matches best the labels.
+This is done iteratively using an optimizer (Adaptive) \gls{gl-gradient-descent} and \ti{backpropagation}, by searching the minimum cost in multiple steps, called \ti{epochs}.
 
-\subsection{Convolutional Neural Nets}
-\subsection{Recurrent Neural Networks and LSTMs / GRU}
-supervised
+%- can solve tasks by abstraction or generalization of data relations
+%
+%
+%Activation Functions
+%Cost function
+%Gradient
+%- Regression: Continuous Values
+%- Classification: Multiple class
+%- One Class
 
-LSTM 4 dimensional
-% https://stackoverflow.com/questions/54743549/is-it-possible-to-making-lstm-model-with-4-dimension-shape-of-data
+%\subsection{Convolutional Neural Nets}
 
-Limitations to only 3 dimensions, needs flattening
+\subsection{Recurrent Neural Networks}
+\label{subsec:rnn}
 
-Sample dimension (X -> y)
-Time (Step) Dimension
-Feature Dimension
-Data, Quantity dimension, such as Image dimensions, or multiple nodes
-
-TimeDistributedLayer
-% https://stackoverflow.com/a/61588937/5164462
-% https://stackoverflow.com/questions/53107126/what-are-the-uses-of-timedistributed-wrapper-for-lstm-or-any-other-layers
+LSTMs / GRU -> supervised
 
 \subsection{Dense Layer}
 \label{subsec:dense-layer}
@@ -333,7 +341,7 @@ This means that each single species is represented by a vector.
 The length of the vector can be selected freely, it is called the \ti{embedding dimension}.
 A lookup-table is created which encodes each category with randomly initialized weights of size of the embedding dimension (cf.\ table~\ref{tab:species-embedding}).
 Now the embedding vector for each species is looked up and replaced in the data table resulting in an embedded representation (cf.\ table~\ref{tab:embedding_data_table}).
-During training of the model the weights of the look-up table are successively updated (like for the dense layer ~\ref{subsec:dense-layer}) to reduce the loss of the overall model.
+During training of the model the weights of the look-up table are successively updated (like for the dense layer ~\ref{subsec:dense-layer}) to reduce the error (loss) of the overall model.
 An embedding would result in an \gls{gl-one-hot}-encoding, if the embedding dimension and the vocabulary size are equal and the conversion matrix (lookup-table) is the identity matrix.
 
 \begin{table}[htbp!]
@@ -487,10 +495,15 @@ The \gls{rmse} is the root of the \gls{mse} to avoid squaring units, but also pr
 
 %\subsection{Under and Overfitting}
 %\label{subsec:under-and-overfitting}
+As \ti{loss} is meant the cost or the error, which is differentiating the label from the prediction.
+In most cases the loss function is the \gls{mse} which must be optimized, e.g. with \gls{gl-gradient-descent}.
+%--
+%\todo{explain Validation loss} % https://www.baeldung.com/cs/learning-curve-ml
+%Loss = cost
+%function
+%---
 
-\todo{explain Validation loss} % https://www.baeldung.com/cs/learning-curve-ml
-
-As explained in \ref{subsec:neural-net-classes} \gls{ann}s can be trained in epochs.
+As explained in \ref{sec:neural-net-classes} \gls{ann}s can be trained in epochs.
 
 If a model was trained too few epochs, it probably is not able to grab the general trend or learn enough about the data to built context.
 This is called \tb{Underfitting}.

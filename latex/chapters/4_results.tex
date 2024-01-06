@@ -44,6 +44,21 @@ Dealing with variable length data tf.io.VarLenFeature()
 
 %- Screen2Words
 
+LSTM 4 dimensional
+% https://stackoverflow.com/questions/54743549/is-it-possible-to-making-lstm-model-with-4-dimension-shape-of-data
+
+Limitations to only 3 dimensions, needs flattening
+
+Sample dimension (X -> y)
+Time (Step) Dimension
+Feature Dimension
+Data, Quantity dimension, such as Image dimensions, or multiple nodes
+
+TimeDistributedLayer
+% https://stackoverflow.com/a/61588937/5164462
+% https://stackoverflow.com/questions/53107126/what-are-the-uses-of-timedistributed-wrapper-for-lstm-or-any-other-layers
+
+
 Multiple approaches
 
 \todo{create graphic for each approach}
