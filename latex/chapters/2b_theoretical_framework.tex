@@ -39,13 +39,13 @@ The view model then updates the application data, if needed, and then also repor
         \caption{Schema of how the semantics tree is related to the \gls{ui} hierarchy \cite{android_semantics_compose}}
         \label{fig:android_semantics_ui_tree}
     \end{subfigure}
-    \caption{Structure of the Android \gls{ui}}
+    \caption[Structure of the Android UI]{Structure of the Android \gls{ui}}
     \label{fig:android_tree}
 \end{figure}
 %https://developer.android.com/guide/topics/ui/how-android-draws \cite{android_draw_views}
 %https://developer.android.com/jetpack/compose/mental-model \cite{android_jetpack_compose}
 
-\subsection{Data tree structure}
+\subsection{Data Tree Structure}
 \label{subsec:data-tree-structure}
 
 The \gls{ui} elements (i.e.\ the composition) themselves are hierarchically structured in a tree.
@@ -59,7 +59,7 @@ Note that this tool is only available if one has access to the app's source code
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=\textwidth]{graphics/android_layout_inspector}
-    \caption{The Android Layout Inspector tool using the example of \quotes{App ins Grüne}~\cite{mimuc_app_ins_gruene} by the Media Informatics Group of the LMU in Munich.}
+    \caption[Android Layout Inspector tool]{The Android Layout Inspector tool using the example of \quotes{App ins Grüne}~\cite{mimuc_app_ins_gruene} by the Media Informatics Group of the LMU in Munich.}
     \label{fig:android_layout_inspector}
 \end{figure}
 
@@ -70,7 +70,7 @@ If an app is running in production on a users device, meaning that the app is co
 This behavior is of course wanted for safety and privacy reasons.
 Nonetheless, if desired, a user can explicitly allow certain apps to gain access to the semantics tree of your Android \gls{os}.
 This is especially useful for providing accessibility services for impaired users (like done with the TalkBack app).
-Or -- as in our case -- the setting can be used to enable services which collect data for user studies or scientific experiments.
+Or, as in our case, the setting can be used to enable services which collect data for user studies or scientific experiments.
 
 This semantics tree is deviated from the existing \gls{ui} tree.
 It can be fed via special semantic properties while composing the \gls{ui}, e.g.\ by specifying the \code{contentDescription} property of an icon \cite{android_semantics_compose}.
@@ -131,7 +131,7 @@ Data entries can occur in different forms, but we can break them down in three m
 For all types -- discrete, continuous, and categorical values -- we have a wide variety of options for preparing them in order to be subsequently processed by a \gls{ml} model \cite{duong2021}.
 These are listed in the following, while not all can be applied to all types of values.
 
-\subsubsection{Feature selection}
+\subsubsection{Feature Selection}
 
 Feature selection is a crucial step to successfully develop a model with the desired results.
 It can improve learning performance, thus reduces time, increases computational efficiency, decreases memory storage, and helps build better generalization models \cite{li2017feature}.
@@ -163,7 +163,7 @@ a) Vector length
 b) Weighting of features
 c) Manipulating individual parameters of model
 
-\subsubsection{Missing data}
+\subsubsection{Missing Data}
 Some data entries may are missing.
 Therefore, two approaches can be employed to get around these missing values.
 First, one can drop these values by removing the column or row.
@@ -244,7 +244,7 @@ This is also called \gls{gl-one-hot}-encoding ~\cite{brownlee2021}.
         \subcaption{One-hot encoded species}
         \label{tab:one-hot}
     \end{subtable}
-    \caption{\Gls{gl-one-hot}-encoding of categories, $I_{d}$ is the index of the data entry}
+    \caption[One-hot-encoding of categories]{\Gls{gl-one-hot}-encoding of categories, $I_{d}$ is the index of the data entry}
     \label{tab:cat_one_hot}
 \end{table}
 
@@ -374,7 +374,7 @@ An embedding would result in an \gls{gl-one-hot}-encoding, if the embedding dime
         \subcaption{Lookup table for the 2-dimensional embedding of species}
         \label{tab:species-embedding}
     \end{subtable}
-    \caption{Embedding of categories, $I_{d}$ is the index of the data entry, $I_{s}$ is the index of the species}
+    \caption[Embedding of categories]{Embedding of categories, $I_{d}$ is the index of the data entry, $I_{s}$ is the index of the species}
     \label{tab:cat_embeddings}
 \end{table}
 
