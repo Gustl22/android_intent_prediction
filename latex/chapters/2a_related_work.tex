@@ -172,7 +172,7 @@ Similar to \cite{li2021screen2vec} Screen2words considers the screen context fro
 The goal is to provide a summarization for an unseen screen by usage of it's app and \gls{ui} context.
 They describe such a technique as multi-modal, as it \quotes{leverages input from multiple data sources}, like screenshot images, textual labels and UI tree structures.
 As basis for their training data the Rico-SCA \ref{subsec:rico} dataset is used, to remove inaccurate view hierarchies.
-Although the public code did not provide a direct way to parse the \gls{gl-protobuf} of Rico-SCA.
+Although the public code did not provide a direct way to parse the \Gls{gl-protobuf} of Rico-SCA.
 In addition they hired 85 labelers to manually annotate each of the 22k existing screens with multiple summarizations, resulting in more than 100k phrases.
 
 As input for their summarizing \gls{nn} they used a flattened view hierarchy which contained padded embeddings for categorical values, like the view class.
