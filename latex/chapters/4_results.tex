@@ -69,7 +69,34 @@ A user working with web applications and or playing directly rendered games stil
 
 % TAKEAWAY: Create custom dataset
 
-\section{Preprocessing Android UI tree data}
+\section{Preprocessing Android UI Tree Data}
+
+The widely used dataset Rico was chosen as basis to feed the model.
+As noted in section \ref{subsec:rico}, the structure is disaggregated in \ti{app}s, containing \ti{traces}, containing \ti{view hierarchies}, containing \ti{view}s.
+A significant aspect is, that the samples in the traces don't get mixed up with other samples, to keep the temporal dependence.
+The dataset already was analyzed and manipulated by other researchers, though some of the steps were adopted from Screen2words (section \ref{subsec:screen2words}).
+This implicates the feature extraction from the nodes, the bounding box normalization, and the node flattening process (cf. section \ref{subsec:preprocessing}).
+The attributes of the Rico dataset (table \ref{tab:rico_view_hierarchy_attributes}) not exactly matching the accessibility tree (cf. listing \ref{android_accessibility_node}), but they are similar enough to state that the process is applicable for both variants.
+
+For the proof of concept these attributes were extracted: \code{bounds} (inherits four values), \code{visibility}, \code{clickable} and the \code{class}.
+Also, the nodes depth in the dom tree was calculated, apparent as \code{obj_dom_pos} and the visibility for the user was validated with \code{visibility_to_user_seq}.
+One screen exists of multiple views / components, which all have their own attributes.
+To be able to examine each screen as one sample, the view hierarchy had to be flattened.
+This was done by separating the views by attributes and merge each value by its feature.
+Therefore, a screen sample was converted to a list of features, which again hold a list of values.
+This is an important step to realize as the dataset now consists of four array dimensions, which plays a big role in later steps, as it makes further processing more challenging.
+The gesture traces were acquired from the dataset to provide them as labels, but also as additional input.
+They contain one (click) or multiple (swipe) coordinates.
+For simplification only the first value was considered, but it is proposed to also provide the other values as input.
+Then all traces were iterated through and samples were filtered out, which did not provide any features.
+Also, only traces were picked, which did provide six or more screen samples, to be able to train a sequential model, resulting in 4278 traces with 50301 samples.
+Then the features consisting of arrays were padded to the same length (here: 500).
+This could be done per feature, but it was uniquely applied, because the number of views and therefore the length for each nested feature array is the same.
+
+The data then was split in a train and a validation set.
+Due to the limiting capacity of the \gls{gpu}, only 20\% of the traces were used.
+Therefore, 642 traces were selected for training and 213 for validation.
+
 \subsection{Filtering privacy invasive details}
 
 - rico doesn't use logins or any privat data
@@ -82,6 +109,8 @@ A user working with web applications and or playing directly rendered games stil
 Dealing with variable length data tf.io.VarLenFeature()
 
 \section{Model}
+
+% Shift click sequence
 
 Use LSTM, so predict something unseen, in contrast to RICO or ERICA, which only categorize the current context
 

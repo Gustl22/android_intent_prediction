@@ -49,6 +49,8 @@ As far as known to date this is the largest collection of mobile app designs and
 Like its predecessor Rico uses a web-based approach to collect user traces.
 It enables the applications like searching for designs, generation of UI layouts and code, modeling of user interactions, and prediction of user perception.
 It exposes visual, textual, structural, and interactive design properties of more than 72k unique UI screens.
+The traces dataset is categorized by apps, wich each inherits multiple interaction traces.
+These contain a screenshot and a view hierarchy for each screen change.
 Unfortunately the dataset doesn't include interaction traces for app to app transitions or interactions with the Android OS itself.
 In table~\ref{tab:rico_view_hierarchy_attributes} a collection of all view hierarchy attributes is shown with their meaning.
 These were extracted by iterating over all view hierarchy files contained in the traces of the dataset.
