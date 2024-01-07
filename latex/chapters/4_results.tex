@@ -1,7 +1,32 @@
 \chapter{Results}
 
+%A concept will be developed on how a model for predicting user intent could be built and how it could be applied to the user session.
+%To this end, possibilities for collecting and vectorizing sequential UI trees will be discussed
+%which are designed to predict the user intent. Here, privacy and feature pre-filteringin UI data plays an important role
+%
+%After that, personalized as well as collaborative data can be used in a hybrid approach.
+%This modelshould then be made available to the user in an Android app service and, depending on the level ofdetail, suggest upcoming apps or actions to the user at a suitable time
+
+This chapter will explain how a prediction model for user intent can be designed and what factors of influence have to be considered.
+The design will be shown on the basis of a proof of concept implementation.
+Also, a concept of how this model can be applied to the real world is proposed. \todo{check if that is actually done.}
+
+As noted in the introduction the term \ti{intent} has a very wide scope.
+It's prediction can only be made in fractions, or serve as indicator.
+The semantically closest way and also the most detailed would be to describe the users intent in words, thus a description of what the user wants to do next.
+Unfortunately, the users intent description cannot be determined yet, as no according dataset is provided.
+An important step, the screen summarization as shown in Screen2words~\ref{subsec:screen2words}, already was made, which could also be fed with the users intention descriptions.
+But this would then only reflect the already passed fulfilled intent and not the upcoming next purpose.
+Also, the users flows can be predicted as shown in the works of ERICA~\ref{subsec:erica}.
+\todo{may more describe what a 'flow' can do}
+Next app prediction already works quite well~\ref{todo}, which also reflects the larger intent of the user, but is not very detailed.
+
+In order to approximate that goal the assumption was made that the next \tb{user interaction} also give hints on what the user is intending to achieve.
+The interaction is resulting in another screen, which then the user (hopefully) intends to see.
+
+
 Proof of concept, as an example gesture or click traces were used as labels.
-More general approaches can be used such as a description of the intent \cite{screen2words}, which needs another data set.
+More general approaches can be used such as a description of the intent \cite{wang2021screen2words}, which needs another data set.
 
 %\todo{overall goal is more than just interaction traces}
 Make the algorithm as independent of the data as possible.
@@ -90,9 +115,28 @@ Decoder can either only decode to x and y or to whole UI tree.
 
 \begin{figure}[htbp!]
   \centering
-  \includegraphics[width=\textwidth]{graphics/model_history_loss}
-  \caption[Model loss vs. validation loss]{Model loss vs. validation loss}
-  \label{fig:model_history_loss}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{graphics/model_history_loss_clicks}
+    \caption{Clicks as features only}
+    \label{fig:model_history_loss_clicks}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{graphics/model_history_loss_features}
+    \caption{Bounding box and click features}
+    \label{fig:model_history_loss_features}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.8\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{graphics/model_history_loss_features}
+    \caption{Bounding box and shifted click features}
+    \label{fig:model_history_loss_features_shifted}
+  \end{subfigure}
+  \caption[Training loss vs. validation loss]{Training loss vs. validation loss.}
+  \label{fig:model_history_losses}
 \end{figure}
 
 \subsection{Mean Squared Error}
