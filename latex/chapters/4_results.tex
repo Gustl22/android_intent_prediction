@@ -1,4 +1,5 @@
 \chapter{Results}
+\label{ch:results}
 
 %A concept will be developed on how a model for predicting user intent could be built and how it could be applied to the user session.
 %To this end, possibilities for collecting and vectorizing sequential UI trees will be discussed
@@ -15,25 +16,29 @@ As noted in the introduction the term \ti{intent} has a very wide scope.
 It's prediction can only be made in fractions, or serve as indicator.
 The semantically closest way and also the most detailed would be to describe the users intent in words, thus a description of what the user wants to do next.
 Unfortunately, the users intent description cannot be determined yet, as no according dataset is provided.
-An important step, the screen summarization as shown in Screen2words~\ref{subsec:screen2words}, already was made, which could also be fed with the users intention descriptions.
+An important step, the screen summarization as shown in Screen2words~\ref{subsec:screen2words} \cite{wang2021screen2words}, already was made, which could also be fed with the users intention descriptions.
 But this would then only reflect the already passed fulfilled intent and not the upcoming next purpose.
 Also, the users flows can be predicted as shown in the works of ERICA~\ref{subsec:erica}.
 \todo{may more describe what a 'flow' can do}
-Next app prediction already works quite well~\ref{todo}, which also reflects the larger intent of the user, but is not very detailed.
+Next app prediction already works quite well~\ref{katsarou2022whatsnextapp}, which also reflects the larger intent of the user, but is not very detailed.
+In the process of the working on this topic, surprisingly a successful attempt was made to predict the next user interaction, which is explained in section \ref{subsec:user-click-behaviors-deep-learning} \cite{zhou2021large}.
+This shows, that it is possible to predict certain user actions upfront.
 
-In order to approximate that goal the assumption was made that the next \tb{user interaction} also give hints on what the user is intending to achieve.
+In order to approximate to reflect the user intent the assumption is made that the next \tb{user interaction} also give hints on what the user is intending to achieve.
 The interaction is resulting in another screen, which then the user (hopefully) intends to see.
 
+\todo{Mathematically formulate the problem?}
 
+To provide a basis for further development on this topic, the following criteria were determined.
+\begin{itemize}
+  \item Make the model as independent of the data as possible (generalization).
+  \item Make it extensible for solving other problems, e.g.\ run it as form a classification or apply reinforcement.
+  \item Make it accessible to other developers.
+  \item Make it reproducible by providing the correct sources and add documentation.
+\end{itemize}
+
+\todo{formulate or remove}
 Proof of concept, as an example gesture or click traces were used as labels.
-More general approaches can be used such as a description of the intent \cite{wang2021screen2words}, which needs another data set.
-
-%\todo{overall goal is more than just interaction traces}
-Make the algorithm as independent of the data as possible.
-Find general rules to feed the data.
-Applicable to other research fields, not just UI traces.
-Use LSTM, so predict something unseen, in contrast to RICO or ERICA, which only categorize the current context
-
 %Steps:
 %- Data acquisition
 %- Data cleaning / Preprocessing (Panadas)
@@ -44,27 +49,25 @@ Use LSTM, so predict something unseen, in contrast to RICO or ERICA, which only 
 
 \section{Datasets}
 
-- Problem with sequential data sets
-- Google and Samsung
-- need to have correct data
-- no missing data
-- needs enough data to train a NN
-- need enough features to be able to recognize patterns
-- up to date
-- Publicly available
-- Variable length of app sessions, define one session of activating the screen until it is turned off.
+The most relevant datasets already were presented in section~\ref{sec:datasets-of-ui-trees}.
+During research a few problems arose, which made it difficult to obtain a dataset which serves the needs of intent prediction.
+Most suited datasets, referenced in the papers (by Google and Samsung), were not publicly available.
+A promising candidate is the Rico dataset (section~\ref{subsec:rico}), as it provides a huge amount of traces, which is needed for successfully learning a \gls{nn}.
+It is also quite up-to-date, which reflects current development and trends.
+Trade-offs had to be made in the correctness of the data.
+Some samples are missing or don't match with the screenshot.
 
-Missing
-- System to feed in in real time
-- Dataset which is across multiple apps, also tracks the system
--
+To overcome these limitations, it is proposed to create a custom dataset, which takes advantage of the accessibility services (section \ref{subsec:android-accessibility-service}).
+Traces then can be recorded during transitions of apps (cross-app) or while interacting with the operating system.
+The length of a trace would then be extended to a session, defined as from activating the screen until it is turned off (by the user or the system).
+Tracing with accessibility services also has the benefit, that the model could be used locally on the device without communicating with an external provider.
+External communication and storage of data on servers increases the risk of attacks and leakage, which should be avoided by any circumstances.
+On-device processing also is possibly faster, works without internet connection, and makes the application more trustworthy.
+A local working technology also facilitate reinforcement learning (section \ref{subsec:machine-learning-types}), which improves the user experience significantly.
+Additional features then could also be considered, like sensor data, such as \gls{gps} and gyroscope, acceleration, temperature, light and many more.
+A user working with web applications and or playing directly rendered games still is a challenge to track, as the accessibility service does not have access to these elements in the same way as for native apps.
 
-\subsection{Rico}
-
-\begin{itemize}
-  \item Too less frames.
-  \item No transition between apps.
-\end{itemize}
+% TAKEAWAY: Create custom dataset
 
 \section{Preprocessing Android UI tree data}
 \subsection{Filtering privacy invasive details}
@@ -79,6 +82,8 @@ Missing
 Dealing with variable length data tf.io.VarLenFeature()
 
 \section{Model}
+
+Use LSTM, so predict something unseen, in contrast to RICO or ERICA, which only categorize the current context
 
 %- Screen2Words
 
@@ -104,6 +109,7 @@ Multiple approaches
 AutoEncoder:
 
 \begin{itemize}
+  \item Pretrained -> LSTM -> Decoder
   \item Encoder -> Decoder -> LSTM -> Decoder
   \item Encoder -> LSTM -> Decoder
   \item LSTM -> Encoder -> Decoder (AutoEncoder)
@@ -112,6 +118,9 @@ AutoEncoder:
 Decoder can either only decode to x and y or to whole UI tree.
 
 \section{Evaluation}
+
+- distance metric not really make sense, as buttons can be positioned very differently.
+Much better, would be conversion of model to classification with multiple outputs in order to predict the most likely actionable buttons, which the user will click on.
 
 \begin{figure}[htbp!]
   \centering
@@ -154,8 +163,6 @@ Decoder can either only decode to x and y or to whole UI tree.
   \caption[Training and validation loss, number of epochs]{Training and validation loss of all three methods, ClickOnly, SelectedFeatures and FeaturesClickShifted}
   \label{tab:model_losses}
 \end{table}
-
-\subsection{Mean Squared Error}
 
 \section{Limitations}
 

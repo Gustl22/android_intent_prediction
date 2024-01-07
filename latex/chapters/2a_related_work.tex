@@ -168,10 +168,10 @@ Such an approach of representing an Android layout and context in a vector can b
 \subsection{Screen2Words}
 \label{subsec:screen2words}
 
-Similar to \cite{li2021screen2vec} Screen2words \cite{wang2021screen2words} considers the screen context from the view hierarchy to create a screen embedding.
+Similar to~\cite{li2021screen2vec} Screen2words~\cite{wang2021screen2words} considers the screen context from the view hierarchy to create a screen embedding.
 The goal is to provide a summarization for an unseen screen by usage of it's app and \gls{ui} context.
 They describe such a technique as multi-modal, as it \quotes{leverages input from multiple data sources}, like screenshot images, textual labels and UI tree structures.
-As basis for their training data the Rico-SCA \ref{subsec:rico} dataset is used, to remove inaccurate view hierarchies.
+As basis for their training data the Rico-SCA (section~\ref{subsec:rico}) dataset is used, to remove inaccurate view hierarchies.
 Although the public code did not provide a direct way to parse the \Gls{gl-protobuf} of Rico-SCA.
 In addition they hired 85 labelers to manually annotate each of the 22k existing screens with multiple summarizations, resulting in more than 100k phrases.
 
@@ -243,7 +243,7 @@ Also as far as known the dataset and code is not publicly accessible.
 \subsection{Large-Scale Modeling of Mobile User Click Behaviors Using Deep Learning}
 \label{subsec:user-click-behaviors-deep-learning}
 
-Xin Zhou and Yang Li \cite{zhou2021large} extend the work of \cite{lee2018click}.
+Xin Zhou and Yang Li~\cite{zhou2021large} extend the work of~\cite{lee2018click}.
 They expect to optimize the UI experience by recommending the users next click interaction based on their findings.
 They gathered a dataset of 20 million clicks from 4k mobile users.
 The goal was to overcome the challenge of accurate but also scalable click sequence modeling.
