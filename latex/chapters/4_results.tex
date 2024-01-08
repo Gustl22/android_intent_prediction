@@ -21,7 +21,7 @@ But this would then only reflect the already passed fulfilled intent and not the
 Also, the users flows can be predicted as shown in the works of ERICA~\ref{subsec:erica}.
 \todo{may more describe what a 'flow' can do}
 Next app prediction already works quite well~\ref{katsarou2022whatsnextapp}, which also reflects the larger intent of the user, but is not very detailed.
-In the process of the working on this topic, surprisingly a successful attempt was made to predict the next user interaction, which is explained in section \ref{subsec:user-click-behaviors-deep-learning} \cite{zhou2021large}.
+In the process of the working on this topic, surprisingly a successful attempt was made to predict the next user interaction, which is explained in section \ref{subsec:user-click-behaviors-deep-learning-transformer} \cite{zhou2021large}.
 This shows, that it is possible to predict certain user actions upfront.
 
 In order to approximate to reflect the user intent the assumption is made that the next \tb{user interaction} also give hints on what the user is intending to achieve.
@@ -170,7 +170,7 @@ This would have a similar structure as the pretrained embedding, but is adaptabl
 The decoder of the \gls{ae} then also can be moved to after the \gls{rnn} layer, which should improve the performance.
 Or the encoder and the decoder are subsequently processed afterwards to provide all raw feature inputs to the \gls{rnn}.
 
-As earlier mentioned, an even more promising approach, which has been proved to work well in click sequence prediction (section \ref{subsec:user-click-behaviors-deep-learning}), is the transformer (section \ref{subsubsec:transformer}).
+As earlier mentioned, an even more promising approach, which has been proved to work well in click sequence prediction (section \ref{subsec:user-click-behaviors-deep-learning-transformer}), is the transformer (section \ref{subsubsec:transformer}).
 
 \section{Evaluation}
 

@@ -4,7 +4,7 @@ In this chapter a subsumption is presented which puts the results of the proof-o
 
 The most limiting factors are the dataset, the computational performance, as well as the development time.
 As mentioned previously the underlying dataset plays a significant role, how the model performs.
-As the dataset does only consider app traces, predictions while using the \gls{os} itself cannot be made.
+Because the dataset does only consider app traces, predictions while using the \gls{os} itself cannot be made.
 Also, some view changes while using an app were not recorded, resulting in a gap between training data and the real world application.
 Rico didn't provide data about paid apps or apps with the need for an account, resulting in not reflecting the day-to-day scenarios.
 Nonetheless, this was not the bottleneck of the research.
@@ -15,23 +15,21 @@ This can have multiple reasons.
 At first, the limited \gls{gpu} capacities allowed only to use 20\% of the data, resulting in much less training and evaluation data.
 Second, the distance metric may is not really applicable to train and predict the next user input.
 This denotes that buttons are positioned very differently and a wrong prediction can be positioned far away.
-A much better feature, would be the conversion of model to a classification of actionable elements in order to predict the most likely component, which the user will press.
-This is also proposed in \cite{zhou2021large}, together with a relative ranking metric, which is far more appropriate to calculate the error for predicting the next user action.
+A much better way would be the conversion of model to a classification of actionable elements in order to predict the most likely component, which the user will press.
+This is also proposed in \cite{zhou2021large}, together with a relative ranking metric, which is also more appropriate to calculate the error for predicting the next user action.
 
-While preprocessing also more approaches have to be tested against, to work out the core parameters to predict the next user intent.
-Thus, the model needs more investigation on what kind of data is needed, what layers and methods are suited best.
-E.g. the number of neurons for embeddings is interesting, as well as adding additional features such as the screenshot through a convolutional embedding and
-or adding pretrained word embeddings like done in Screen2words \cite{wang2021screen2words}.
+To improve preprocessing, more approaches have to be tested against, to work out the core parameters to predict the next user intent.
+Thus, the model needs more investigation on what kind of data is needed and what layers and methods are suited best.
+E.g. the number of neurons for embeddings is interesting, as well as adding additional features such as the screenshot through a convolutional embedding or adding pretrained word embeddings like done in Screen2words \cite{wang2021screen2words}.
 
 \todo{TAKEAWAY: click sequence may NOT a good indicator for where the user clicks as buttons can differ from app to app, more semantics, better relative actionable button click rate}
 
-The results from the proof-of-concept did not quite match the expectations.
+%The results from the proof-of-concept did not quite match the expectations.
 
-\section{What is a suitable model for the prediction of user intent?}.
-\todo{formulate as topic}
+\section{Suitable Models for Prediction of User Intent}
 
-To answer this question, LSTM has to be compared against other methods of predicting user intents.
-As shown in \todo{add ref} classic stochastic approaches may can predict larger scope of the user such as the next app or a general user workflow.
+To answer the question of \ti{what a suitable model for the prediciton of user intent} is, \gls{lstm} has to be compared against other methods of predicting user intents.
+Classic stochastic approaches may can predict larger scope of the user such as the next app or a general user workflow.
 But they are not sufficient for predicting views, screens, or even precise gesture inputs.
 To overcome this limitation the \gls{ml}-models have established in large datasets.
 As the described problem is to be contextualized in the prediction of time series, the following options are offered:
@@ -53,9 +51,14 @@ It is well-supported by Keras~(\ref{keras}) and easy to use.
 Also, similar approaches have been made in the area of app prediction or app summarization~\ref{cite me}, which can be used as basis for this work, such as Screen2Words~\ref{subsec:screen2words}.
 
 
-\section{At what level of detail the predictions can be made?}
-\todo{formulate as topic}
+\section{Level of Detail of Intent Predictions}
 
+The matter to what level of detail user intent predictions can be made, was already discussed in parts in the results chapter \ref{ch:results} to work out the missing parts for intent prediction.
+
+As mentioned, only hints or parts of the semantic intent can be predicted.
+In the numerous papers, the app, the user flow and even the click sequence, which can be seen equatable to the user interaction, was proven to be predictable to a certain degree.
+Still missing is a prediction of screens, views and intent descriptions, which seems doable by combining the Screen2words (section \ref{subsec:screen2words}) model with the transformer model (section \ref{subsec:user-click-behaviors-deep-learning-transformer}).
+%fference intent / interaction / screen / flow / click
 % THIS ALREADY WAS MENTIONED IN THE RESULT AS INTRODUCTION
 %As noted in the introduction the term \ti{intent} has a very wide scope.
 %It's prediction can only be made in fractions, or serve as indicator.
@@ -69,12 +72,12 @@ Also, similar approaches have been made in the area of app prediction or app sum
 %In order to approximate that goal the assumption was made that the next user interaction also give hints on what the user is intending to achieve.
 %The interaction is resulting in another screen, which then the user (hopefully) intends to see.
 So not only the interaction, but also the next contents, such as screen or single views can give a hint to the intent.
-As it turns out, this is possible, if replacing the labels in the proposed model, but presumably it will not be very precise.
+This is also possible, if replacing the labels in the proposed model, but it is not evaluated how precise these predictions will be.
 
 %category → app → screen → view → action
-1. Predict Gestures, prediction of current screen, not next screen, is possible and can easily calculate distances between this and the next point
-2. Predict Screen or parts of screens, labels not gestures, box positions, text prediction, decoded and compared to current output, more a qualitative evalutation,
-3. Predict App -> Not possible with RICO, no cross app traces
+%1. Predict Gestures, prediction of current screen, not next screen, is possible and can easily calculate distances between this and the next point
+%2. Predict Screen or parts of screens, labels not gestures, box positions, text prediction, decoded and compared to current output, more a qualitative evalutation,
+%3. Predict App -> Not possible with RICO, no cross app traces
 
 \section{How the user can be supported with their tasks on digigal end devices?}
 \todo{formulate as topic}
