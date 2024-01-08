@@ -58,14 +58,14 @@ Trade-offs had to be made in the correctness of the data.
 Some samples are missing or don't match with the screenshot.
 
 To overcome these limitations, it is proposed to create a custom dataset, which takes advantage of the accessibility services (section \ref{subsec:android-accessibility-service}).
-Traces then can be recorded during transitions of apps (cross-app) or while interacting with the operating system.
-The length of a trace would then be extended to a session, defined as from activating the screen until it is turned off (by the user or the system).
+Traces then can be recorded during transitions of apps (cross-app) or while interacting with the \gls{os}.
+The length of a trace would then be extended to a session, defined from activating the screen until it is turned off (by the user or the system itself).
 Tracing with accessibility services also has the benefit, that the model could be used locally on the device without communicating with an external provider.
-External communication and storage of data on servers increases the risk of attacks and leakage, which should be avoided by any circumstances.
+Additional communication and storage of data on servers increases the risk of attacks and leakage, which should be avoided by any circumstances.
 On-device processing also is possibly faster, works without internet connection, and makes the application more trustworthy.
 A local working technology also facilitate reinforcement learning (section \ref{subsec:machine-learning-types}), which improves the user experience significantly.
 Additional features then could also be considered, like sensor data, such as \gls{gps} and gyroscope, acceleration, temperature, light and many more.
-A user working with web applications and or playing directly rendered games still is a challenge to track, as the accessibility service does not have access to these elements in the same way as for native apps.
+A user working with web applications or playing directly rendered games still is a challenge to track, as the accessibility service does not have access to these elements in the same way as for native apps.
 
 % TAKEAWAY: Create custom dataset
 
@@ -117,35 +117,35 @@ The reason is that the input sequences and labels were then fixed and didn't dep
 \section{Model}
 
 \todo{Shift click sequence}
-In the proof-of-concept a very dynamic approach was selected to be able to support new features without big changes.
+In the proof-of-concept a very dynamic approach was selected to be able to support new features without major changes.
 Therefore, depending on the input features, the model was adapted automatically by these rules:
 
 \begin{itemize}
-  \item If the feature provides a single value, it was directly passed for further processing.
-  \item If the feature included multiple values, they were reduced in the dimensionality (dense layer) based on the length and provided each output value as feature as its own dimension.
-  \item If the feature provided a numerical value (normalized), it was also directly passed to be processed further.
-  \item If the feature provided a categorical value, it was embedded (section \ref{subsec:embedding-layer}) and then flattened to match the array dimensionality.
+  \item If the sample feature consisted of a single value, it was directly passed for further processing.
+  \item If the sample feature included multiple values, they were reduced in the dimensionality (dense layer) based on the length and provided each output value as a separate feature dimension.
+  \item If the sample feature provided a numerical value (normalized), it was also directly passed to be processed further.
+  \item If the sample feature provided a categorical value (indexed), it was embedded (section \ref{subsec:embedding-layer}) and then flattened to match the array dimensionality.
 \end{itemize}
 
 % https://stackoverflow.com/questions/54743549/is-it-possible-to-making-lstm-model-with-4-dimension-shape-of-data
 The numerical and categorical embeddings then were concatenated together and handed over to the \gls{lstm}.
 The \gls{lstm} expects an array / space dimension of three.
 The first array dimension is the sample dimension (unlimited), which in this case is the list of all sample sequences.
-The second array dimension is the time step dimension (fixed size), therefore the sample sequence itself.
-The third array dimension is the feature dimension (fixed size), thus there's no dimension left to encode nested or even variable arrays, such as multiple views / components.
+The second array dimension is the time step dimension (fixed size), thus the sample sequence itself.
+The third array dimension is the feature dimension (fixed size), therefore there's no dimension left to encode nested or even variable arrays, such as multiple views / components.
 For that reason multiple embedded category values had to be flattened (reshaped) before entering the \gls{lstm} model with 128 neurons.
 
 The output of the \gls{lstm} then was passed to a dense layer with 32 neurons, followed by a dropout of 20\% of neurons.
-Finally the values are passed to the output layer with two neurons, which represents the $x$ and $y$ axis of the predicted gesture.
+Finally, the values were passed to the output layer with two neurons, which were representing the $x$ and $y$ axis of the predicted gesture.
 
-Due to all the numerical and categorical features the model in figure~\ref{fig:model_structure} crystallized.
+Due to all the numerical and categorical features chosen from the dataset, the model in figure~\ref{fig:model_structure} crystallized.
 
 \todo{replace figure with actual structure}
 
 \begin{figure}[htbp!]
   \centering
-  \includesvg[width=\textwidth]{graphics/vectorization.svg}
-  \caption[Structure of user intent prediction model]{Structure of user intent prediction model}
+  \makebox[\textwidth][c]{\includesvg[width=1.2\textwidth]{graphics/model_structure.svg}}
+  \caption[Structure of user intent prediction model]{Structure of the proposed intent prediction model, $I_k$ is the $k$th input sequence, $L_k$ is the $k$th label from the sequence, $s_m$ is the $m$th sample in the sequence, $f_n$ is the $n$th feature of a sample.}
   \label{fig:model_structure}
 \end{figure}
 
@@ -214,9 +214,11 @@ Much better, would be conversion of model to classification with multiple output
     FeaturesClickShifted & 0.0811        & 0.0900                   & 10                        \\
     \hline
   \end{tabular}
-  \caption[Training and validation loss, number of epochs]{Training and validation loss of all three methods, ClickOnly, SelectedFeatures and FeaturesClickShifted}
+  \caption[Training and validation loss, number of epochs]{Training and validation loss (\gls{mse}) of all three methods, ClickOnly, SelectedFeatures and FeaturesClickShifted}
   \label{tab:model_losses}
 \end{table}
+
+\todo{TAKEAWAY: click sequence may NOT a good indicator for where the user clicks, better relative actionable button click rate}
 
 \section{Limitations}
 
@@ -235,3 +237,4 @@ Model needs more investigation on what data is needed
 How many neurons are required to achieve this
 Play around with different layers, also Convolutional and pretrained embeddings
 
+\todo{explain concept to help people, independently developed }
