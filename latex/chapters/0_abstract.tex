@@ -7,6 +7,11 @@
 \todo{check if words from the glossary can be replaced in the text}
 \todo{check if every section or chapter cross reference has a prefix "chapter" or "section"}
 
-A guideline is given
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The intent of a user is a source of information, which is hard to accommodate.
+In the context of using a smartphone, this can imply the next user action, the user flow, or the recommendation for the next app.
+A flexible, open-source proof-of-concept for an intent prediction model based on a \gls{lstm} has been worked out.
+It includes three models ClickOnly, SelectedFeatures and FeaturesClickShifted, which aim to predict the next user click.
+All three are performing only slightly better than the statistically mean click gesture, trained on 15\% of the usable Rico dataset.
+Criteria for a dataset suitable for Android intent prediction were determined.
+Approaches, like transformer multi-attention model, actionable element prediction, and further metrics have potential to push the development of semantically meaningful prediction models.
