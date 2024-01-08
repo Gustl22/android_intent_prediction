@@ -198,6 +198,10 @@ In contrast to the expectation, shifting the click sequence in FeaturesClickShif
 Even the ClickOnly model performed better, with no additional features.
 As buttons are scattered all around the screen, $0.3$ \gls{rmse} seems a reasonable value, if the models always predicts the mean as the next click interaction.
 
+Regarding the number of epochs, the ClickOnly model needed less than the others, which is expected as it has only two feature dimensions.
+The other two models needed more epochs to align with the values of the ClickOnly model.
+This can be the result of aligning the additional random weights for all the additional features.
+The FeaturesClickShifted model needed slightly more epochs than the SelectedFeatures model, which could be by chance, or it found slightly more correlations than the SelectedFeatures model.
 %\todo{calculate mean distance from center}
 %the \gls{rmse} of 0.3102 with 0.5
 %0.3052 with mean
@@ -248,23 +252,5 @@ As buttons are scattered all around the screen, $0.3$ \gls{rmse} seems a reasona
   \label{tab:model_losses}
 \end{table}
 
-Therefore, at least with the limited training and evaluation, the distance metric is not really applicable to predict the next user input.
-This denotes that buttons are positioned very differently and a wrong prediction can be positioned far away.
-A much better feature, would be the conversion of model to a classification of actionable elements in order to predict the most likely component, which the user will press.
-This is also proposed in \cite{zhou2021large}, together with a relative ranking metric, which is far more appropriate to calculate the error for predicting the next user action.
 
-\todo{TAKEAWAY: click sequence may NOT a good indicator for where the user clicks as buttons can differ from app to app, more semantics, better relative actionable button click rate}
-
-\section{Limitations}
-\label{sec:limitations}
-
-The most limiting factors are the dataset, the computational performance, as well as the development time.
-As the dataset does only consider app traces, predictions while using the \gls{os} itself cannot be made.
-Also, some view changes while using an app were not recorded, resulting in a gab between training data and the real world application.
-Rico didn't provide data about paid apps or apps with the need for an account, resulting in not reflecting the day-to-day scenarios.
-
-While preprocessing also more approaches have to be tested against to work out the core parameters to predict the next user intent.
-Thus, the model needs more investigation on what kind of data is needed, what layers and methods are suited best.
-E.g. the number of neurons for embeddings is interesting, as well as adding additional features such as the screenshot through a convolutional embedding and
-or adding pretrained word embeddings like done in Screen2words \cite{wang2021screen2words}.
 

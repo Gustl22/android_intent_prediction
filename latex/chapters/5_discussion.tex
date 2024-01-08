@@ -1,12 +1,31 @@
-\chapter{Application of Android UI Tree Vectors}
+\chapter{Discussion}
 
-\todo{explain concept and design for app which helps people, independently developed from \cite{zhou2021large}}
+In this chapter a subsumption is presented which puts the results of the proof-of-concept into perspective.
 
-\section{Automation and Testing of Android Apps}
-\section{UI Design Similarities}
-\section{Action Prediction Models, User Behavior Modeling}
-\section{Behavioral Analyses for Smartphone Usage Patterns}
+The most limiting factors are the dataset, the computational performance, as well as the development time.
+As mentioned previously the underlying dataset plays a significant role, how the model performs.
+As the dataset does only consider app traces, predictions while using the \gls{os} itself cannot be made.
+Also, some view changes while using an app were not recorded, resulting in a gap between training data and the real world application.
+Rico didn't provide data about paid apps or apps with the need for an account, resulting in not reflecting the day-to-day scenarios.
+Nonetheless, this was not the bottleneck of the research.
 
+While evaluating the three models ClickOnly, SelectedFeatures and FeaturesClickShifted, all of them had a similar performance.
+Compared with the calculated statistical mean value of the click positions with the \gls{rmse}, the models only performed slightly better.
+This can have multiple reasons.
+At first, the limited \gls{gpu} capacities allowed only to use 20\% of the data, resulting in much less training and evaluation data.
+Second, the distance metric may is not really applicable to train and predict the next user input.
+This denotes that buttons are positioned very differently and a wrong prediction can be positioned far away.
+A much better feature, would be the conversion of model to a classification of actionable elements in order to predict the most likely component, which the user will press.
+This is also proposed in \cite{zhou2021large}, together with a relative ranking metric, which is far more appropriate to calculate the error for predicting the next user action.
+
+While preprocessing also more approaches have to be tested against, to work out the core parameters to predict the next user intent.
+Thus, the model needs more investigation on what kind of data is needed, what layers and methods are suited best.
+E.g. the number of neurons for embeddings is interesting, as well as adding additional features such as the screenshot through a convolutional embedding and
+or adding pretrained word embeddings like done in Screen2words \cite{wang2021screen2words}.
+
+\todo{TAKEAWAY: click sequence may NOT a good indicator for where the user clicks as buttons can differ from app to app, more semantics, better relative actionable button click rate}
+
+The results from the proof-of-concept did not quite match the expectations.
 
 \section{What is a suitable model for the prediction of user intent?}.
 \todo{formulate as topic}
@@ -59,3 +78,25 @@ As it turns out, this is possible, if replacing the labels in the proposed model
 
 \section{How the user can be supported with their tasks on digigal end devices?}
 \todo{formulate as topic}
+\todo{explain concept and design for app which helps people, independently developed from \cite{zhou2021large}}
+
+\section{Application of Android UI Tree Vectors}
+
+
+Furthermore, the machine learning model could provide the following benefits in addition to intent prediction:
+\begin{itemize}
+    \item reduction of the complexity and size of the UI tree
+    \item creation of user groups that have similar behavior when using digital UI systems \cite{jayarajah2015need}
+    \item elimination of technical expertise on individual features that would be required to manually compare user sessions \cite{ghods2019activity2vec}
+    \item consideration of a user's history over time (sequential)
+    \item comparison of user interactions without providing privacy invasive information
+    \item supporting app developers to improve their app design and usability
+    \item application in psychology and market research
+    \item pre-loading of processes on devices (energy savings) \cite{shen2019deepapp}
+\end{itemize}
+
+\section{Automation and Testing of Android Apps}
+\section{UI Design Similarities}
+\section{Action Prediction Models, User Behavior Modeling}
+\section{Behavioral Analyses for Smartphone Usage Patterns}
+
