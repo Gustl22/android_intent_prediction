@@ -1,5 +1,18 @@
 \chapter{Conclusion and Future Work}
-\label{sec:zusfas}
+\label{sec:conclusion}
+
+In this thesis the Android UI structure and the ways of retrieving them has been worked out, to be able to gather a meaningful dataset.
+The basics of \gls{ml}, \gls{nn}s, the preprocessing steps and evaluation metrics have been illustrated to grasp the idea of the proof-of-concept.
+%The research methods have been stated to ensure the
+The word intent has much room for interpretation, thus a set of indicators were given to better differentiate.
+A proof-of-concept for an intent prediction model based on a \gls{lstm} was worked out, which does not yet predict advantageous gestures, but only predicts slightly better mean click coordinates.
+The environment did not enable the performance to fully test out the potential.
+However, the proposed concept provides flexibility and extensibility for future work and is accessible for the public.
+More promising approaches arose, like transformer multi-attention model, actionable element prediction, and the usage of metrics like relative rankings (\ref{subsec:user-click-behaviors-deep-learning-transformer}).
+The available technologies already enable large parts of intent prediction.
+Nonetheless, more precise or semantically meaningful prediction models, such as screen or descriptive ones are still missing.
+
+\tb{Outlook}
 
 Use LSTM, so predict something unseen, in contrast to RICO or ERICA, which only categorize the current context
 more semantics and language features
@@ -9,8 +22,11 @@ the proof of concept did not show the expected results, thus it can be learned a
 
 Other model structures have to be evaluated
 
-\section*{Summary}
-\section*{Outlook}
+\todo{TAKEAWAY: click sequence may NOT a good indicator for where the user clicks as buttons can differ from app to app, more semantics, better relative actionable button click rate}
+
+% TAKEAWAY: Create custom dataset
+
+%\section*{Outlook}
 
 Future directions for research in this area
 
@@ -20,6 +36,7 @@ Generate Dataset which overcomes the limitations
 
 Make a study with actual feedback on a prediction system, visualization
 -> Learn faster and directly, Reinforced learning
+group of users
 
 Work out user flows, like in ERICA, but without the need to separate it from the interaction tree
 
