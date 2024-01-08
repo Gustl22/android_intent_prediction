@@ -99,11 +99,11 @@ Therefore, 642 traces were selected for training and 213 for validation.
 The following processing applied equally, but executed separately for train and test split.
 
 The input and output (label) pairs were generated, which had to be done after splitting the traces to keep the temporal order.
-Therefore, for each trace the first samples (here: 5) acted as the input sequence and the next one (here: sixth) was the label.
+Therefore, for each trace the first samples $s$ (here: 5) acted as the input sequence $I$ and the next one (here: sixth) was the label $L$ (cf.\ figure~\ref{fig:model-structure}).
 This step was repeated by shifting the samples by one, so that the first sample was dropped and the label from the previous record then was part of the second input sequence.
 As label then served the next (here: seventh) sample.
 This process was done until no sample was left in the trace, that could take the role of the label.
-For the case of the proof-of-concept all features were dropped from the labels, except the click / gesture position values, because that's the prediction that has been looked for.
+For the case of the proof-of-concept all features were dropped from the labels, except the click / gesture position values $f_1$ and $f_2$, because that's the prediction that has been looked for.
 After the input and output pairs for each trace have been generated, they then could be finally merged together in one array.
 The reason is that the input sequences and labels were then fixed and didn't depend on the upcoming samples in the trace.
 
@@ -116,18 +116,18 @@ The reason is that the input sequences and labels were then fixed and didn't dep
 
 \section{Model}
 
-\todo{Shift click sequence}
 In the proof-of-concept a very dynamic approach was selected to be able to support new features without major changes.
-Therefore, depending on the input features, the model was adapted automatically by these rules:
+Therefore, depending on the input features $f$, the model was adapted automatically by these rules (cf.\ figure~\ref{fig:model-structure}):
 
 \begin{itemize}
   \item If the sample feature consisted of a single value, it was directly passed for further processing.
   \item If the sample feature included multiple values, they were reduced in the dimensionality (dense layer) based on the length and provided each output value as a separate feature dimension.
-  \item If the sample feature provided a numerical value (normalized), it was also directly passed to be processed further.
+  \item If the sample feature provided a continuous numerical value (normalized), it was also directly passed to be processed further.
   \item If the sample feature provided a categorical value (indexed), it was embedded (section \ref{subsec:embedding-layer}) and then flattened to match the array dimensionality.
 \end{itemize}
 
 % https://stackoverflow.com/questions/54743549/is-it-possible-to-making-lstm-model-with-4-dimension-shape-of-data
+For simplicity all categorical values were handed over as array as it would not make a difference in processing.
 The numerical and categorical embeddings then were concatenated together and handed over to the \gls{lstm}.
 The \gls{lstm} expects an array / space dimension of three.
 The first array dimension is the sample dimension (unlimited), which in this case is the list of all sample sequences.
@@ -135,26 +135,25 @@ The second array dimension is the time step dimension (fixed size), thus the sam
 The third array dimension is the feature dimension (fixed size), therefore there's no dimension left to encode nested or even variable arrays, such as multiple views / components.
 For that reason multiple embedded category values had to be flattened (reshaped) before entering the \gls{lstm} model with 128 neurons.
 
+\todo{link and explain LSTM (?)}
+%TimeDistributedLayer
+% https://stackoverflow.com/a/61588937/5164462
+% https://stackoverflow.com/questions/53107126/what-are-the-uses-of-timedistributed-wrapper-for-lstm-or-any-other-layers
+
 The output of the \gls{lstm} then was passed to a dense layer with 32 neurons, followed by a dropout of 20\% of neurons.
-Finally, the values were passed to the output layer with two neurons, which were representing the $x$ and $y$ axis of the predicted gesture.
+Finally, the values were passed to the output layer with two neurons, which were representing the $x$ (Gest$_x$) and $y$ (Gest$_y$) axis of the predicted gesture.
 
-Due to all the numerical and categorical features chosen from the dataset, the model in figure~\ref{fig:model_structure} crystallized.
+Due to all the numerical and categorical features chosen from the dataset, the model \tb{SelectedFeatures} in figure~\ref{fig:model-structure} crystallized.
 
-\todo{replace figure with actual structure}
-
+\todo{typo in figure: "continuous"}
 \begin{figure}[htbp!]
   \centering
   \makebox[\textwidth][c]{\includesvg[width=1.2\textwidth]{graphics/model_structure.svg}}
   \caption[Structure of user intent prediction model]{Structure of the proposed intent prediction model, $I_k$ is the $k$th input sequence, $L_k$ is the $k$th label from the sequence, $s_m$ is the $m$th sample in the sequence, $f_n$ is the $n$th feature of a sample.}
-  \label{fig:model_structure}
+  \label{fig:model-structure}
 \end{figure}
 
 Use LSTM, so predict something unseen, in contrast to RICO or ERICA, which only categorize the current context
-
-TimeDistributedLayer
-% https://stackoverflow.com/a/61588937/5164462
-% https://stackoverflow.com/questions/53107126/what-are-the-uses-of-timedistributed-wrapper-for-lstm-or-any-other-layers
-
 
 Multiple approaches
 
@@ -172,6 +171,13 @@ AutoEncoder:
 Decoder can either only decode to x and y or to whole UI tree.
 
 \section{Evaluation}
+
+To get an insight of what features are providing valuable information, a second model was built, which only included the click / gesture sequence as feature, referenced as \tb{ClickOnly}.
+During preparing the dataset an important step was missing, which could help improving performing better.
+Only the click of the next screen was predicted, but not the click on the current screen.
+Therefore, all click values were shifted by one step and filled up with a value of $0.5$ which represents the mid of the screen.
+The idea is that the click now belongs to the screen which is shown after the action.
+In theory that should improve the models performance, as the model \tb{FeaturesClickShifted} then can choose the click based on the elements shown on the current screen while predicting.
 
 - distance metric not really make sense, as buttons can be positioned very differently.
 Much better, would be conversion of model to classification with multiple outputs in order to predict the most likely actionable buttons, which the user will click on.
@@ -214,7 +220,7 @@ Much better, would be conversion of model to classification with multiple output
     FeaturesClickShifted & 0.0811        & 0.0900                   & 10                        \\
     \hline
   \end{tabular}
-  \caption[Training and validation loss, number of epochs]{Training and validation loss (\gls{mse}) of all three methods, ClickOnly, SelectedFeatures and FeaturesClickShifted}
+  \caption[Training and validation loss, number of epochs]{Training and validation loss (\gls{mse}) of all three models, ClickOnly, SelectedFeatures and FeaturesClickShifted}
   \label{tab:model_losses}
 \end{table}
 
