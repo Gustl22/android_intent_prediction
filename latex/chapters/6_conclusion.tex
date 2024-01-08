@@ -1,6 +1,8 @@
 \chapter{Conclusion and Future Work}
 \label{sec:conclusion}
 
+\section*{Summary}
+
 In this thesis the Android UI structure and the ways of retrieving them has been worked out, to be able to gather a meaningful dataset.
 The basics of \gls{ml}, \gls{nn}s, the preprocessing steps and evaluation metrics have been illustrated to grasp the idea of the proof-of-concept.
 %The research methods have been stated to ensure the
@@ -12,40 +14,36 @@ More promising approaches arose, like transformer multi-attention model, actiona
 The available technologies already enable large parts of intent prediction.
 Nonetheless, more precise or semantically meaningful prediction models, such as screen or descriptive ones are still missing.
 
-\tb{Outlook}
+\section*{Outlook}
+%Future directions for research in this area
 
-Use LSTM, so predict something unseen, in contrast to RICO or ERICA, which only categorize the current context
-more semantics and language features
-types of elements (class) has much more impact than position.
-intent prediction is possible but only
-the proof of concept did not show the expected results, thus it can be learned a lot
-
-Other model structures have to be evaluated
-
-\todo{TAKEAWAY: click sequence may NOT a good indicator for where the user clicks as buttons can differ from app to app, more semantics, better relative actionable button click rate}
-
+Although the results of the proposed model did not quite match the expectations, this field of application has lots of open questions to be researched on.
+The prospects are by adding more semantics, such as language features or sensory inputs, any scope of intent can be predicted more granularly.
+The data selection also has lots of potential to improve by applying preprocessing steps such it is done in RicoSCA \cite{li2020mapping} or Clay \cite{clay}.
+%Use LSTM, so predict something unseen, in contrast to RICO or ERICA, which only categorize the current context
+Also the types of elements (class) have a much more impact on the outcome than the gesture positions.
+%the proof of concept did not show the expected results, thus it can be learned a lot
+%\todo{TAKEAWAY: click sequence may NOT a good indicator for where the user clicks as buttons can differ from app to app, more semantics, better relative actionable button click rate}
+A public accessible app tracing app and a big enough dataset which also cover cross-app traces would be a good basis for future research.
+Other model types have to be evaluated or reproduced.
 % TAKEAWAY: Create custom dataset
+%Generate Dataset which overcomes the limitations
+Also, a user study should be conducted to evaluate how helpful an overlay can be, which proposes the next item to click.
+Today, smartphones are expected to be powerful enough and are equipped with intelligent processors to take tasks like recording the accessibility tree and user interaction prediction.
+This would also help preserving privacy.
+Zhou and Li \cite{zhou2021large} already provided a \quotes{Next Click Overlay} that reduces the number of traversals from 9.04 to 2.61.
+Feedback and improvement on such a visualization of a prediction system would be very interesting.
+Applying reinforcement learning (section \ref{subsec:machine-learning-types}) to the existing models also would help improving the user experience.
+%group of users
 
-%\section*{Outlook}
+%Work out user flows, like in ERICA, but without the need to separate it from the interaction tree
+%Take in visual and textual context (semantics).
 
-Future directions for research in this area
+%Use dataset with
+%Also use accessibility service, as phones are much more powerful.
+%No need for web interface.
+%-> Reinforced directly on the phone, more privacy.
+%
+%ChatGPT – Image Recognition – Limitation als Ausblick
 
-ChatGPT – Image Recognition – Limitation als Ausblick
-
-Generate Dataset which overcomes the limitations
-
-Make a study with actual feedback on a prediction system, visualization
--> Learn faster and directly, Reinforced learning
-group of users
-
-Work out user flows, like in ERICA, but without the need to separate it from the interaction tree
-
-Take in visual and textual context (semantics).
-
-Make dataset with app overlapping traces.
-Use dataset with preprocessing such as RicoSCA or Clay. Dataset has wrong data see \cite{clay}
-Also use accessibility service, as phones are much more powerful.
-No need for web interface.
--> Reinforced directly on the phone, more privacy.
-
-Make a user study which can apply this model.
+In regard to the current development in large language models like Bart or ChatGPT, it will be exiting to see what surprising breakthrough comes up next.
