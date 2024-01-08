@@ -1,49 +1,13 @@
 \chapter{Introduction}
 \label{sec:introduction}
 
-The interaction of a user with an end device such as a smartphone or a computer is very diverse and difficult to predict.
-Nevertheless, user-specific (personalized) as well as global (collaborative) patterns can possibly be worked out with the help of preceding user interactions.
-These could be used to predict the intention of a user or a group of users.
-It is interesting to know to what level of detail these predictions can be made reliably.
-By making use of the continous on-device data an attempt can be made to gain more insights in the user behavior or even forecast their next actions.
-
-It suggests itself to implement this with the help of user interactions in sessions on Android devices.
-For this purpose, the Sequential UI Tree data of the device could be tracked, filtered and labeled.
-After preprocessing, it could be trained with a machine learning model to find similar interaction sequences and then make predictions.
+The interaction of a user with an end device such as a smartphone or a computer is very diverse and difficult to contextualize.
+Nevertheless, user-specific (personalized) as well as global (collaborative) patterns can possibly be worked out with the help of preceding user interactions and screen contents.
+These could be used to predict the intention, such as the action or the motivation of a user or a group of users.
+Especially the level of detail, at which these predictions can be made, is an integral part of offering a reliable service.
+By making use of the continuous on-device data, the users behavior can be worked out and be used to forecast their next actions.
 These can then be very coarse, such as predicting the next app.
-Or they can be very detailed, e.g., determining the next user action, such as filling out a form field.
-
-A concept will be developed on how a model for predicting user intent could be built and how it could be applied to the user session.
-To this end, possibilities for collecting and vectorizing sequential UI trees (e.g., from the Android Accessibility Service) will be discussed.
-The performance of the model can be measured, for example, by indicators such as the amount of training data and time spent on the learning process.
-
-\begin{figure}[htbp!]
-    \centering
-    \includesvg[width=\textwidth]{graphics/vectorization.svg}
-    \caption[Schema of ML-algorithm predicting user intent]{
-        Possible procedure using a Machine-Learning algorithm to predict the next intent from a beginning user session:
-        The input (1) can be a sequence of Android tree data.
-        With help of a Machine-Learning-Model (2) (e.g. RNN) a vector representation can be trained and then predict the most probable action or screen (3) from a given starting sequence, but also can be improvde through the users feedback.
-    }
-    \label{fig:encode-decode}
-\end{figure}
-
-% Zusammenfassen in die wichtigste Aussage: machine learning ist spannend für die Vorhersage weil es Usergruppen erstellt, die sensiblen Daten rausgefiltert werden und ....?
-Furthermore, the machine learning model could provide the following benefits in addition to intent prediction:
-\begin{itemize}
-    \item reduction of the complexity and size of the UI tree
-    \item creation of user groups that have similar behavior when using digital UI systems \cite{jayarajah2015need}
-    \item elimination of technical expertise on individual features that would be required to manually compare user sessions \cite{ghods2019activity2vec}
-    \item consideration of a user's history over time (sequential)
-    \item comparison of user interactions without providing privacy invasive information
-    \item supporting app developers to improve their app design and usability
-    \item application in psychology and market research
-    \item pre-loading of processes on devices (energy savings) \cite{shen2019deepapp}
-\end{itemize}
-
-As listed above, many fields of application can profit by elaborating such a system.
-It would be exciting to know, how the concrete concept would look like and if it can be implemented successfully e.g. to improve the user experience on end-user devices.
-
+Or they can be very detailed, e.g.\ determining the next user action, such as filling out a form field or selecting the favorite meal in the delivery service app.
 
 \section{The Role of Intent Prediction}
 \label{sec:role-intent-prediction}
@@ -80,7 +44,38 @@ Motivation for transforming Android UI tree data to vectors
 
 - Low Button depth: number of clicks until one gets to the action \cite{lee2018click}
 
-- Explain intent, and the other words in the title
+
+% Zusammenfassen in die wichtigste Aussage: machine learning ist spannend für die Vorhersage weil es Usergruppen erstellt, die sensiblen Daten rausgefiltert werden und ....?
+Furthermore, such a technology provides many benefits in addition to intent prediction.
+The complexity and the size of a \gls{ui} tree can be reduced by vectorizing them. \todo{vectorization}
+User groups can be worked out in social studies, which have a similar behavior when using digital \gls{ui} systems \cite{jayarajah2015need}.
+Also, the technical expertise on individual features can be eliminated, that would be required to manually compare user sessions \cite{ghods2019activity2vec}.
+A users smartphone usage history can be saved or compared, considering the aspect of avoiding saving personal information.
+App developers can be supported to improve their app design and usability.
+It may be applied in psychology and market research or help detecting addictions.
+On a technical side the method can optimize preloading of processes on mobile devices, which results in energy savings \cite{shen2019deepapp}.
+As shown, many fields of application can profit by elaborating such a system.
+It would be exciting to know, how the concrete concept would look like and if it can be implemented successfully e.g. to improve the user experience on end-user devices.
+
+For this purpose, the Android \gls{ui} of the device can be tracked, and relevant information are collected.
+After a few preprocessing steps, the data can be trained with a \gls{ml} model to acquire the user behaviors and then make predictions, if convenient for the user.
+
+\begin{figure}[htbp!]
+    \centering
+    \includesvg[width=\textwidth]{graphics/vectorization.svg}
+    \caption[Schema of ML-algorithm predicting user intent]{
+        Possible procedure using a Machine-Learning algorithm to predict the next intent from a beginning user session:
+        The input (1) can be a sequence of Android tree data.
+        With help of a Machine-Learning-Model (2) (e.g. RNN) a vector representation can be trained and then predict the most probable action or screen (3) from a given starting sequence, but also can be improvde through the users feedback.
+    }
+    \label{fig:encode-decode}
+\end{figure}
+
+A guideline and a proof-of concept will be developed on how a model for predicting user intent could be built.
+To this end, possibilities for collecting and vectorizing sequential UI trees (e.g., from the Android Accessibility Service) will be discussed.
+The performance of the model can be measured, for example, by indicators such as the amount of training data and time spent on the learning process.
+
+\todo{formulate contributions}
 
 Contributions: \cite{zhou2021large}
 • An analysis of a large-scale dataset of mobile user click se-
@@ -112,28 +107,30 @@ In computer science there often coexists multiple (correct) solutions to the sam
 Many technologies have the capabilities of achieving a similar result, but are specialized in the one or the other way.
 That led to the first question
 
+\todo{formulate research questions}
+
 \quotes{What is a suitable model for the prediction of user intent?}.
 
 \quotes{At what level of detail the predictions can be made?}
 
 
-\label{subsec:motivation}
-\todo{P1.1. What is the large scope of the problem?}
-\todo{P1.2. What is the specific problem?}
-
-% Second Paragraph
-% CORE MESSAGE OF THIS PARAGRAPH:
-\todo{P2.1. The second paragraph should be about what have others been doing}
-\todo{P2.2. Why is the problem important? Why was this work carried out?}
-
-% Third Paragraph
-% CORE MESSAGE OF THIS PARAGRAPH:
-\todo{P3.1. What have you done?}
-\todo{P3.2. What is new about your work?}
-
-% Fourth paragraph
-% CORE MESSAGE OF THIS PARAGRAPH:
-\todo{P4.1. What did you find out? What are the concrete results?}
-\todo{P4.2. What are the implications? What does this mean for the bigger picture?}
+%\label{subsec:motivation}
+%\todo{P1.1. What is the large scope of the problem?}
+%\todo{P1.2. What is the specific problem?}
+%
+%% Second Paragraph
+%% CORE MESSAGE OF THIS PARAGRAPH:
+%\todo{P2.1. The second paragraph should be about what have others been doing}
+%\todo{P2.2. Why is the problem important? Why was this work carried out?}
+%
+%% Third Paragraph
+%% CORE MESSAGE OF THIS PARAGRAPH:
+%\todo{P3.1. What have you done?}
+%\todo{P3.2. What is new about your work?}
+%
+%% Fourth paragraph
+%% CORE MESSAGE OF THIS PARAGRAPH:
+%\todo{P4.1. What did you find out? What are the concrete results?}
+%\todo{P4.2. What are the implications? What does this mean for the bigger picture?}
 
 %LaTeX hints are provided in \autoref{chap:latexhints}.
