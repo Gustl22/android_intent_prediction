@@ -331,7 +331,7 @@ This means that each single species is represented by a vector.
 The length of the vector can be selected freely, it is called the \ti{embedding dimension}.
 A lookup-table is created which encodes each category with randomly initialized weights of size of the embedding dimension (cf.\ table~\ref{tab:species-embedding}).
 Now the embedding vector for each species is looked up and replaced in the data table resulting in an embedded representation (cf.\ table~\ref{tab:embedding_data_table}).
-During training of the model the weights of the look-up table are successively updated (like for the dense layer ~\ref{subsec:dense-layer}) to reduce the error (loss) of the overall model.
+During training of the model the weights of the look-up table are successively updated (like for the dense layer) to reduce the error (loss) of the overall model.
 An embedding would result in an \gls{gl-one-hot}-encoding, if the embedding dimension and the vocabulary size are equal and the conversion matrix (lookup-table) is the identity matrix.
 
 \begin{table}[htbp!]

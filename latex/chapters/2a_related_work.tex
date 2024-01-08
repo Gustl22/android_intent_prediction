@@ -30,7 +30,7 @@ Therefore the much more powerful servers take the task of capturing the UI trees
 The apps are hosted on multiple physical devices with a modified Android OS directly connected with the server.
 ERICA captures UI screens and user flows by tracking UI changes.
 They then used this data to form k-mean clusters from the UI elements (visual and textual features) and the interactive elements (icons and buttons).
-Based on the clusters they then build classifiers and trained an AutoEncoder (\ref{subsec:autoencoder}) to determine the flows from the test dataset.
+Based on the clusters they then build classifiers and trained an AutoEncoder to determine the flows from the test dataset.
 The authors worked out 23 common user flows (from over a thousand popular Android apps) which aim to provide complementary, promising or new design patterns and trends.
 
 %- data-driven app design application
@@ -60,7 +60,7 @@ Unfortunately the dataset doesn't include interaction traces for app to app tran
 In table~\ref{tab:rico_view_hierarchy_attributes} a collection of all view hierarchy attributes is shown with their meaning.
 These were extracted by iterating over all view hierarchy files contained in the traces of the dataset.
 This gives insights in what attributes were recorded in the Rico dataset and what relevance they may have during training the model.
-The authors of Rico used their dataset to train a 64-dimensional UI layout vector~\ref{subsec:embedding} with an AutoEncoder \ref{subsec:autoencoder}.
+The authors of Rico used their dataset to train a 64-dimensional UI layout vector~\ref{subsec:embedding-layer} with an AutoEncoder.
 For their input they converted the UI layout hierarchy to an image with colored bounding boxes differentiating images and text.
 This has the advantage to be able to deal with the high dimensions inside the UI tree.
 But the conversion also most likely discards lots of meaningful information hidden in the UI tree semantics.
@@ -161,7 +161,7 @@ Toby Jia-Jun Li, Lindsay Popowski et al. \cite{li2021screen2vec} wrote a \gls{nn
 %i.e., the type of machine learning approach that trains a model without human-labeled data by withholding some part of the data, and tasking the network with predicting it
 It is claimed that they are among the first to develop a \gls{nn} for mobile screens which takes textual, visual design, and layout patterns and app context meta-data into account.
 As inspiration they used the Word2Vec to predict result by considering the context and map them to a \gls{cbow}.
-The self-supervised~\ref{self-supervised} model consists of two pipeline levels.
+The self-supervised model consists of two pipeline levels.
 The outer level (\gls{gui} screen level) combines embeddings of \gls{gui} components, layout hierarchy and app descriptions.
 The inner level is only present for the \gls{gui} components as they contain nested embeddings for the screen text and the class type.
 The screen text (in the inner level) as well as the app description (in the outer level) is processed using a pretrained Sentence-BERT model.
@@ -185,7 +185,7 @@ In addition they hired 85 labelers to manually annotate each of the 22k existing
 As input for their summarizing \gls{nn} they used a flattened view hierarchy which contained padded embeddings for categorical values, like the view class.
 Also the textual components of the screen were extracted and encoded with a pre-trained GloVE Word embedding.
 The GloVE encoding was also applied to the app description.
-The description was combined with the textual components and the other screen attributes to serve as input of a Transformer Encoder \ref{subsubsec:transformer}.
+The description was combined with the textual components and the other screen attributes to serve as input of a Transformer Encoder .
 Simultaneously each screenshot was embedded though a \gls{cnn}, which was then concatenated with the Transformer Encoder to form the overall encoder of the Screen2words model.
 The screen summaries were used as labels for the model and were also embedded with the GloVE encoding.
 
@@ -257,7 +257,7 @@ The goal was to overcome the challenge of accurate but also scalable click seque
 That means that apps are not limited in their composition and the screens get increasingly diverse and there's no predefined set of UI elements.
 Also the users click behavior is very individual and heavily dependents on situational factors.
 
-Based on the Transformer architecture in \ref{subsubsec:transformer} they created a deep learning model which has 48\% \gls{gl-accuracy} for predicting the next user click and 71\% \gls{gl-accuracy} for the three most probable \ti{actionable} objects.
+Based on the Transformer architecture in  they created a deep learning model which has 48\% \gls{gl-accuracy} for predicting the next user click and 71\% \gls{gl-accuracy} for the three most probable \ti{actionable} objects.
 The researchers differentiated three main inputs for embedding their elements visible on the screen: the text content, the type of view and the bounding box.
 All the elements are then passed to a Transformer Encoder representing a single screen.
 Together with the click event as well as the time encoding the screen embedding serves as one concatenated input step.
