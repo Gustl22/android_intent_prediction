@@ -179,31 +179,53 @@ During preparing the dataset an important step was missing, which could help imp
 Only the click of the next screen was predicted, but not the click on the current screen.
 Therefore, all click values were shifted by one step and filled up with a value of $0.5$ which represents the mid of the screen.
 The idea is that the click now belongs to the screen which is shown after the action.
-In theory that should improve the models performance, as the model \tb{FeaturesClickShifted} then can choose the click based on the elements shown on the current screen while predicting.
+In theory that should improve the models performance, as it then can choose the click based on the elements shown on the current screen while predicting.
+This experiment is referenced as \tb{FeaturesClickShifted}.
 
-- distance metric not really make sense, as buttons can be positioned very differently.
-Much better, would be conversion of model to classification with multiple outputs in order to predict the most likely actionable buttons, which the user will click on.
+In the figures of \ref{fig:model_history_losses} the training loss and the validation loss can be seen for all three approaches.
+A numbered representation of the last epoch for each model is listed in the table \ref{tab:model_losses}.
+The models all were trained with the \gls{adam} optimizer by using the \gls{mse} as loss metric.
+
+In all three models, the loss was around 0.09 for the validation set.
+This is a deviation of around 0.3 for the \gls{rmse}.
+That means for a screen from left \tb{0} to right \tb{1} and bottom \tb{0} to top \tb{1}, the predicted point (click) was around $0.3$ away projected to the euclidean distance.
+To put it in perspective, if the center is used as prediction, it is off by maximal $0.5$, if the expected user click is always at the border.
+But in the mean the clicks are even closer.
+To check that the \gls{rmse} was calculated, if all predictions were made to $0.5$ for Gest$_x$ and Gest$_y$, resulting in $0.3102$.
+Using the mean for Gest$_x$ ($0.4360$) and Gest$_y$ ($0.4552$) resulted in a \gls{rmse} of $0.3052$.
+This implies that the models predicting the user clicks only slightly better than the statistical mean.
+In contrast to the expectation, shifting the click sequence in FeaturesClickShifted did not result in much better predictions compared to the SelectedFeatures model, at least not with the small amount of training data.
+Even the ClickOnly model performed better, with no additional features.
+As buttons are scattered all around the screen, $0.3$ \gls{rmse} seems a reasonable value, if the models always predicts the mean as the next click interaction.
+
+%\todo{calculate mean distance from center}
+%the \gls{rmse} of 0.3102 with 0.5
+%0.3052 with mean
+%0.3060 with median
+%
+%x has median value of 0.4259, mean value of 0.4360
+%y has median value of 0.4248, mean value of 0.4552
 
 \begin{figure}[htbp!]
   \centering
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
     \includegraphics[width=\textwidth]{graphics/model_history_loss_clicks}
-    \caption{Only clicks as features}
+    \caption{ClickOnly: Only clicks as features}
     \label{fig:model_history_loss_clicks}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
     \includegraphics[width=\textwidth]{graphics/model_history_loss_features}
-    \caption{Bounding box and click features}
+    \caption{SelectedFeatures: Bounding box and click features}
     \label{fig:model_history_loss_features}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.8\textwidth}
     \centering
     \includegraphics[width=\textwidth]{graphics/model_history_loss_features_shifted}
-    \caption{Bounding box and shifted click features}
+    \caption{FeaturesClickShifted: Bounding box and shifted click features}
     \label{fig:model_history_loss_features_shifted}
   \end{subfigure}
   \caption[Training loss vs. validation loss]{Training loss (\ti{loss}, blue) vs. validation loss (\ti{val\_loss}, orange). Horizontal axis is the number of epochs. Vertical axis is the loss as \gls{mse}.}
@@ -213,18 +235,22 @@ Much better, would be conversion of model to classification with multiple output
 \begin{table}[htbp!]
   \small
   \centering
-  \begin{tabular}{|l|l|l|l|}
+  \begin{tabular}{|l|l|l|l|l|}
     \hline
-    \textbf{Method}      & \textbf{Loss} & \textbf{Validation Loss} & \textbf{Number of epochs} \\
+    \textbf{Method}      & \textbf{Loss} & \textbf{Validation Loss} & \textbf{RMSE Val Loss}   & \textbf{Number of epochs} \\
     \hline
-    ClickOnly            & 0.0793        & 0.0872                   & 7                         \\
-    SelectedFeatures     & 0.0824        & 0.0948                   & 9                         \\
-    FeaturesClickShifted & 0.0811        & 0.0900                   & 10                        \\
+    ClickOnly            & 0.0793        & 0.0872                   & 0.2953                   & 7                         \\
+    SelectedFeatures     & 0.0824        & 0.0948                   & 0.3079                   & 9                         \\
+    FeaturesClickShifted & 0.0811        & 0.0900                   & 0.3000                   & 10                        \\
     \hline
   \end{tabular}
   \caption[Training and validation loss, number of epochs]{Training and validation loss (\gls{mse}) of all three models, ClickOnly, SelectedFeatures and FeaturesClickShifted}
   \label{tab:model_losses}
 \end{table}
+
+- distance metric not really make sense, as buttons can be positioned very differently.
+Much better, would be conversion of model to classification with multiple outputs in order to predict the most likely actionable buttons, which the user will click on.
+
 
 \todo{TAKEAWAY: click sequence may NOT a good indicator for where the user clicks as buttons can differ from app to app, more semantics, better relative actionable button click rate}
 
