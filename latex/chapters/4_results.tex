@@ -83,7 +83,7 @@ Also, the nodes depth in the dom tree was calculated, apparent as \code{obj_dom_
 One screen exists of multiple views / components, which all have their own attributes.
 To be able to examine each screen as one sample, the view hierarchy had to be flattened.
 This was done by separating the views by attributes and merge each value by its feature.
-Therefore, a screen sample was converted to a list of features, which again hold a list of values.
+Therefore, a screen sample was converted to a list of features, which again holds a list of values.
 This is an important step to realize as the dataset now consists of four array dimensions, which plays a big role in later steps, as it makes further processing more challenging.
 The gesture traces were acquired from the dataset to provide them as labels, but also as additional input.
 They contain one (click) or multiple (swipe) coordinates.
@@ -96,35 +96,60 @@ This could be done per feature, but it was uniquely applied, because the number 
 The data then was split in a train and a validation set.
 Due to the limiting capacity of the \gls{gpu}, only 20\% of the traces were used.
 Therefore, 642 traces were selected for training and 213 for validation.
+The following processing applied equally, but executed separately for train and test split.
+
+The input and output (label) pairs were generated, which had to be done after splitting the traces to keep the temporal order.
+Therefore, for each trace the first samples (here: 5) acted as the input sequence and the next one (here: sixth) was the label.
+This step was repeated by shifting the samples by one, so that the first sample was dropped and the label from the previous record then was part of the second input sequence.
+As label then served the next (here: seventh) sample.
+This process was done until no sample was left in the trace, that could take the role of the label.
+For the case of the proof-of-concept all features were dropped from the labels, except the click / gesture position values, because that's the prediction that has been looked for.
+After the input and output pairs for each trace have been generated, they then could be finally merged together in one array.
+The reason is that the input sequences and labels were then fixed and didn't depend on the upcoming samples in the trace.
 
 \subsection{Filtering privacy invasive details}
 
+\todo{todo}
 - rico doesn't use logins or any privat data
 - gestures can tell more about the user
 -
 
-
-\subsection{Normalization, Feature Selection}
-
-Dealing with variable length data tf.io.VarLenFeature()
-
 \section{Model}
 
-% Shift click sequence
+\todo{Shift click sequence}
+In the proof-of-concept a very dynamic approach was selected to be able to support new features without big changes.
+Therefore, depending on the input features, the model was adapted automatically by these rules:
+
+\begin{itemize}
+  \item If the feature provides a single value, it was directly passed for further processing.
+  \item If the feature included multiple values, they were reduced in the dimensionality (dense layer) based on the length and provided each output value as feature as its own dimension.
+  \item If the feature provided a numerical value (normalized), it was also directly passed to be processed further.
+  \item If the feature provided a categorical value, it was embedded (section \ref{subsec:embedding-layer}) and then flattened to match the array dimensionality.
+\end{itemize}
+
+% https://stackoverflow.com/questions/54743549/is-it-possible-to-making-lstm-model-with-4-dimension-shape-of-data
+The numerical and categorical embeddings then were concatenated together and handed over to the \gls{lstm}.
+The \gls{lstm} expects an array / space dimension of three.
+The first array dimension is the sample dimension (unlimited), which in this case is the list of all sample sequences.
+The second array dimension is the time step dimension (fixed size), therefore the sample sequence itself.
+The third array dimension is the feature dimension (fixed size), thus there's no dimension left to encode nested or even variable arrays, such as multiple views / components.
+For that reason multiple embedded category values had to be flattened (reshaped) before entering the \gls{lstm} model with 128 neurons.
+
+The output of the \gls{lstm} then was passed to a dense layer with 32 neurons, followed by a dropout of 20\% of neurons.
+Finally the values are passed to the output layer with two neurons, which represents the $x$ and $y$ axis of the predicted gesture.
+
+Due to all the numerical and categorical features the model in figure~\ref{fig:model_structure} crystallized.
+
+\todo{replace figure with actual structure}
+
+\begin{figure}[htbp!]
+  \centering
+  \includesvg[width=\textwidth]{graphics/vectorization.svg}
+  \caption[Structure of user intent prediction model]{Structure of user intent prediction model}
+  \label{fig:model_structure}
+\end{figure}
 
 Use LSTM, so predict something unseen, in contrast to RICO or ERICA, which only categorize the current context
-
-%- Screen2Words
-
-LSTM 4 dimensional
-% https://stackoverflow.com/questions/54743549/is-it-possible-to-making-lstm-model-with-4-dimension-shape-of-data
-
-Limitations to only 3 dimensions, needs flattening
-
-Sample dimension (X -> y)
-Time (Step) Dimension
-Feature Dimension
-Data, Quantity dimension, such as Image dimensions, or multiple nodes
 
 TimeDistributedLayer
 % https://stackoverflow.com/a/61588937/5164462
