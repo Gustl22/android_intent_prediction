@@ -10,7 +10,7 @@
 
 This chapter will explain how a prediction model for user intent can be designed and what factors of influence have to be considered.
 The design will be shown on the basis of a proof of concept implementation.
-Also, a concept of how this model can be applied to the real world is proposed. \todo{check if that is actually done.}
+%Also, a concept of how this model can be applied to the real world is proposed. \todo{check if that is actually done.}
 
 As noted in the introduction the term \ti{intent} has a very wide scope.
 It's prediction can only be made in fractions, or serve as indicator.
@@ -19,7 +19,7 @@ Unfortunately, the users intent description cannot be determined yet, as no acco
 An important step, the screen summarization as shown in Screen2words~\ref{subsec:screen2words} \cite{wang2021screen2words}, already was made, which could also be fed with the users intention descriptions.
 But this would then only reflect the already passed fulfilled intent and not the upcoming next purpose.
 Also, the users flows can be predicted as shown in the works of ERICA~\ref{subsec:erica}.
-\todo{may more describe what a 'flow' can do}
+%\todo{may more describe what a 'flow' can do}
 Next app prediction already works quite well~\ref{katsarou2022whatsnextapp}, which also reflects the larger intent of the user, but is not very detailed.
 In the process of the working on this topic, surprisingly a successful attempt was made to predict the next user interaction, which is explained in section \ref{subsec:user-click-behaviors-deep-learning-transformer} \cite{zhou2021large}.
 This shows, that it is possible to predict certain user actions upfront.
@@ -27,7 +27,7 @@ This shows, that it is possible to predict certain user actions upfront.
 In order to approximate to reflect the user intent the assumption is made that the next \tb{user interaction} also give hints on what the user is intending to achieve.
 The interaction is resulting in another screen, which then the user (hopefully) intends to see.
 
-\todo{Mathematically formulate the problem?}
+%\todo{Mathematically formulate the problem?}
 
 To provide a basis for further development on this topic, the following criteria were determined.
 \begin{itemize}
@@ -37,8 +37,8 @@ To provide a basis for further development on this topic, the following criteria
   \item Make it reproducible by providing the correct sources and add documentation.
 \end{itemize}
 
-\todo{formulate or remove}
-Proof of concept, as an example gesture or click traces were used as labels.
+%\todo{formulate or remove}
+%Proof of concept, as an example gesture or click traces were used as labels.
 %Steps:
 %- Data acquisition
 %- Data cleaning / Preprocessing (Panadas)
@@ -107,12 +107,12 @@ For the case of the proof-of-concept all features were dropped from the labels, 
 After the input and output pairs for each trace have been generated, they then could be finally merged together in one array.
 The reason is that the input sequences and labels were then fixed and didn't depend on the upcoming samples in the trace.
 
-\subsection{Filtering privacy invasive details}
-
-\todo{todo}
-- rico doesn't use logins or any privat data
-- gestures can tell more about the user
--
+%\subsection{Filtering privacy invasive details}
+%
+%\todo{todo}
+%- rico doesn't use logins or any privat data
+%- gestures can tell more about the user
+%-
 
 \section{Model}
 
@@ -135,7 +135,7 @@ The second array dimension is the time step dimension (fixed size), thus the sam
 The third array dimension is the feature dimension (fixed size), therefore there's no dimension left to encode nested or even variable arrays, such as multiple views / components.
 For that reason multiple embedded category values had to be flattened (reshaped) before entering the \gls{lstm} model with 128 neurons.
 
-\todo{link and explain LSTM (?)}
+%\todo{link and explain LSTM (?)}
 %TimeDistributedLayer
 % https://stackoverflow.com/a/61588937/5164462
 % https://stackoverflow.com/questions/53107126/what-are-the-uses-of-timedistributed-wrapper-for-lstm-or-any-other-layers
@@ -145,7 +145,7 @@ Finally, the values were passed to the output layer with two neurons, which were
 
 Due to all the numerical and categorical features chosen from the dataset, the model \tb{SelectedFeatures} in figure~\ref{fig:model-structure} crystallized.
 
-\todo{typo in figure: "continuous"}
+%\todo{typo in figure: "continuous"}
 \begin{figure}[htbp!]
   \centering
   \makebox[\textwidth][c]{\includesvg[width=1.2\textwidth]{graphics/model_structure.svg}}

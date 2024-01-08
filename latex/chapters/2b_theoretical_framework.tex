@@ -107,7 +107,7 @@ It can include biases and therefore may acquire forms of discrimination or unfai
 Nonetheless \gls{ml} has a lot of potential to uncover hidden connections in large datasets.
 The most important concepts are explained to be able to follow certain decisions in this thesis.
 
-\todo{explain Tensors, Datasets}
+%\todo{explain Tensors, Datasets}
 %https://stackoverflow.com/a/48599383/5164462
 
 \subsection{Preprocessing}
@@ -139,7 +139,7 @@ Also, it may be a valid approach to get around missing data and can help structu
 
 %https://dl-acm-org.emedien.ub.uni-muenchen.de/doi/pdf/10.1145/3136625
 On the technical sight, feature selection can be differentiated for two goals: supervised and unsupervised learning~\cite{li2017feature} (cf. section \ref{subsec:machine-learning-types}).
-However, principles from the supervised feature selection can be applied in the unsupervised domain, resulting in a semi-supervised \ref{semi-supervised} filter selection.
+However, principles from the supervised feature selection can be applied in the unsupervised domain, resulting in a semi-supervised filter selection.
 For classifiers and regression problems (unsupervised) following methods can be applied.
 Multiple features can be compared by calculating their correlation.
 If one feature is uncorrelated to all other features, this may be an indicator that this feature can be dropped, as it doesn't contribute to the resulting model (\ti{filter method}).
@@ -151,17 +151,6 @@ Feature extraction can also be used in unsupervised feature selection.
 Clustering is a common approach to reduce the number of input dimensions by gaining insights of which classes can be merged and which need to stay.
 A more computational but promising solution is to filter the features by optimizing the model result, also called a \ti{wrapper method}.
 By gradually removing and adding features and calculating the models performance, one can determine which inputs are important and which are at risk to increase computing time without noticeable effect.
-
-\todo{formulate or remove}
-semantic or legal feature selection
-Such as Filtering privacy invasive details
-Remove sensitive data
-%https://news.mit.edu/2023/new-way-look-data-privacy-0714
-
-Parameterizing the vectorization process
-a) Vector length
-b) Weighting of features
-c) Manipulating individual parameters of model
 
 \subsubsection{Missing Data}
 Some data entries may are missing.
@@ -274,7 +263,7 @@ Or classes are trained based on labeled data, but their class boundaries are ext
 %Also, if having only few labeled points, one can start with training a cluster through unlabeled data and then determine the class label of the clusters with the labeled data points.
 
 %\tb{Self-supervised Learning}
-\todo{may explain Self-supervised learning}
+%\todo{may explain Self-supervised learning}
 
 \tb{Reinforcement Learning} is closely related to decision theory \cite{ghahramani2003unsupervised}.
 A model is given the input and produces an output, which is exposed to the environment.
@@ -285,7 +274,7 @@ This learning type can also be helpful in fine-tuning \gls{rnn}s.
 \section{Artificial Neural Nets}
 \label{sec:neural-net-classes}
 
-\todo{activation functions,Gradient Descent, backpropagation and may include graphic of perceptron}
+%\todo{activation functions,Gradient Descent, backpropagation and may include graphic of perceptron}
 Unfortunately the concepts of neural networks, cannot be explained in detail, as it is beyond the scope of this thesis.
 A good choice to make familiar with Neural nets is the book \quotes{Neural Networks and Deep Learning} of Nielsen~\cite{nielsen2015neural}, which is consulted throughout this section.
 
@@ -510,5 +499,5 @@ This is called \tb{Underfitting}.
 The opposite \tb{Overfitting} is the case, if model was trained too many epochs.
 This results in knowing the train dataset very well and being able to predict every sample in the training set.
 But as soon as it is confronted with new data samples, it results in a larger errors than in earlier epochs.
-This can be solved by adding an \ti{early stop} function, which automatically interrupts the training, when the validation loss \ref{todo} increases.
+This can be solved by adding an \ti{early stop} function, which automatically interrupts the training, when the validation loss increases.
 

@@ -1,14 +1,13 @@
 \chapter{Related Work}
 \label{ch:related-work}
 
-\todo{introduce in related work, differentiate the importance of datasets}
-Describe relevant scientific literature related to your work.
-
-(e.g., via Recurrent Neural Network (\textit{RNN}) \cite{quadrana2017personalizing} \cite{bansal2022remembering} \cite{pietro2022recommendationSystems}, \textit{Seq2Seq} Model \cite{chollet2017seq2seq},
-\textit{Screen2Vec} Model \cite{li2021screen2vec},
-\textit{Intention2Text} \cite{yu2020understanding}, \textit{Html2Vec} \cite{wu2022distributed}), which are designed to predict the user intent. Here, privacy and feature pre-filtering in UI data plays an important role \todo{because?}. After that, personalized as well as collaborative data can be used in a hybrid approach. This model should then be made available to the user in an Android app service and, depending on the level of detail, suggest upcoming apps or actions to the user at a suitable time. It should also be considered whether the user can contribute to the learning process and improve suggested actions through feedback (labeling).
-
-The effectiveness can be evaluated by accuracy metrics in predicting, for example, app categories \cite{google2023appCategory} or complete test sequences via Rico \cite{deka2017rico} or ERICA \cite{deka2016erica}.
+In the following the most important works related to Android UIs and intent prediction are listed.
+%(e.g., via Recurrent Neural Network (\textit{RNN}) \cite{quadrana2017personalizing} \cite{bansal2022remembering} \cite{pietro2022recommendationSystems}, \textit{Seq2Seq} Model \cite{chollet2017seq2seq},
+%\textit{Screen2Vec} Model \cite{li2021screen2vec},
+%\textit{Intention2Text} \cite{yu2020understanding}, \textit{Html2Vec} \cite{wu2022distributed}), which are designed to predict the user intent. Here, privacy and feature pre-filtering in UI data plays an important role \todo{because?}.
+%After that, personalized as well as collaborative data can be used in a hybrid approach. This model should then be made available to the user in an Android app service and, depending on the level of detail, suggest upcoming apps or actions to the user at a suitable time. It should also be considered whether the user can contribute to the learning process and improve suggested actions through feedback (labeling).
+%
+%The effectiveness can be evaluated by accuracy metrics in predicting, for example, app categories \cite{google2023appCategory} or complete test sequences via Rico \cite{deka2017rico} or ERICA \cite{deka2016erica}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -128,7 +127,7 @@ The process of filtering reduced the Rico dataset to 25k more concise and meanin
 \subsection{Mobile UI CLAY Dataset}
 
 The Google researchers Gang Li et al. \cite{clay} present a a so-called \ti{CLAY} pipeline which is able to denoise mobile UI layouts from incorrect nodes or adding further semantics to it.
-As basis they used the Rico \ref{rico} dataset for a subject of improvement.
+As basis they used the Rico \ref{subsec:rico} dataset for a subject of improvement.
 They state that recording results are dynamic and can get out of sync with the actual screen of the user.
 That leads to 37.4\% of screens which contain invalid objects.
 This induces invisible or misaligned objects, or objects which are not clickable (greyed out).
@@ -161,7 +160,7 @@ Advantages:
 Toby Jia-Jun Li, Lindsay Popowski et al. \cite{li2021screen2vec} wrote a \gls{nn} called Screen2Vec which embeds the UI components while preserving the semantics.
 %i.e., the type of machine learning approach that trains a model without human-labeled data by withholding some part of the data, and tasking the network with predicting it
 It is claimed that they are among the first to develop a \gls{nn} for mobile screens which takes textual, visual design, and layout patterns and app context meta-data into account.
-As inspiration they used the Word2Vec~\ref{word2vec} to predict result by considering the context and map them to a \gls{cbow}.
+As inspiration they used the Word2Vec to predict result by considering the context and map them to a \gls{cbow}.
 The self-supervised~\ref{self-supervised} model consists of two pipeline levels.
 The outer level (\gls{gui} screen level) combines embeddings of \gls{gui} components, layout hierarchy and app descriptions.
 The inner level is only present for the \gls{gui} components as they contain nested embeddings for the screen text and the class type.
@@ -198,41 +197,41 @@ They also trained different graduations of their model by removing some of their
 That showed that using all modalities brought the best results (3.4 stars mean) in their rating.
 Using only the screenshots (pixel) modality the ratings were lower by almost one star indicating that adding more modalities contribute to improve the screen to word vectorization.
 
-\todo{why this paper is important for this work}
-- can give insights in evalutation methods
-- uses good embedding for various input modalities
-- has a solution to embed words
+%\todo{why this paper is important for this work}
+%- can give insights in evalutation methods
+%- uses good embedding for various input modalities
+%- has a solution to embed words
 
-\subsection{Intention2Text}
-\cite{yu2020understanding}
-
-\subsection{Html2Vec}
-\cite{wu2022distributed}
-
-\subsection{Tree2Vec}
-
-\subsection{Activity2Vec}
+%\subsection{Intention2Text}
+%\cite{yu2020understanding}
+%
+%\subsection{Html2Vec}
+%\cite{wu2022distributed}
+%
+%\subsection{Tree2Vec}
+%
+%\subsection{Activity2Vec}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Time Series / Sequence models}
+%\section{Time Series / Sequence models}
+%
+%- one more dimension
+%- allows predicting unseen states
+%- back propagation -> see technical part
+%-
 
-- one more dimension
-- allows predicting unseen states
-- back propagation -> see technical part
--
-
-RNNs: 9\_Personalizing session based recommendations with RNNs \cite{quadrana2017personalizing}
-10\_Bansal\_Hybrid RNN Recommender system \cite{bansal2022remembering}
-\cite{pietro2022recommendationSystems}
-
-\subsection{Seq2Seq Model}
-\cite{chollet2017seq2seq}
+%RNNs: 9\_Personalizing session based recommendations with RNNs \cite{quadrana2017personalizing}
+%10\_Bansal\_Hybrid RNN Recommender system \cite{bansal2022remembering}
+%\cite{pietro2022recommendationSystems}
+%
+%\subsection{Seq2Seq Model}
+%\cite{chollet2017seq2seq}
 
 \subsection{Click Sequence Prediction / PathFinder}
 
 Seokjun Lee et al. \cite{lee2018click} propose a technique called \ti{PathFinder} which aims to predict the sequence of user clicks in Android mobile apps.
-The user input and the contextual data is collected via the Android Accessibility Services \ref{accessibility_services}, so the users \gls{os} does not need to be modified or \glslink{gl-rooting}{rooted}.
+The user input and the contextual data is collected via the Android Accessibility Services (\ref{subsec:android-accessibility-service}), so the users \gls{os} does not need to be modified or \glslink{gl-rooting}{rooted}.
 They collected the data from 55 students of their university with a sequence tracing tool and collected near 2 million button clicks from over a thousand apps.
 They follow a collaborative and content-based approach which takes both all the users data as well as the individual preferences into account.
 The \ti{button depth} describes the number of clicks or taps until the user gets to their target screen.
@@ -303,4 +302,4 @@ Unfortunately as far as the investigation permits, neither the dataset nor the c
   \label{fig:zhou_graphs}
 \end{figure}
 
-\todo{provide short summary}
+%\todo{provide short summary}
