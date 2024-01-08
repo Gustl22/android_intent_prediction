@@ -256,19 +256,15 @@ This is also proposed in \cite{zhou2021large}, together with a relative ranking 
 \todo{TAKEAWAY: click sequence may NOT a good indicator for where the user clicks as buttons can differ from app to app, more semantics, better relative actionable button click rate}
 
 \section{Limitations}
+\label{sec:limitations}
 
-Dataset
-Dataset is not through different apps, only in one app.
-Dataset is not detailed enough in the time steps, or not containing all data
-Dataset is not long enough
-Dataset has no paid apps or apps with login, which most services require
-Dataset has wrong data see \cite{clay}
+The most limiting factors are the dataset, the computational performance, as well as the development time.
+As the dataset does only consider app traces, predictions while using the \gls{os} itself cannot be made.
+Also, some view changes while using an app were not recorded, resulting in a gab between training data and the real world application.
+Rico didn't provide data about paid apps or apps with the need for an account, resulting in not reflecting the day-to-day scenarios.
 
-Preprocessing
-Need more time to validate what are the core parameters to predict the next user intent
-
-
-Model needs more investigation on what data is needed
-How many neurons are required to achieve this
-Play around with different layers, also Convolutional and pretrained embeddings
+While preprocessing also more approaches have to be tested against to work out the core parameters to predict the next user intent.
+Thus, the model needs more investigation on what kind of data is needed, what layers and methods are suited best.
+E.g. the number of neurons for embeddings is interesting, as well as adding additional features such as the screenshot through a convolutional embedding and
+or adding pretrained word embeddings like done in Screen2words \cite{wang2021screen2words}.
 
