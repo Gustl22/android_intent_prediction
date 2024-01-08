@@ -1,6 +1,7 @@
 \chapter{Introduction}
 \label{sec:introduction}
 
+%\todo{Explain how many time a user spents on a mobile device, facilitate steps, make it more productive, qualitative user experience}
 The interaction of a user with an end device such as a smartphone or a computer is very diverse and difficult to contextualize.
 Nevertheless, user-specific (personalized) as well as global (collaborative) patterns can possibly be worked out with the help of preceding user interactions and screen contents.
 These could be used to predict the intention, such as the action or the motivation of a user or a group of users.
@@ -23,31 +24,29 @@ Gestures and click sequences then are the concrete actions, and might fulfill a 
 Therefore, in this work it is not the goal to obtain the users full intent, but to work out factors, such as user inputs or gestures, which hint to the intent of the user.
 Further, \ti{prediction} describes that the intent or factors of intent should be available (calculated) before they have actually happened or were measured.
 
-\todo{Explain screen, view, flow, click}
+%\todo{Explain screen, view, flow, click}
 
-But it can be easily replaced by more semantic data, which might even be easier to predict.
-Descriptive User intent embedding as preliminary stage, which can be applied with Screen2Words\cite{wang2021screen2words} in a similar fashion.
-difference intent / interaction / screen / flow / click
+%But it can be easily replaced by more semantic data, which might even be easier to predict.
+%Descriptive User intent embedding as preliminary stage, which can be applied with Screen2Words\cite{wang2021screen2words} in a similar fashion.
+%difference intent / interaction / screen / flow / click
 
 
 \section{Necessity of Vectors for Android UI}
 \label{sec:necessity-of-vectors-for-android-ui}
-\todo{Explain how many time a user spents on a mobile device, facilitate steps, make it more productive, qualitative user experience}
+%Motivation for transforming Android UI tree data to vectors
 
+A vector is a mathematical construct, which can hold a list of numbers, and it is also a special form of a tensor.
+Vectorizing an object means, representing the object in a concise form and ensuring to transfer certain features or meanings.
+In this context, vectorization is a tool to embed objects in a (small) binary package, which then can perform certain actions in an artificial environment.
+Most of the time in this thesis vectorization is referred to as embedding or the result of a trained model.
 
-Motivation for transforming Android UI tree data to vectors
-
-- open source code for predicting next user click / action
-- evaluate and compare existing approaches
-- provide tools to reduce screen sequences to vectors
-- how to work with multidimensional (multi-modal) data in RNNs
-
-- Low Button depth: number of clicks until one gets to the action \cite{lee2018click}
+The Android \gls{os} produces a big amount of data in every user session.
+To be able to process such an amount of these traces, it is helpful to save these in a small form factor, such as an embedding.
 
 
 % Zusammenfassen in die wichtigste Aussage: machine learning ist spannend für die Vorhersage weil es Usergruppen erstellt, die sensiblen Daten rausgefiltert werden und ....?
 Furthermore, such a technology provides many benefits in addition to intent prediction.
-The complexity and the size of a \gls{ui} tree can be reduced by vectorizing them. \todo{vectorization}
+The complexity and the size of a \gls{ui} tree can be reduced by vectorizing them.
 User groups can be worked out in social studies, which have a similar behavior when using digital \gls{ui} systems \cite{jayarajah2015need}.
 Also, the technical expertise on individual features can be eliminated, that would be required to manually compare user sessions \cite{ghods2019activity2vec}.
 A users smartphone usage history can be saved or compared, considering the aspect of avoiding saving personal information.
@@ -75,43 +74,53 @@ A guideline and a proof-of concept will be developed on how a model for predicti
 To this end, possibilities for collecting and vectorizing sequential UI trees (e.g., from the Android Accessibility Service) will be discussed.
 The performance of the model can be measured, for example, by indicators such as the amount of training data and time spent on the learning process.
 
-\todo{formulate contributions}
+\section{Contributions}
+%\todo{formulate contributions}
 
-Contributions: \cite{zhou2021large}
-• An analysis of a large-scale dataset of mobile user click se-
-quences that reveals rich factors and complexity in modeling
-click behaviors, which contributes new knowledge to under-
-stand mobile interaction behaviors.
-• A Transformer-based deep model that predicts next element
-to click based on the user click history and the current screen
-and time. The model does not rely on a vocabulary of prede-
-fined UI elements and provides a general solution for model-
-ing arbitrary UI elements for click prediction.
-• A thorough experiment that compares our deep model with
-multiple alternative designs and baseline models, and an
-analysis of model behaviors and benefits that the model can
-bring to improve mobile interaction.
+%Contributions: \cite{zhou2021large}
+%• An analysis of a large-scale dataset of mobile user click se-
+%quences that reveals rich factors and complexity in modeling
+%click behaviors, which contributes new knowledge to under-
+%stand mobile interaction behaviors.
+%• A Transformer-based deep model that predicts next element
+%to click based on the user click history and the current screen
+%and time. The model does not rely on a vocabulary of prede-
+%fined UI elements and provides a general solution for model-
+%ing arbitrary UI elements for click prediction.
+%• A thorough experiment that compares our deep model with
+%multiple alternative designs and baseline models, and an
+%analysis of model behaviors and benefits that the model can
+%bring to improve mobile interaction.
+%
+%Contributions: \cite{li2021screen2vec}
+%Screen2Vec: a new self-supervised technique for generating
+%more comprehensive semantic embeddings of GUI screens
+%and components using their textual content, visual design
+%and layout patterns, and app meta-data.
+%(2) An open-sourced GUI embedding model trained using the
+%Screen2Vec technique on the Rico [9] dataset that can be
+%used off-the-shelf.
+%(3) Several sample downstream tasks that showcase the model’s
+%usefulness.
 
-Contributions: \cite{li2021screen2vec}
-Screen2Vec: a new self-supervised technique for generating
-more comprehensive semantic embeddings of GUI screens
-and components using their textual content, visual design
-and layout patterns, and app meta-data.
-(2) An open-sourced GUI embedding model trained using the
-Screen2Vec technique on the Rico [9] dataset that can be
-used off-the-shelf.
-(3) Several sample downstream tasks that showcase the model’s
-usefulness.
+%- open source code for predicting next user click / action
+%- evaluate and compare existing approaches
+%- provide tools to reduce screen sequences to vectors
+%- how to work with multidimensional (multi-modal) data in RNNs
+%- Low Button depth: number of clicks until one gets to the action \cite{lee2018click}
+
+The thesis is aimed to contribute in the following way.
+Criteria on dataset for Android UI embeddings are given.
+A proof-of-concept is shown, how a multidimensional flexible intent prediction model can be designed and,
+an overview of methods and models is given, which can help deciding which model is suited for Android intention prediction.
 
 In computer science there often coexists multiple (correct) solutions to the same problem.
 Many technologies have the capabilities of achieving a similar result, but are specialized in the one or the other way.
-That led to the first question
+That led to the question of \ti{what a suitable model for the prediction of user intent} can be.
 
-\todo{formulate research questions}
-
-\quotes{What is a suitable model for the prediction of user intent?}.
-
-\quotes{At what level of detail the predictions can be made?}
+Also, the term \quotes{user intent} is not defined exactly.
+A prediction can be made in different contexts.
+That raises the question \ti{at what level of detail the intent predictions can be made?}
 
 
 %\label{subsec:motivation}
